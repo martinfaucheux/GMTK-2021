@@ -10,6 +10,8 @@ public class Blob : MonoBehaviour
     
     public Transform guyPoolTransform; 
     public Transform skinBridgePoolTransform; 
+
+    [SerializeField] float bloupScaleRatio = 1.1f;
     
     
     private CollisionMatrix _collisionMatrix;
@@ -110,6 +112,13 @@ public class Blob : MonoBehaviour
         foreach(Entity collidedEntity in collidedToResolve){
             collidedEntity.Interact(this);
         }
+
+        if (collidedToResolve.Any()){
+            Vector3 targetScale = bloupScaleRatio * transform.localScale;
+            // bloup animation
+            LeanTween.scale(gameObject, targetScale, 0.2f).setLoopPingPong(1);
+        }
+
         collidedToResolve = new List<Entity>();
     }
 }

@@ -18,7 +18,6 @@ public class Guy : Entity
         base.Interact(collidingBlob);
         isBlocking = false;
         isInteractable = false;
-        Debug.Log("I am collided");
         collidingBlob.AbsorbGuy(this);
         BuildSkinBridges(blob);
     }
