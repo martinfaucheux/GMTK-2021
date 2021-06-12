@@ -83,33 +83,36 @@ public class Player : MonoBehaviour
         // need to use a CollisionMatrix method instead
         Vector3 realPosEnd = realPosStart + CollisionMatrix.instance.GetRealWorldVector(direction);
 
-        StartCoroutine(SmoothMovement(realPosEnd));
+        LeanTween.move(gameObject, realPosEnd, GameManager.instance.actionDuration);
+        // TODO: need to set isMoving
+        
+        // StartCoroutine(SmoothMovement(realPosEnd));
 
         // return True if we successfuly move
         return true;
     }
 
-    protected IEnumerator SmoothMovement(Vector3 endPos)
-    {
-        // sqr for the remaining distance
-        // = distance between the current position and the end position
-        float sqrRemainingDistance = (transform.position - endPos).sqrMagnitude;
+    // protected IEnumerator SmoothMovement(Vector3 endPos)
+    // {
+    //     // sqr for the remaining distance
+    //     // = distance between the current position and the end position
+    //     float sqrRemainingDistance = (transform.position - endPos).sqrMagnitude;
 
-        _isMoving = true;
-        while (sqrRemainingDistance > float.Epsilon)
-        {
-            // move the rigidbody moveUnits units toward the end position
-            float moveUnits = _inverseMoveTime * Time.deltaTime;
-            Vector3 newPosition = Vector3.MoveTowards(transform.position, endPos, moveUnits);
-            transform.position = newPosition;
-            sqrRemainingDistance = (transform.position - endPos).sqrMagnitude;
-            // wait for a frame before reevalue the conditions of the loop
-            yield return null;
+    //     _isMoving = true;
+    //     while (sqrRemainingDistance > float.Epsilon)
+    //     {
+    //         // move the rigidbody moveUnits units toward the end position
+    //         float moveUnits = _inverseMoveTime * Time.deltaTime;
+    //         Vector3 newPosition = Vector3.MoveTowards(transform.position, endPos, moveUnits);
+    //         transform.position = newPosition;
+    //         sqrRemainingDistance = (transform.position - endPos).sqrMagnitude;
+    //         // wait for a frame before reevalue the conditions of the loop
+    //         yield return null;
 
-        }
+    //     }
 
-        // set at the correct place at the end
-        transform.position = endPos;
-        _isMoving = false;
-    }
+    //     // set at the correct place at the end
+    //     transform.position = endPos;
+    //     _isMoving = false;
+    // }
 }
