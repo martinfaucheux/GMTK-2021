@@ -35,8 +35,9 @@ public class Blob : MonoBehaviour
 
         List<Entity> collidedEntities = new List<Entity>();
 
-        bool isDisplacementPossible = true;
-        while(isDisplacementPossible){
+        bool isDisplacementPossible = true; // main condition to get out of loop
+        bool isDisplacementStopped = false; // if a entity pins down the blob
+        while(isDisplacementPossible & !isDisplacementStopped){
             foreach(Guy guy in guys){                
                 Vector2Int positionToCheck = guy.matrixCollider.matrixPosition + (distance + 1) * dirVect;
                 bool isValidPosition = CollisionMatrix.instance.IsValidPosition(positionToCheck);
@@ -48,6 +49,7 @@ public class Blob : MonoBehaviour
                     if (entityComponent != null & entityComponent.isInteractable){
                         collidedEntities.Add(entityComponent);
                         isEntityBlocking = entityComponent.isBlocking;
+                        isDisplacementStopped = entityComponent.isStopMovement;
                     }
                 }
                 isDisplacementPossible &= (isValidPosition & !isEntityBlocking);
