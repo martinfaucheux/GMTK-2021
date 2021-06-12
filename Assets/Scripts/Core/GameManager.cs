@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public float actionDuration;
     
+    public bool isWin = false;
     void Awake()
     {
         //Check if instance already exists
@@ -23,8 +24,15 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void Update(){
+        if(Input.anyKeyDown & isWin){
+            LevelLoader.instance.LoadNextLevel();
+        }
+    }
+
     public void Win(){
         GameEvents.instance.OnWinTrigger();
+        isWin = true;
         Debug.Log("YOU WIN");
         // LevelLoader.instance.LoadNextLevel();
     }

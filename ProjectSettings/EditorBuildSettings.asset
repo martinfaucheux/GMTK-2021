@@ -6,6 +6,39 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Level 1 - No obstacle.unity
+    guid: 2345523cfb47d9445a9ff05ebc4eb53d
+  - enabled: 1
+    path: Assets/Scenes/Level 2 - First obstacle.unity
+    guid: e7c501f9bd5c390499e8bc06531ec423
+  - enabled: 1
+    path: Assets/Scenes/Level 3 - Several obstacle.unity
+    guid: e964482e853fbd249a11fab4c108e530
+  - enabled: 1
+    path: Assets/Scenes/Level 4 - Several obstacle, advance.unity
+    guid: 30ba4520728e1ec4282feafe7ba3479c
+  - enabled: 1
+    path: Assets/Scenes/Level 5 - Spiral.unity
+    guid: 25c7a7eedd695104290426330a6742b7
+  - enabled: 1
+    path: Assets/Scenes/Level 6 - Intro to new guy.unity
+    guid: afb22e7bce42ead4ba8b050e0cb517cd
+  - enabled: 1
     path: Assets/Scenes/Level 7 - Play with new guy.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Level 8 - Advance with new guy.unity
+    guid: 405258ab82aae4044a7061cbcbd46adb
+  - enabled: 1
+    path: Assets/Scenes/Level 9 - Square.unity
+    guid: 31f84d5f357cb15489d817a1b10321b4
+  - enabled: 1
+    path: Assets/Scenes/Level 10 - inside the squre.unity
+    guid: 60a19d259a552c24786e81b0f52082ad
+  - enabled: 1
+    path: Assets/Scenes/Level 11 - Too many is too much.unity
+    guid: bb971fe52f05fed45be8f529ac56276a
+  - enabled: 1
+    path: Assets/Scenes/Level 14 - Quite tricky with the little guys.unity
+    guid: 5d58be1ebb71f4945afb82b007a6ba8a
   m_configObjects: {}
