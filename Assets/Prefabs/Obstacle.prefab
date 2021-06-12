@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5059189283627240291}
   - component: {fileID: 5059189283627240289}
-  - component: {fileID: 5059189283627240302}
+  - component: {fileID: 1221359839477234830}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Player
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matrixPosition: {x: 0, y: 0}
---- !u!114 &5059189283627240302
+--- !u!114 &1221359839477234830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5059189283627240300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2cecb2a337d9af4198346b5093c7fcc, type: 3}
+  m_Script: {fileID: 11500000, guid: 541ad8512a57af94cbbe8dbb89babdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isInteractable: 1
@@ -64,6 +64,7 @@ MonoBehaviour:
   isStopMovement: 0
   interactWhenOutOfReach: 0
   collidingSoundName: Hit Tree
+  trembleAmplitude: 0.1
 --- !u!1 &6113319805332216126
 GameObject:
   m_ObjectHideFlags: 0

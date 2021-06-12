@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf586a730896f442b75456ea8e18dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepThroughScenes: 0
+  keepThroughScenes: 1
   sounds:
   - name: Zoom
     audioClip: {fileID: 8300000, guid: 246bd1bb36fd7b2478e93620227acdf2, type: 3}

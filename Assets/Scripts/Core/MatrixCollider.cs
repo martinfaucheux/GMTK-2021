@@ -16,7 +16,8 @@ public class MatrixCollider : MonoBehaviour {
 
     private void OnDestroy()
     {
-        _collisionMatrix.RemoveCollider(this);
+        if(_collisionMatrix != null)
+            _collisionMatrix.RemoveCollider(this);
     }
 
     public Vector3 GetRealPos()

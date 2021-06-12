@@ -92,8 +92,10 @@ public class Blob : MonoBehaviour
     public bool AttemptMove(Direction direction){
         (Vector2Int displacement, List<Entity> collidedEntities) = GetMovement(direction);
         interactedToResolve = collidedEntities;
-        AudioManager.instance?.Play("Zoom");
         AnimateMove(displacement);
+
+        if(displacement.sqrMagnitude > 0f)
+            AudioManager.instance?.Play("Zoom");
 
         return true;
     }

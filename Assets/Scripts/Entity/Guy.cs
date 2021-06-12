@@ -8,11 +8,6 @@ public class Guy : Entity
 
     [SerializeField] GameObject bridgeSkinPrefab;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     public override void Interact(Blob collidingBlob)
     {
         base.Interact(collidingBlob);
