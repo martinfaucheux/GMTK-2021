@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7556256951387216422, guid: 3ab5a47ebb9013d4ba9fe1bca20ea780, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7556256951728373944, guid: 3ab5a47ebb9013d4ba9fe1bca20ea780, type: 3}
       propertyPath: m_Name
       value: KeepBetweenScenes
