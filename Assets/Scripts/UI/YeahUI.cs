@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class YeahUI : MonoBehaviour
 {
-    private Image _imageComponent;
+    [SerializeField] Image yeahImageComponent;
+    [SerializeField] RectTransform fadeImageTransform;
+
 
     [SerializeField] float popDuration = 0.2f;
+    [SerializeField] float finalFadeAlpha = 0.33f;
 
     void Start()
     {
-        _imageComponent = GetComponent<Image>();
         GameEvents.instance.onWin += PopImage;
     }
 
@@ -22,6 +24,8 @@ public class YeahUI : MonoBehaviour
     private void PopImage(){
         Vector3 targetScale = new Vector3(1f,1f,1f);
         LeanTween.scale(gameObject, targetScale, popDuration).setEaseOutBack();
+        LeanTween.alpha(fadeImageTransform, finalFadeAlpha, popDuration);
+        LeanTween.rotate(gameObject, Vector3.forward * 7, 4 * popDuration).setLoopPingPong();
     }
 
     
