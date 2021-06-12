@@ -56,47 +56,7 @@ public class Player : MonoBehaviour
     private void AttemptMove(Direction direction)
     {
         _lastMoveTime = Time.time;
-
-
-        (Vector2Int displacement, List<Entity> collidedEntities) = _blob.GetMovement(direction);
-
-        _blob.Move(displacement);
-
-
-
-
-        // Vector2Int newMatrixPosition = _matrixCollider.GetMaxInLinePosition(direction);
-        // Debug.Log(newMatrixPosition);
-
-        // if (newMatrixPosition != _matrixCollider.matrixPosition){
-        //     Move(newMatrixPosition);
-        // }
-
-
-
-
-
-
-        // GameObject collidingObject = _matrixCollider.GetObjectInDirection(direction);
-
-        // bool canMove = true;
-
-        // if (collidingObject != null)
-        // {
-        //     MatrixCollider otherCollider = collidingObject.GetComponent<MatrixCollider>();
-        //     canMove = !otherCollider.IsBlocking;
-
-        //     if (otherCollider == null)
-        //     {
-        //         Debug.LogError(otherCollider.ToString() + ": colliding but no collider found");
-        //         return;
-        //     }
-        // }     
-        // // Check that direction is valid and that object is able to move
-        // if (_matrixCollider.IsValidDirection(direction) & canMove)
-        // {
-        //     Move(direction);
-        // }
+        _blob.AttemptMove(direction);
     }
 
     private void MoveBlob(Vector2Int displacement){
@@ -122,27 +82,4 @@ public class Player : MonoBehaviour
         _isMoving = false;
     }
 
-    // protected IEnumerator SmoothMovement(Vector3 endPos)
-    // {
-    //     // sqr for the remaining distance
-    //     // = distance between the current position and the end position
-    //     float sqrRemainingDistance = (transform.position - endPos).sqrMagnitude;
-
-    //     _isMoving = true;
-    //     while (sqrRemainingDistance > float.Epsilon)
-    //     {
-    //         // move the rigidbody moveUnits units toward the end position
-    //         float moveUnits = _inverseMoveTime * Time.deltaTime;
-    //         Vector3 newPosition = Vector3.MoveTowards(transform.position, endPos, moveUnits);
-    //         transform.position = newPosition;
-    //         sqrRemainingDistance = (transform.position - endPos).sqrMagnitude;
-    //         // wait for a frame before reevalue the conditions of the loop
-    //         yield return null;
-
-    //     }
-
-    //     // set at the correct place at the end
-    //     transform.position = endPos;
-    //     _isMoving = false;
-    // }
 }

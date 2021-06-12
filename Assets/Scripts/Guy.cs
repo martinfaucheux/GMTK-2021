@@ -10,4 +10,11 @@ public class Guy : Entity
     {
         base.Start();
     }
+
+    public override void OnCollide(Blob collidingBlob)
+    {
+        base.OnCollide(collidingBlob);
+        Debug.Log("I am collided");
+        collidingBlob.AbsorbGuy(this);
+    }
 }

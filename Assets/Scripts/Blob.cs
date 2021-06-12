@@ -12,12 +12,16 @@ public class Blob : MonoBehaviour
     
     private bool _isMoving = false;
     private List<Guy> guys;
+    
+    private List<Entity> collidedToResolve;
 
     void Start()
     {
         // add initial collider to the blob
         Guy[] initGuys = guyPoolTransform.GetComponentsInChildren<Guy>(); 
         guys = initGuys.OfType<Guy>().ToList(); // convert to list
+        
+        collidedToResolve = new List<Entity>();
     }
 
     public (Vector2Int, List<Entity>) GetMovement(Direction direction){
@@ -30,10 +34,7 @@ public class Blob : MonoBehaviour
         bool isDisplacementPossible = true;
         while(isDisplacementPossible){
             distance ++;
-            foreach(Guy guy in guys){
-                
-                Debug.Log(guy.matrixCollider);
-                
+            foreach(Guy guy in guys){                
                 Vector2Int positionToCheck = guy.matrixCollider.matrixPosition + (distance + 1) * dirVect;
                 bool isValidPosition = CollisionMatrix.instance.IsValidPosition(positionToCheck);
                 bool isEntityBlocking = false;
@@ -46,8 +47,6 @@ public class Blob : MonoBehaviour
                         isEntityBlocking = entityComponent.isBlocking;
                     }
                 }
-
-                
                 isDisplacementPossible &= (isValidPosition & !isEntityBlocking);
             }
 
@@ -56,7 +55,16 @@ public class Blob : MonoBehaviour
         return (maxDisplacement, collidedEntities);
     }
 
-    public void Move(Vector2Int displacement){
+    public bool AttemptMove(Direction direction){
+        (Vector2Int displacement, List<Entity> collidedEntities) = GetMovement(direction);
+        collidedToResolve = collidedEntities;
+        Debug.Log("collided to resolve: " + collidedToResolve.ToString());
+        AnimateMove(displacement);
+
+        return true;
+    }
+
+    public void AnimateMove(Vector2Int displacement){
         _isMoving = true;
         foreach(Guy guy in guys){
             guy.matrixCollider.matrixPosition += displacement;
@@ -66,10 +74,20 @@ public class Blob : MonoBehaviour
         Vector3Int v3Dsiplacement = (Vector3Int) displacement;
         Vector3 newRealWorldPos = transform.position + v3Dsiplacement;
 
-        LeanTween.move(gameObject, newRealWorldPos, moveDuration).setOnComplete(SetNotMoving);
+        LeanTween.move(gameObject, newRealWorldPos, moveDuration).setOnComplete(ResolveCollision);
     }
 
-    private void SetNotMoving(){
+    public void AbsorbGuy(Guy guy){
+        guys.Add(guy);
+        guy.blob = this;
+        guy.transform.SetParent(guyPoolTransform);
+    }
+
+    private void ResolveCollision(){
         _isMoving = false;
+        foreach(Entity collidedEntity in collidedToResolve){
+            collidedEntity.OnCollide(this);
+        }
+        collidedToResolve = new List<Entity>();
     }
 }

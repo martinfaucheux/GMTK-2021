@@ -12,6 +12,10 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public virtual void OnCollide(Blob collidingBlob){
+
+    }
+
     protected virtual void Start()
     {
         matrixCollider = GetComponent<MatrixCollider>();
