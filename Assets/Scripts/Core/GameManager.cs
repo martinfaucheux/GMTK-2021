@@ -8,6 +8,13 @@ public class GameManager : MonoBehaviour
     public float actionDuration;
     
     public bool isWin = false;
+
+    public bool playerCanMove{
+        get{
+            return !isWin;
+        }
+    }
+
     void Awake()
     {
         //Check if instance already exists
@@ -31,7 +38,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Win(){
-        GameEvents.instance.OnWinTrigger();
+        GameEvents.instance.WinTrigger();
         isWin = true;
         Debug.Log("YOU WIN");
         // LevelLoader.instance.LoadNextLevel();

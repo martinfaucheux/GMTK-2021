@@ -5,6 +5,8 @@ public class GameEvents : MonoBehaviour
 {
     public static GameEvents instance = null;
     public event Action onWin;
+    public event Action onFadeOut;
+    public event Action onFadeIn;
 
     //Awake is always called before any Start functions
     void Awake()
@@ -23,11 +25,27 @@ public class GameEvents : MonoBehaviour
     }
 
 
-    public void OnWinTrigger()
+    public void WinTrigger()
     {
         if (onWin != null)
         {
             onWin();
+        }
+    }
+
+    public void FadeOutTrigger()
+    {
+        if (onFadeOut != null)
+        {
+            onFadeOut();
+        }
+    }
+
+    public void FadeInTrigger()
+    {
+        if (onFadeIn != null)
+        {
+            onFadeIn();
         }
     }
 

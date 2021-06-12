@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     private void TriggerMovement(Direction direction){
         // Debug.Log("Attempt move CD:" + moveCooldown.ToString());
 
-        if (moveCooldown == 0){
+        if (moveCooldown == 0 & GameManager.instance.playerCanMove){
             AttemptMove(direction);
         }       
     }
@@ -56,26 +56,6 @@ public class Player : MonoBehaviour
     {
         _lastMoveTime = Time.time;
         _blob.AttemptMove(direction);
-    }
-
-    private void MoveBlob(Vector2Int displacement){
-
-    }
-
-    private bool Move(Vector2Int newMatrixPos){
-
-        // compute move duration
-        float distance = (_matrixCollider.matrixPosition - newMatrixPos).magnitude;
-        float moveDuration = Mathf.Min(GameManager.instance.actionDuration, distance * 1f / moveSpeed);
-
-        // update position
-        _matrixCollider.matrixPosition = newMatrixPos;
-        Vector3 newRealWorldPos = _matrixCollider.GetRealPos();
-
-        LeanTween.move(gameObject, newRealWorldPos, moveDuration);
-        //.setOnComplete(SetNotMoving);
-
-        return true;
     }
 
 }

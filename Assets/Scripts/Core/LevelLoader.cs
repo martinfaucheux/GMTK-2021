@@ -39,6 +39,9 @@ public class LevelLoader : MonoBehaviour
     {
         currentLevelId = SceneManager.GetActiveScene().buildIndex;
         _isMainMenu = (currentLevelId == 0);
+
+        // trigger fade in at start
+        GameEvents.instance.FadeInTrigger();
     }
 
     public void LoadNextLevel()
@@ -74,6 +77,9 @@ public class LevelLoader : MonoBehaviour
     }
 
     private void LoadLevel(int levelID, bool doSaveData = true){
+
+        GameEvents.instance.FadeOutTrigger();
+
         if (doSaveData){
             SaveData(currentLevelID: levelID);
         }

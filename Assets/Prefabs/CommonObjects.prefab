@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d071744e66ab8d4c869db057af29ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSwapPeriod: 0.4
+  spriteSwapPeriod: 0.3
   pressedSprite: {fileID: 21300000, guid: 59a01de3a7628af40a7c39c5b0dacb8c, type: 3}
   releasedSprite: {fileID: 21300000, guid: 6bb02d1d94a9f7a48b86d75c51df3a44, type: 3}
   timeBeforeShow: 1
@@ -522,7 +522,6 @@ GameObject:
   - component: {fileID: 8410190574609165256}
   - component: {fileID: 7971550538653172210}
   - component: {fileID: 8244278119025415512}
-  - component: {fileID: 2894401257401674715}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -615,19 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLevelId: 0
   currentLevelId: 0
-  transitionDuration: 0.5
---- !u!114 &2894401257401674715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8410190574609165260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1028b8d33aee1734d82838bf98b83c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  transitionDuration: 2
 --- !u!1 &8410190574635116769
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +626,7 @@ GameObject:
   - component: {fileID: 8410190574635116573}
   - component: {fileID: 8410190574635116770}
   - component: {fileID: 8410190574635116768}
+  - component: {fileID: 8410190574132613279}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -711,6 +699,38 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8410190574635116769}
   m_Enabled: 1
+--- !u!114 &8410190574132613279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410190574635116769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &8410190575727951998
 GameObject:
   m_ObjectHideFlags: 0
