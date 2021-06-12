@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameEvents : MonoBehaviour
 {
-    public static GameManager instance;
-    public float actionDuration;
-    
+    public static GameEvents instance = null;
+    public event Action onWin;
+
+    //Awake is always called before any Start functions
     void Awake()
     {
         //Check if instance already exists
@@ -20,12 +20,15 @@ public class GameManager : MonoBehaviour
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a CollisionMatrix.
             Destroy(gameObject);
-
     }
 
-    public void Win(){
-        GameEvents.instance.OnWinTrigger();
-        Debug.Log("YOU WIN");
-        // LevelLoader.instance.LoadNextLevel();
+
+    public void OnWinTrigger()
+    {
+        if (onWin != null)
+        {
+            onWin();
+        }
     }
+
 }
