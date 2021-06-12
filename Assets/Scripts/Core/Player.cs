@@ -5,9 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public bool canMove{
+    public float moveCooldown{
         get{
-            return (_lastMoveTime - Time.time < GameManager.instance.actionDuration);
+            float timeSinceMove = Time.time - _lastMoveTime;
+            return Mathf.Max(0f, GameManager.instance.actionDuration - timeSinceMove);
         }
     }
 
@@ -44,7 +45,9 @@ public class Player : MonoBehaviour
     }
 
     private void TriggerMovement(Direction direction){
-        if (canMove){
+        // Debug.Log("Attempt move CD:" + moveCooldown.ToString());
+
+        if (moveCooldown == 0){
             AttemptMove(direction);
         }       
     }
@@ -53,6 +56,7 @@ public class Player : MonoBehaviour
     {
         _lastMoveTime = Time.time;
         GameObject collidingObject = _matrixCollider.GetObjectInDirection(direction);
+
         bool canMove = true;
 
         if (collidingObject != null)
@@ -77,6 +81,7 @@ public class Player : MonoBehaviour
     {
         // update collider position
         _matrixCollider.matrixPosition += direction.ToPos();
+        Debug.Log("New Matrix Pos: " + _matrixCollider.matrixPosition.ToString());
 
         // update real position
         Vector3 realPosStart = transform.position;
