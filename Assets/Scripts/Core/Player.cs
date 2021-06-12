@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     public float moveSpeed = 10;
 
     private MatrixCollider _matrixCollider;
+    private Blob _blob;
     private bool _isMoving = false;
-    private float _inverseMoveTime;
     private float _lastMoveTime;
     public static Player instance;
 
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
     void Start(){
         _matrixCollider = GetComponent<MatrixCollider>();
-        _inverseMoveTime = 1f / GameManager.instance.actionDuration;
+        _blob = GetComponent<Blob>();
         PlayerController.OnGetCommand += TriggerMovement;
 
     }
@@ -57,12 +57,25 @@ public class Player : MonoBehaviour
     {
         _lastMoveTime = Time.time;
 
-        Vector2Int newMatrixPosition = _matrixCollider.GetMaxInLinePosition(direction);
-        Debug.Log(newMatrixPosition);
 
-        if (newMatrixPosition != _matrixCollider.matrixPosition){
-            Move(newMatrixPosition);
-        }
+        (Vector2Int displacement, List<Entity> collidedEntities) = _blob.GetMovement(direction);
+
+        _blob.Move(displacement);
+
+
+
+
+        // Vector2Int newMatrixPosition = _matrixCollider.GetMaxInLinePosition(direction);
+        // Debug.Log(newMatrixPosition);
+
+        // if (newMatrixPosition != _matrixCollider.matrixPosition){
+        //     Move(newMatrixPosition);
+        // }
+
+
+
+
+
 
         // GameObject collidingObject = _matrixCollider.GetObjectInDirection(direction);
 
@@ -86,6 +99,10 @@ public class Player : MonoBehaviour
         // }
     }
 
+    private void MoveBlob(Vector2Int displacement){
+
+    }
+
     private bool Move(Vector2Int newMatrixPos){
 
         // compute move duration
@@ -98,25 +115,6 @@ public class Player : MonoBehaviour
 
         LeanTween.move(gameObject, newRealWorldPos, moveDuration).setOnComplete(SetNotMoving);
 
-        return true;
-    }
-
-    private bool Move(Direction direction)
-    {
-        // update collider position
-        _matrixCollider.matrixPosition += direction.ToPos();
-        Debug.Log("New Matrix Pos: " + _matrixCollider.matrixPosition.ToString());
-
-        // update real position
-        Vector3 realPosStart = transform.position;
-        // need to use a CollisionMatrix method instead
-        Vector3 realPosEnd = realPosStart + CollisionMatrix.instance.GetRealWorldVector(direction);
-
-        LeanTween.move(gameObject, realPosEnd, GameManager.instance.actionDuration);
-        
-        // StartCoroutine(SmoothMovement(realPosEnd));
-
-        // return True if we successfuly move
         return true;
     }
 
