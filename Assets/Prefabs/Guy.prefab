@@ -64,6 +64,7 @@ MonoBehaviour:
   isStopMovement: 0
   interactWhenOutOfReach: 1
   blob: {fileID: 0}
+  bridgeSkinPrefab: {fileID: 1941174533373607620, guid: a66bce8cee206e84a9a1e77ea7ee9d06, type: 3}
 --- !u!1 &6917929220396130326
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,8 @@ public class Entity : MonoBehaviour
 
     public bool interactWhenOutOfReach = false;
 
-    public virtual bool CanCollide(){
-        return isBlocking;
+    public Vector2Int matrixPosition{
+        get{return matrixCollider.matrixPosition;}
     }
 
     public virtual void Interact(Blob collidingBlob){

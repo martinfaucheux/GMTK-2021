@@ -7,11 +7,15 @@ public class Blob : MonoBehaviour
 
     [SerializeField] float moveSpeed = 10;
 
-    [SerializeField] Transform guyPoolTransform; 
+    
+    public Transform guyPoolTransform; 
+    public Transform skinBridgePoolTransform; 
+    
+    
     private CollisionMatrix _collisionMatrix;
     
     // private bool _isMoving = false;
-    private List<Guy> guys;
+    public List<Guy> guys {get; private set;}
     
     private List<Entity> collidedToResolve;
 
