@@ -19,6 +19,7 @@ public class Blob : MonoBehaviour
     // private bool _isMoving = false;
     public List<Guy> guys {get; private set;}
     
+    private List<Entity> interactedToResolve;
     private List<Entity> collidedToResolve;
 
     void Start()
@@ -31,6 +32,7 @@ public class Blob : MonoBehaviour
             AbsorbGuy(guy);
         }
         
+        interactedToResolve = new List<Entity>();
         collidedToResolve = new List<Entity>();
     }
 
@@ -56,10 +58,17 @@ public class Blob : MonoBehaviour
                 GameObject objectAtPosition = CollisionMatrix.instance.GetObjectAtPosition(positionToCheck);
                 if (objectAtPosition != null){
                     Entity entityComponent = objectAtPosition.GetComponent<Entity>();
-                    if (entityComponent != null & entityComponent.isInteractable){
-                        iterationEntityList.Add(entityComponent);
+
+                    if (entityComponent != null){
                         isEntityBlocking = entityComponent.isBlocking;
-                        isDisplacementStopped = entityComponent.isStopMovement;
+                        if(isEntityBlocking){
+                            collidedToResolve.Add(entityComponent);
+                        }
+
+                        if (entityComponent.isInteractable){
+                            iterationEntityList.Add(entityComponent);
+                            isDisplacementStopped = entityComponent.isStopMovement;
+                        }
                     }
                 }
                 isDisplacementPossible &= (isValidPosition & !isEntityBlocking);
@@ -82,7 +91,7 @@ public class Blob : MonoBehaviour
 
     public bool AttemptMove(Direction direction){
         (Vector2Int displacement, List<Entity> collidedEntities) = GetMovement(direction);
-        collidedToResolve = collidedEntities;
+        interactedToResolve = collidedEntities;
         AudioManager.instance?.Play("Zoom");
         AnimateMove(displacement);
 
@@ -110,17 +119,21 @@ public class Blob : MonoBehaviour
 
     private void ResolveCollision(){
         // _isMoving = false;
-        foreach(Entity collidedEntity in collidedToResolve){
-            collidedEntity.Interact(this);
+        foreach(Entity interactedEntity in interactedToResolve){
+            interactedEntity.Interact(this);
         }
 
-        if (collidedToResolve.Any()){
+        if (interactedToResolve.Any()){
             Vector3 targetScale = bloupScaleRatio * transform.localScale;
             // bloup animation
             LeanTween.scale(gameObject, targetScale, 0.2f).setLoopPingPong(1);
-            AudioManager.instance?.Play("Bubble");
+        }
+
+        foreach(Entity collidedEntity in collidedToResolve){
+            collidedEntity.Collide(this);
         }
 
         collidedToResolve = new List<Entity>();
+        interactedToResolve = new List<Entity>();
     }
 }

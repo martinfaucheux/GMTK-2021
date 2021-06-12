@@ -63,6 +63,7 @@ MonoBehaviour:
   isBlocking: 1
   isStopMovement: 0
   interactWhenOutOfReach: 0
+  collidingSoundName: Hit Tree
 --- !u!1 &6113319805332216126
 GameObject:
   m_ObjectHideFlags: 0

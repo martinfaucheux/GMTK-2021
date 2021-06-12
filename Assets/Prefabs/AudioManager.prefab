@@ -66,3 +66,10 @@ MonoBehaviour:
     randomizePitch: 0.064
     loop: 0
     playOnStart: 0
+  - name: Hit Tree
+    audioClip: {fileID: 8300000, guid: 4f6538f14cb406c46ad96b9366b55aa0, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomizePitch: 0.1
+    loop: 0
+    playOnStart: 0

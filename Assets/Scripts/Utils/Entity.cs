@@ -11,12 +11,18 @@ public class Entity : MonoBehaviour
 
     public bool interactWhenOutOfReach = false;
 
+    public string collidingSoundName;
+
     public Vector2Int matrixPosition{
         get{return matrixCollider.matrixPosition;}
     }
 
-    public virtual void Interact(Blob collidingBlob){
+    public virtual void Interact(Blob collidingBlob){}
 
+    public virtual void Collide(Blob collidingBlob){
+        if(collidingSoundName != ""){
+            AudioManager.instance?.Play(collidingSoundName);
+        }
     }
 
     protected virtual void Start()
