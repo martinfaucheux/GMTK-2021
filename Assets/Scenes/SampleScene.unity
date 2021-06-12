@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8dc79262485f6a4b8b3d92498f89fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matrixSize: {x: 7, y: 7}
+  matrixSize: {x: 8, y: 8}
   origin: {x: -3.5, y: -3.5, z: 0}
   mode: 0
   showSceneBounds: 1

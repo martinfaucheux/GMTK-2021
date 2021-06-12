@@ -102,7 +102,7 @@ public class CollisionMatrix: MonoBehaviour {
     {
         Vector3 newOrigin = - (Vector2) matrixSize / 2f;
         if (mode == Mode.TOPDOWN){
-            origin = newOrigin;
+            origin = newOrigin + new Vector3(0.5f, 0.5f, 0f);
         }
         else {
             origin = new Vector3(newOrigin.x, 0, newOrigin.y);
