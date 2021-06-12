@@ -10,7 +10,7 @@ public class Blob : MonoBehaviour
     [SerializeField] Transform guyPoolTransform; 
     private CollisionMatrix _collisionMatrix;
     
-    private bool _isMoving = false;
+    // private bool _isMoving = false;
     private List<Guy> guys;
     
     private List<Entity> collidedToResolve;
@@ -65,14 +65,13 @@ public class Blob : MonoBehaviour
     public bool AttemptMove(Direction direction){
         (Vector2Int displacement, List<Entity> collidedEntities) = GetMovement(direction);
         collidedToResolve = collidedEntities;
-        Debug.Log("collided to resolve: " + collidedToResolve.ToString());
         AnimateMove(displacement);
 
         return true;
     }
 
     public void AnimateMove(Vector2Int displacement){
-        _isMoving = true;
+        // _isMoving = true;
         foreach(Guy guy in guys){
             guy.matrixCollider.matrixPosition += displacement;
         }
@@ -91,7 +90,7 @@ public class Blob : MonoBehaviour
     }
 
     private void ResolveCollision(){
-        _isMoving = false;
+        // _isMoving = false;
         foreach(Entity collidedEntity in collidedToResolve){
             collidedEntity.Interact(this);
         }

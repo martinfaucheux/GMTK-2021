@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
 
     private MatrixCollider _matrixCollider;
     private Blob _blob;
-    private bool _isMoving = false;
     private float _lastMoveTime;
     public static Player instance;
 
@@ -73,13 +72,10 @@ public class Player : MonoBehaviour
         _matrixCollider.matrixPosition = newMatrixPos;
         Vector3 newRealWorldPos = _matrixCollider.GetRealPos();
 
-        LeanTween.move(gameObject, newRealWorldPos, moveDuration).setOnComplete(SetNotMoving);
+        LeanTween.move(gameObject, newRealWorldPos, moveDuration);
+        //.setOnComplete(SetNotMoving);
 
         return true;
-    }
-
-    private void SetNotMoving(){
-        _isMoving = false;
     }
 
 }

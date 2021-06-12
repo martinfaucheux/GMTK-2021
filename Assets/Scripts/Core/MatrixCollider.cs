@@ -12,7 +12,6 @@ public class MatrixCollider : MonoBehaviour {
         _collisionMatrix = CollisionMatrix.instance;
         matrixPosition = _collisionMatrix.GetMatrixPos(this.transform);
         _collisionMatrix.AddCollider(this);
-        Debug.Log("Position on grid: " + matrixPosition.ToString());
     }
 
     private void OnDestroy()
