@@ -11,14 +11,11 @@ public class Guy : Entity
         base.Start();
     }
 
-    public override bool CanCollide(){
-        return isBlocking & (blob == null);
-    }
-
-    public override void OnCollide(Blob collidingBlob)
+    public override void Interact(Blob collidingBlob)
     {
-        base.OnCollide(collidingBlob);
+        base.Interact(collidingBlob);
         isBlocking = false;
+        isInteractable = false;
         Debug.Log("I am collided");
         collidingBlob.AbsorbGuy(this);
     }

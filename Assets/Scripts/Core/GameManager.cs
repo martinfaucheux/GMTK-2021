@@ -22,4 +22,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
     }
+
+    public void Win(){
+        Debug.Log("YOU WIN");
+    }
 }

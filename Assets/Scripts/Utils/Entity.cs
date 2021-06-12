@@ -5,14 +5,14 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public MatrixCollider matrixCollider{get; private set;}
-
-    public bool isBlocking;
+    public bool isInteractable = true; // whether Interact should be run when colliding
+    public bool isBlocking = true; // whether this blocks movement
 
     public virtual bool CanCollide(){
         return isBlocking;
     }
 
-    public virtual void OnCollide(Blob collidingBlob){
+    public virtual void Interact(Blob collidingBlob){
 
     }
 

@@ -18,8 +18,12 @@ public class Blob : MonoBehaviour
     void Start()
     {
         // add initial collider to the blob
-        Guy[] initGuys = guyPoolTransform.GetComponentsInChildren<Guy>(); 
-        guys = initGuys.OfType<Guy>().ToList(); // convert to list
+        guys = new List<Guy>();
+
+        Guy[] initGuys = guyPoolTransform.GetComponentsInChildren<Guy>();
+        foreach(Guy guy in initGuys){
+            AbsorbGuy(guy);
+        }
         
         collidedToResolve = new List<Entity>();
     }
@@ -41,7 +45,7 @@ public class Blob : MonoBehaviour
                 GameObject objectAtPosition = CollisionMatrix.instance.GetObjectAtPosition(positionToCheck);
                 if (objectAtPosition != null){
                     Entity entityComponent = objectAtPosition.GetComponent<Entity>();
-                    if (entityComponent != null & entityComponent.CanCollide()){
+                    if (entityComponent != null & entityComponent.isInteractable){
                         collidedEntities.Add(entityComponent);
                         isEntityBlocking = entityComponent.isBlocking;
                     }
@@ -87,7 +91,7 @@ public class Blob : MonoBehaviour
     private void ResolveCollision(){
         _isMoving = false;
         foreach(Entity collidedEntity in collidedToResolve){
-            collidedEntity.OnCollide(this);
+            collidedEntity.Interact(this);
         }
         collidedToResolve = new List<Entity>();
     }
