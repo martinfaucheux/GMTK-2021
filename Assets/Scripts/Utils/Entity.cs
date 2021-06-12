@@ -9,6 +9,8 @@ public class Entity : MonoBehaviour
     public bool isBlocking = true; // whether this blocks movement
     public bool isStopMovement = false; // wheter displacement is allowed on the case but it can't go further
 
+    public bool interactWhenOutOfReach = false;
+
     public virtual bool CanCollide(){
         return isBlocking;
     }

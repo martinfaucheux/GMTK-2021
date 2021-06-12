@@ -38,6 +38,10 @@ public class Blob : MonoBehaviour
         bool isDisplacementPossible = true; // main condition to get out of loop
         bool isDisplacementStopped = false; // if a entity pins down the blob
         while(isDisplacementPossible & !isDisplacementStopped){
+
+            // store entities collided at this distance iteration
+            List<Entity> iterationEntityList = new List<Entity>();
+
             foreach(Guy guy in guys){                
                 Vector2Int positionToCheck = guy.matrixCollider.matrixPosition + (distance + 1) * dirVect;
                 bool isValidPosition = CollisionMatrix.instance.IsValidPosition(positionToCheck);
@@ -47,12 +51,20 @@ public class Blob : MonoBehaviour
                 if (objectAtPosition != null){
                     Entity entityComponent = objectAtPosition.GetComponent<Entity>();
                     if (entityComponent != null & entityComponent.isInteractable){
-                        collidedEntities.Add(entityComponent);
+                        iterationEntityList.Add(entityComponent);
                         isEntityBlocking = entityComponent.isBlocking;
                         isDisplacementStopped = entityComponent.isStopMovement;
                     }
                 }
                 isDisplacementPossible &= (isValidPosition & !isEntityBlocking);
+            }
+
+            // trigger Interact method only for entities that have interactWhenOutOfReach
+            // in case the movement has been blocked
+            foreach(Entity collidedEntity in iterationEntityList){
+                if(isDisplacementPossible | collidedEntity.interactWhenOutOfReach){
+                    collidedEntities.Add(collidedEntity);
+                }
             }
             
             // only add if displacement is possible

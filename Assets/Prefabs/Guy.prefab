@@ -61,6 +61,7 @@ MonoBehaviour:
   isInteractable: 1
   isBlocking: 1
   isStopMovement: 0
+  interactWhenOutOfReach: 1
   blob: {fileID: 0}
 --- !u!212 &3300681083460135624
 SpriteRenderer:
