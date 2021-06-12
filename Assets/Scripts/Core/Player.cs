@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
             return Mathf.Max(0f, GameManager.instance.actionDuration - timeSinceMove);
         }
     }
+    public float moveSpeed = 10;
 
     private MatrixCollider _matrixCollider;
     private bool _isMoving = false;
@@ -55,26 +56,49 @@ public class Player : MonoBehaviour
     private void AttemptMove(Direction direction)
     {
         _lastMoveTime = Time.time;
-        GameObject collidingObject = _matrixCollider.GetObjectInDirection(direction);
 
-        bool canMove = true;
+        Vector2Int newMatrixPosition = _matrixCollider.GetMaxInLinePosition(direction);
+        Debug.Log(newMatrixPosition);
 
-        if (collidingObject != null)
-        {
-            MatrixCollider otherCollider = collidingObject.GetComponent<MatrixCollider>();
-            canMove = !otherCollider.IsBlocking;
-
-            if (otherCollider == null)
-            {
-                Debug.LogError(otherCollider.ToString() + ": colliding but no collider found");
-                return;
-            }
-        }     
-        // Check that direction is valid and that object is able to move
-        if (_matrixCollider.IsValidDirection(direction) & canMove)
-        {
-            Move(direction);
+        if (newMatrixPosition != _matrixCollider.matrixPosition){
+            Move(newMatrixPosition);
         }
+
+        // GameObject collidingObject = _matrixCollider.GetObjectInDirection(direction);
+
+        // bool canMove = true;
+
+        // if (collidingObject != null)
+        // {
+        //     MatrixCollider otherCollider = collidingObject.GetComponent<MatrixCollider>();
+        //     canMove = !otherCollider.IsBlocking;
+
+        //     if (otherCollider == null)
+        //     {
+        //         Debug.LogError(otherCollider.ToString() + ": colliding but no collider found");
+        //         return;
+        //     }
+        // }     
+        // // Check that direction is valid and that object is able to move
+        // if (_matrixCollider.IsValidDirection(direction) & canMove)
+        // {
+        //     Move(direction);
+        // }
+    }
+
+    private bool Move(Vector2Int newMatrixPos){
+
+        // compute move duration
+        float distance = (_matrixCollider.matrixPosition - newMatrixPos).magnitude;
+        float moveDuration = Mathf.Min(GameManager.instance.actionDuration, distance * 1f / moveSpeed);
+
+        // update position
+        _matrixCollider.matrixPosition = newMatrixPos;
+        Vector3 newRealWorldPos = _matrixCollider.GetRealPos();
+
+        LeanTween.move(gameObject, newRealWorldPos, moveDuration).setOnComplete(SetNotMoving);
+
+        return true;
     }
 
     private bool Move(Direction direction)
@@ -89,12 +113,15 @@ public class Player : MonoBehaviour
         Vector3 realPosEnd = realPosStart + CollisionMatrix.instance.GetRealWorldVector(direction);
 
         LeanTween.move(gameObject, realPosEnd, GameManager.instance.actionDuration);
-        // TODO: need to set isMoving
         
         // StartCoroutine(SmoothMovement(realPosEnd));
 
         // return True if we successfuly move
         return true;
+    }
+
+    private void SetNotMoving(){
+        _isMoving = false;
     }
 
     // protected IEnumerator SmoothMovement(Vector3 endPos)

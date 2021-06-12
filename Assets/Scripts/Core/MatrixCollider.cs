@@ -44,6 +44,22 @@ public class MatrixCollider : MonoBehaviour {
 
         return _collisionMatrix.GetObjectAtPosition(positionToCheck);
     }
+
+    public Vector2Int GetMaxInLinePosition(Direction direction){
+
+        Vector2Int maxInlinePosition = matrixPosition;
+        Vector2Int positionToCheck = matrixPosition + direction.ToPos();
+
+        while(_collisionMatrix.IsValidPosition(positionToCheck)){
+            GameObject objectAtPosition = _collisionMatrix.GetObjectAtPosition(positionToCheck);
+            if (objectAtPosition != null){
+                break;
+            }
+            maxInlinePosition = positionToCheck;
+            positionToCheck += direction.ToPos();
+        }
+        return maxInlinePosition;
+    }
     
 
     public Direction GetDirectionToOtherCollider(MatrixCollider otherCollider)
