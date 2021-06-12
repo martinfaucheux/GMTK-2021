@@ -112,3 +112,5 @@ MonoBehaviour:
   isInteractable: 1
   isBlocking: 0
   isStopMovement: 1
+  interactWhenOutOfReach: 0
+  spriteRenderer: {fileID: 3467680248784761838}
