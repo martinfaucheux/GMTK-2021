@@ -5,8 +5,6 @@ using UnityEngine;
 public class MatrixCollider : MonoBehaviour {
 
     public Vector2Int matrixPosition;
-    public bool IsBlocking = false;
-
     private CollisionMatrix _collisionMatrix;
 
 	// Use this for initialization

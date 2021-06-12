@@ -33,7 +33,6 @@ public class Blob : MonoBehaviour
 
         bool isDisplacementPossible = true;
         while(isDisplacementPossible){
-            distance ++;
             foreach(Guy guy in guys){                
                 Vector2Int positionToCheck = guy.matrixCollider.matrixPosition + (distance + 1) * dirVect;
                 bool isValidPosition = CollisionMatrix.instance.IsValidPosition(positionToCheck);
@@ -42,14 +41,16 @@ public class Blob : MonoBehaviour
                 GameObject objectAtPosition = CollisionMatrix.instance.GetObjectAtPosition(positionToCheck);
                 if (objectAtPosition != null){
                     Entity entityComponent = objectAtPosition.GetComponent<Entity>();
-                    if (entityComponent != null){
+                    if (entityComponent != null & entityComponent.CanCollide()){
                         collidedEntities.Add(entityComponent);
                         isEntityBlocking = entityComponent.isBlocking;
                     }
                 }
                 isDisplacementPossible &= (isValidPosition & !isEntityBlocking);
             }
-
+            
+            // only add if displacement is possible
+            distance += isDisplacementPossible ? 1 : 0;
         }
         Vector2Int maxDisplacement = distance * dirVect;
         return (maxDisplacement, collidedEntities);

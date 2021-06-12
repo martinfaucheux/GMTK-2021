@@ -6,10 +6,10 @@ public class Entity : MonoBehaviour
 {
     public MatrixCollider matrixCollider{get; private set;}
 
-    public bool isBlocking {
-        get{
-            return matrixCollider.IsBlocking;
-        }
+    public bool isBlocking;
+
+    public virtual bool CanCollide(){
+        return isBlocking;
     }
 
     public virtual void OnCollide(Blob collidingBlob){
