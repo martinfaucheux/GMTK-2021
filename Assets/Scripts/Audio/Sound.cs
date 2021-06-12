@@ -11,6 +11,8 @@ public class Sound
     public float volume = 1f;
     [Range(.1f, 3f)]
     public float pitch = 1f;
+    [Range(0f, 1f)]
+    public float randomizePitch = 0f;
     public bool loop;
     public bool playOnStart;
 
@@ -34,6 +36,11 @@ public class Sound
     }
 
     public void Play(){
+
+        if(randomizePitch > 0){
+            source.pitch = pitch + randomizePitch * Random.Range(-1, 1);
+        }
+
         source.Play();
     }
 }

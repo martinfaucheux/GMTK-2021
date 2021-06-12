@@ -23,6 +23,7 @@ public class YeahUI : MonoBehaviour
 
     private void PopImage(){
         Vector3 targetScale = new Vector3(1f,1f,1f);
+        AudioManager.instance?.Play("Yeah");
         LeanTween.scale(gameObject, targetScale, popDuration).setEaseOutBack();
         LeanTween.alpha(fadeImageTransform, finalFadeAlpha, popDuration);
         LeanTween.rotate(gameObject, Vector3.forward * 7, 4 * popDuration).setLoopPingPong();

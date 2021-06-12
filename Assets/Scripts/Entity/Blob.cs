@@ -118,6 +118,7 @@ public class Blob : MonoBehaviour
             Vector3 targetScale = bloupScaleRatio * transform.localScale;
             // bloup animation
             LeanTween.scale(gameObject, targetScale, 0.2f).setLoopPingPong(1);
+            AudioManager.instance?.Play("Bubble");
         }
 
         collidedToResolve = new List<Entity>();
