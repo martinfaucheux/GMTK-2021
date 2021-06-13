@@ -7,7 +7,7 @@ public static class DataSaver {
 
     public static string dataFileName = "player.data";
 
-    public static void SaveGameState(int maxLevelId, int currentLevelId){
+    public static void SaveGameState(Dictionary<int, bool> unlockedLevels, int maxLevelId, int currentLevelId){
         
         BinaryFormatter formatter = new BinaryFormatter();
 
@@ -15,7 +15,7 @@ public static class DataSaver {
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(maxLevelId, currentLevelId);
+        PlayerData data = new PlayerData(unlockedLevels, maxLevelId, currentLevelId);
 
         formatter.Serialize(stream, data);
         stream.Close();

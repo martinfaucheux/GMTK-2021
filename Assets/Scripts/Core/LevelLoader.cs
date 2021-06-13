@@ -10,6 +10,8 @@ public class LevelLoader : MonoBehaviour
     // maximum level that was reached
     public int maxLevelId;
     // current loaded level id
+
+    public Dictionary<int, bool> unlockedLevels = new Dictionary<int, bool>();
     public int currentLevelId;
 
     public float transitionDuration = 0.5f;
@@ -81,7 +83,7 @@ public class LevelLoader : MonoBehaviour
         GameEvents.instance.FadeOutTrigger();
 
         if (doSaveData){
-            SaveData(currentLevelID: levelID);
+            SaveData(unlockedLevels, currentLevelID: levelID);
         }
         
         _lastLevelPlayedID = levelID;
@@ -89,7 +91,7 @@ public class LevelLoader : MonoBehaviour
     }
 
     public bool IsLevelUnlocked(int levelId){
-        return (levelId <= maxLevelId);
+        return (unlockedLevels.ContainsKey(levelId) && unlockedLevels[levelId]); 
     }
 
     public bool IsPreviousLevelAvailable(){
@@ -101,13 +103,21 @@ public class LevelLoader : MonoBehaviour
     }
 
     private void UnlockLevel(int levelID){
-        if (maxLevelId < levelID){
-            maxLevelId = levelID;
-            SaveData(maxLevelId: levelID);
+        
+        bool hasChanged = !IsLevelUnlocked(levelID);
+
+        unlockedLevels[levelID] = true;
+
+        if (hasChanged){
+            if (maxLevelId < levelID){
+                maxLevelId = levelID;
+            }
+            // TODO: add dict
+            SaveData(unlockedLevels, maxLevelId: levelID);
         }
     }
 
-    public void SaveData(int maxLevelId = -1, int currentLevelID = -1){
+    public void SaveData(Dictionary<int, bool> unlockedLevels, int maxLevelId = -1, int currentLevelID = -1){
         if (maxLevelId < 0 ){
             maxLevelId = this.maxLevelId;
         }
@@ -115,7 +125,7 @@ public class LevelLoader : MonoBehaviour
         if (currentLevelID < 0){
             currentLevelID = this.currentLevelId;
         }
-        DataSaver.SaveGameState(maxLevelId, currentLevelID);
+        DataSaver.SaveGameState(unlockedLevels, maxLevelId, currentLevelID);
 
     }
 
@@ -125,6 +135,7 @@ public class LevelLoader : MonoBehaviour
         if (playerData != null){
             maxLevelId = playerData.maxLevelId;
             _lastLevelPlayedID = playerData.currentLevelId;
+            unlockedLevels = playerData.unlockedLevels;
         }
     }
 
