@@ -45,11 +45,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 12 - Guys in grid.unity
     guid: f593a7572e499f04f89d54b4c1bf3a6e
   - enabled: 1
-    path: Assets/Scenes/Level 16 - Back and forth.unity
-    guid: b8caf53eb69e45d40a2eb2bb464934f9
+    path: Assets/Scenes/Level 13 - Oasis.unity
+    guid: 48c9b4ffedaaf8f4aab8e8e5f8fc743e
   - enabled: 1
     path: Assets/Scenes/Level 14 - Penetrate.unity
     guid: 251946ec517ae69489f6d2924b3b6279
+  - enabled: 1
+    path: Assets/Scenes/Level 15 - Cornered.unity
+    guid: 595bff877786cee4b9da748e600ac971
+  - enabled: 1
+    path: Assets/Scenes/Level 16 - Back and forth.unity
+    guid: b8caf53eb69e45d40a2eb2bb464934f9
   - enabled: 1
     path: Assets/Scenes/Level 17 - Quite tricky with the little guys.unity
     guid: 31f84d5f357cb15489d817a1b10321b4
