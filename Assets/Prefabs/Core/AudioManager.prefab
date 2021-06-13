@@ -46,7 +46,7 @@ MonoBehaviour:
   keepThroughScenes: 1
   sounds:
   - name: Zoom
-    audioClip: {fileID: 8300000, guid: 246bd1bb36fd7b2478e93620227acdf2, type: 3}
+    audioClip: {fileID: 8300000, guid: ca6a791b3a361564bb90ec65c2a23c72, type: 3}
     volume: 0.246
     pitch: 1.33
     randomizePitch: 0.1
@@ -75,8 +75,8 @@ MonoBehaviour:
     playOnStart: 0
   - name: Explosion
     audioClip: {fileID: 8300000, guid: 7fcee954c4c0f2f41823e4cb9e9bb656, type: 3}
-    volume: 0.612
-    pitch: 0.48
+    volume: 0.697
+    pitch: 0.88
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
@@ -87,3 +87,17 @@ MonoBehaviour:
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
+  - name: Menu Music
+    audioClip: {fileID: 8300000, guid: bd8308f277314cd409a69af6b8728be8, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomizePitch: 0
+    loop: 1
+    playOnStart: 0
+  - name: Game Music
+    audioClip: {fileID: 8300000, guid: b7237b217b9367f4c94be6912a8914a6, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomizePitch: 0
+    loop: 1
+    playOnStart: 1

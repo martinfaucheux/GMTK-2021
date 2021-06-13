@@ -38,14 +38,30 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void Stop(string soundName){
+        if(_soundDict.ContainsKey(soundName)){
+            _soundDict[soundName].Stop();
+        }
+        else{
+            Debug.LogError("Unknown sound: " + soundName);
+        }
+    }
+
     private void CheckSingleton(){
         if(instance == null){
             instance = this;
         }
         else{
+            Debug.Log("Audio manager found, destroying.");
             Destroy(gameObject);
             return;
         }
     }
 
+    void OnDestroy(){
+        foreach(KeyValuePair<string, Sound> entry in _soundDict){           
+            Sound sound = entry.Value;
+            Destroy(sound.source);
+        }    
+    }
 }

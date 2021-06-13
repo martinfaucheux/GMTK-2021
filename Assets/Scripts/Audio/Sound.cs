@@ -43,4 +43,6 @@ public class Sound
 
         source.Play();
     }
+
+    public void Stop() => _source.Stop();
 }

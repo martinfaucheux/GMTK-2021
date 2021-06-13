@@ -681,7 +681,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 109.3
+  m_fontSize: 98.3
   m_fontSizeBase: 71.39
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 89.2
+  m_fontSize: 74.6
   m_fontSizeBase: 71.39
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1606,7 +1606,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.8
+  m_fontSize: 35.65
   m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1943,17 +1943,9 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 858463055709579717, guid: 581dc36fd956f754dadb8980ba4fef78, type: 3}
-      propertyPath: sounds.Array.data[4].pitch
-      value: 0.88
+      propertyPath: sounds.Array.data[7].volume
+      value: 0.135
       objectReference: {fileID: 0}
-    - target: {fileID: 858463055709579717, guid: 581dc36fd956f754dadb8980ba4fef78, type: 3}
-      propertyPath: sounds.Array.data[4].volume
-      value: 0.697
-      objectReference: {fileID: 0}
-    - target: {fileID: 858463055709579717, guid: 581dc36fd956f754dadb8980ba4fef78, type: 3}
-      propertyPath: sounds.Array.data[0].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ca6a791b3a361564bb90ec65c2a23c72, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 581dc36fd956f754dadb8980ba4fef78, type: 3}
 --- !u!1 &1871683798

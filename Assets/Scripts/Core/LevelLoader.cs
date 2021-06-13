@@ -83,6 +83,7 @@ public class LevelLoader : MonoBehaviour
     }
 
     public void LoadFirstScene(){
+        Destroy(AudioManager.instance); // destroy so main menu music will play
         LoadLevel(0, false);
     }
 
