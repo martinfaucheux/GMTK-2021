@@ -63,6 +63,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 18 - Play Arround with 2 burgers.unity
     guid: 8fd3c6db0ea055349a93c920a1afbf0a
   - enabled: 1
-    path: Assets/Scenes/LevelSelection.unity
-    guid: e91fc22c55cc26849ad9df0db6efd64c
+    path: Assets/Scenes/Level 20 - Prioritize burgers.unity
+    guid: cf9596b9f42a04a4ea74b978404f715c
+  - enabled: 1
+    path: Assets/Scenes/Level 21 - Burgers at the center.unity
+    guid: 4f57bbe363d05f54f83e5ec389b93722
+  - enabled: 1
+    path: Assets/Scenes/Level 22 - Meh.unity
+    guid: 55a32b9a9292e1b4eb29fe87b3ad06f7
+  - enabled: 1
+    path: Assets/Scenes/Level 23 - Meh advanced.unity
+    guid: ecc9e5b6e6b28c04ba8863f6712c227c
+  - enabled: 1
+    path: Assets/Scenes/Level 19 - Dont follow your intuition.unity
+    guid: a5ee91373a9abac42899b98bbef25fe0
   m_configObjects: {}

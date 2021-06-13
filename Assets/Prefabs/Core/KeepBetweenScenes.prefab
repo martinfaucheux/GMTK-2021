@@ -32,7 +32,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 259, y: 148}
+  m_AnchoredPosition: {x: 182, y: 102}
   m_SizeDelta: {x: -990, y: -514}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1658576495191606235
@@ -342,6 +342,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7556256952660036447}
     m_Modifications:
+    - target: {fileID: 1221969571189282911, guid: ea55f5ae26c67554ba3048249f35ff6f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -12
+      objectReference: {fileID: 0}
     - target: {fileID: 9207526786561347188, guid: ea55f5ae26c67554ba3048249f35ff6f, type: 3}
       propertyPath: m_Name
       value: TransitionBurger (3)
@@ -376,11 +380,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9207526786561347189, guid: ea55f5ae26c67554ba3048249f35ff6f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -251.8085
+      value: -151.8183
       objectReference: {fileID: 0}
     - target: {fileID: 9207526786561347189, guid: ea55f5ae26c67554ba3048249f35ff6f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 216.4855
+      value: 309.8987
       objectReference: {fileID: 0}
     - target: {fileID: 9207526786561347189, guid: ea55f5ae26c67554ba3048249f35ff6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -412,11 +416,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9207526786561347189, guid: ea55f5ae26c67554ba3048249f35ff6f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1058
+      value: 989.7371
       objectReference: {fileID: 0}
     - target: {fileID: 9207526786561347189, guid: ea55f5ae26c67554ba3048249f35ff6f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 936
+      value: 940.6061
       objectReference: {fileID: 0}
     - target: {fileID: 9207526786561347189, guid: ea55f5ae26c67554ba3048249f35ff6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
