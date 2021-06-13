@@ -17,5 +17,6 @@ public class Burger : Entity
         spriteRenderer.enabled = false;
         GameManager.instance.burgerToCollect --;
         GameManager.instance.CheckWinCondition();
+        Destroy(gameObject);
     }
 }

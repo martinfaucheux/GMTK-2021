@@ -25,7 +25,7 @@ public class FaceAnimation : MonoBehaviour
     private Sprite _initMouthSprite;
 
     private float _lastBlink;
-    private bool _isBlinking;
+    private bool _isBlinking = false;
 
     void Start(){
 

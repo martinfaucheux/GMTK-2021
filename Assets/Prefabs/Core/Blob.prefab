@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: doBlink
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8004901410075272785, guid: a25ef2704c3acfa4dbfc27f28da6faa6, type: 3}
+      propertyPath: doBlink
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8207152619832090608, guid: a25ef2704c3acfa4dbfc27f28da6faa6, type: 3}
       propertyPath: m_Sprite
       value: 
