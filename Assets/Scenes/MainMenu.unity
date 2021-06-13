@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9960785, g: 0.8588236, b: 0.8078432, a: 1}
+  m_Color: {r: 1, g: 0.7477631, b: 0.5707547, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1453,6 +1453,14 @@ PrefabInstance:
     - target: {fileID: 858463055709579716, guid: 581dc36fd956f754dadb8980ba4fef78, type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 858463055709579717, guid: 581dc36fd956f754dadb8980ba4fef78, type: 3}
+      propertyPath: sounds.Array.data[4].pitch
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 858463055709579717, guid: 581dc36fd956f754dadb8980ba4fef78, type: 3}
+      propertyPath: sounds.Array.data[4].volume
+      value: 0.697
       objectReference: {fileID: 0}
     - target: {fileID: 858463055709579717, guid: 581dc36fd956f754dadb8980ba4fef78, type: 3}
       propertyPath: sounds.Array.data[0].audioClip

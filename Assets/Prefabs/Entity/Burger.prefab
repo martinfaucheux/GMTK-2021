@@ -114,6 +114,7 @@ MonoBehaviour:
   isBlocking: 0
   isStopMovement: 1
   interactWhenOutOfReach: 0
+  collidingSoundName: Crunch
   spriteRenderer: {fileID: 3467680248784761838}
 --- !u!95 &5046463077321178096
 Animator:

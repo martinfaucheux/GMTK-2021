@@ -73,3 +73,10 @@ MonoBehaviour:
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
+  - name: Crunch
+    audioClip: {fileID: 8300000, guid: 2cd01a918d86290489f4848008738fc9, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomizePitch: 0.1
+    loop: 0
+    playOnStart: 0

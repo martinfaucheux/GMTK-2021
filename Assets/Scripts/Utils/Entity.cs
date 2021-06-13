@@ -17,16 +17,21 @@ public class Entity : MonoBehaviour
         get{return matrixCollider.matrixPosition;}
     }
 
-    public virtual void Interact(Blob collidingBlob){}
+    public virtual void Interact(Blob collidingBlob){
+        PlaySound();
+    }
 
     public virtual void Collide(Blob collidingBlob){
-        if(collidingSoundName != ""){
-            AudioManager.instance?.Play(collidingSoundName);
-        }
     }
 
     protected virtual void Start()
     {
         matrixCollider = GetComponent<MatrixCollider>();
+    }
+
+    private void PlaySound(){
+        if(collidingSoundName != ""){
+            AudioManager.instance?.Play(collidingSoundName);
+        }
     }
 }

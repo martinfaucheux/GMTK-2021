@@ -129,7 +129,7 @@ public class Blob : MonoBehaviour
 
             // bloup animation
             Vector3 targetScale = bloupScaleRatio * transform.localScale;
-            LeanTween.scale(gameObject, targetScale, 0.2f).setLoopPingPong(1);
+            LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
 
             // wow animation
             foreach(Guy guy in guys){
