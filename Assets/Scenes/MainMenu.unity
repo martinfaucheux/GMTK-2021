@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1285863087641861218, guid: 3ab5a47ebb9013d4ba9fe1bca20ea780, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -12
+      objectReference: {fileID: 0}
     - target: {fileID: 7556256951387216422, guid: 3ab5a47ebb9013d4ba9fe1bca20ea780, type: 3}
       propertyPath: m_Material
       value: 
@@ -582,7 +586,7 @@ MonoBehaviour:
   m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
-  m_FlexibleWidth: -1
+  m_FlexibleWidth: 2.97
   m_FlexibleHeight: -1
   m_LayoutPriority: 0
 --- !u!222 &457442983
@@ -677,7 +681,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 215.85
+  m_fontSize: 109.3
   m_fontSizeBase: 71.39
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -811,7 +815,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 231.3
+  m_fontSize: 89.2
   m_fontSizeBase: 71.39
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1602,10 +1606,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
+  m_fontSize: 42.8
   m_fontSizeBase: 80
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
