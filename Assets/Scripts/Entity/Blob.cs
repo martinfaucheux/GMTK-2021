@@ -119,16 +119,22 @@ public class Blob : MonoBehaviour
         guy.transform.SetParent(guyPoolTransform);
     }
 
-    private void ResolveCollision(){
-        // _isMoving = false;
-        foreach(Entity interactedEntity in interactedToResolve){
-            interactedEntity.Interact(this);
-        }
+    private void ResolveCollision(){      
 
         if (interactedToResolve.Any()){
-            Vector3 targetScale = bloupScaleRatio * transform.localScale;
+            // trigger Interact method
+            foreach(Entity interactedEntity in interactedToResolve){
+                interactedEntity.Interact(this);
+            }
+
             // bloup animation
+            Vector3 targetScale = bloupScaleRatio * transform.localScale;
             LeanTween.scale(gameObject, targetScale, 0.2f).setLoopPingPong(1);
+
+            // wow animation
+            foreach(Guy guy in guys){
+                GameEvents.instance.BlobCollisionTrigger(guy.gameObject.GetInstanceID());
+            }
         }
 
         foreach(Entity collidedEntity in collidedToResolve){

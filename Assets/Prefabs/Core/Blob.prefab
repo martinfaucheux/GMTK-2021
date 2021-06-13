@@ -62,6 +62,7 @@ MonoBehaviour:
   moveSpeed: 10
   guyPoolTransform: {fileID: 4956528817977087345}
   skinBridgePoolTransform: {fileID: 8932931141412514615}
+  bloupScaleRatio: 1.1
 --- !u!1 &4956528817977087344
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +207,20 @@ PrefabInstance:
       propertyPath: isInteractable
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6657009360757133524, guid: a25ef2704c3acfa4dbfc27f28da6faa6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 81169742716e4e345bab8e63455e6fc2, type: 3}
+    - target: {fileID: 6770607883592813779, guid: a25ef2704c3acfa4dbfc27f28da6faa6, type: 3}
+      propertyPath: doBlink
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207152619832090608, guid: a25ef2704c3acfa4dbfc27f28da6faa6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d54d17e9576ef99408118eb685f4d2eb, type: 3}
+    m_RemovedComponents:
+    - {fileID: 8117400944106092554, guid: a25ef2704c3acfa4dbfc27f28da6faa6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a25ef2704c3acfa4dbfc27f28da6faa6, type: 3}
 --- !u!4 &4956528816592878745 stripped
 Transform:

@@ -8,6 +8,8 @@ public class GameEvents : MonoBehaviour
     public event Action onFadeOut;
     public event Action onFadeIn;
 
+    public event Action<int> onBlobCollision;
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -46,6 +48,14 @@ public class GameEvents : MonoBehaviour
         if (onFadeIn != null)
         {
             onFadeIn();
+        }
+    }
+
+    public void BlobCollisionTrigger(int gameObjectId)
+    {
+        if (onBlobCollision != null)
+        {
+            onBlobCollision(gameObjectId);
         }
     }
 
