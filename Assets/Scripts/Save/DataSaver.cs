@@ -19,6 +19,8 @@ public static class DataSaver {
 
         formatter.Serialize(stream, data);
         stream.Close();
+
+        Debug.Log("data saved. Last level id: "+ currentLevelId.ToString());
     }
 
     public static PlayerData LoadGameState(){

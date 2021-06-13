@@ -16,6 +16,8 @@ public class LevelLoader : MonoBehaviour
 
     public float transitionDuration = 0.5f;
 
+    [SerializeField] bool loadSaveData = false;
+
     // cache last level that was played (for play button)
     private int _lastLevelPlayedID = 1;
     private bool _isMainMenu = false;
@@ -44,6 +46,10 @@ public class LevelLoader : MonoBehaviour
 
         // trigger fade in at start
         GameEvents.instance.FadeInTrigger();
+
+        if (loadSaveData){
+            RetrieveGameState();
+        }
     }
 
     public void LoadNextLevel()
