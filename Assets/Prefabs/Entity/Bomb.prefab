@@ -113,5 +113,5 @@ MonoBehaviour:
   isBlocking: 0
   isStopMovement: 1
   interactWhenOutOfReach: 0
-  collidingSoundName: 
+  collidingSoundName: Explosion
   explosionPrefab: {fileID: 8732069959669040096, guid: 06b858801e0e93943a72b4ea7fb1832b, type: 3}

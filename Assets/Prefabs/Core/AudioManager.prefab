@@ -73,6 +73,13 @@ MonoBehaviour:
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
+  - name: Explosion
+    audioClip: {fileID: 8300000, guid: 7fcee954c4c0f2f41823e4cb9e9bb656, type: 3}
+    volume: 0.612
+    pitch: 0.48
+    randomizePitch: 0.1
+    loop: 0
+    playOnStart: 0
   - name: Crunch
     audioClip: {fileID: 8300000, guid: 2cd01a918d86290489f4848008738fc9, type: 3}
     volume: 0.5
