@@ -31,7 +31,7 @@ public class FaceAnimation : MonoBehaviour
 
         _initMouthSprite = mouthSpriteRenderer.sprite;
         _initEyesSprite = eyesSpriteRenderer.sprite;
-        _lastBlink -= Random.Range(0f, blinkPeriod);
+        _lastBlink = Time.time + Random.Range(0f, blinkPeriod);
 
         if (doBreath){
             Vector3 targetPos = new Vector3(0f,breathAmplitude, 0f);
