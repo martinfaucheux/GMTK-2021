@@ -95,7 +95,7 @@ public class LevelLoader : MonoBehaviour
         GameEvents.instance.FadeOutTrigger();
 
         if (doSaveData){
-            SaveData(unlockedLevels, currentLevelID: levelID);
+            SaveData(currentLevelID: levelID);
         }
         
         _lastLevelPlayedID = levelID;
@@ -103,7 +103,8 @@ public class LevelLoader : MonoBehaviour
     }
 
     public bool IsLevelUnlocked(int levelId){
-        return (unlockedLevels.ContainsKey(levelId) && unlockedLevels[levelId]); 
+        return levelId < maxLevelId;
+        // return (unlockedLevels.ContainsKey(levelId) && unlockedLevels[levelId]); 
     }
 
     public bool IsPreviousLevelAvailable(){
@@ -124,8 +125,8 @@ public class LevelLoader : MonoBehaviour
             if (maxLevelId < levelID){
                 maxLevelId = levelID;
             }
-            // TODO: add dict
-            SaveData(unlockedLevels, maxLevelId: levelID);
+            // SaveData(unlockedLevels, maxLevelId: levelID);
+            SaveData(maxLevelId: levelID);
         }
     }
 
@@ -135,7 +136,7 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    public void SaveData(Dictionary<int, bool> unlockedLevels, int maxLevelId = -1, int currentLevelID = -1){
+    public void SaveData(int maxLevelId = -1, int currentLevelID = -1){
         if (maxLevelId < 0 ){
             maxLevelId = this.maxLevelId;
         }
@@ -143,8 +144,8 @@ public class LevelLoader : MonoBehaviour
         if (currentLevelID < 0){
             currentLevelID = this.currentLevelId;
         }
-        DataSaver.SaveGameState(unlockedLevels, maxLevelId, currentLevelID);
-
+        // DataSaver.SaveGameState(unlockedLevels, maxLevelId, currentLevelID);
+        DataSaver.SaveGameState(maxLevelId, currentLevelID);
     }
 
     public void RetrieveGameState(){
@@ -153,8 +154,9 @@ public class LevelLoader : MonoBehaviour
         if (playerData != null){
             maxLevelId = playerData.maxLevelId;
             _lastLevelPlayedID = playerData.currentLevelId;
-            unlockedLevels = playerData.unlockedLevels;
-            Debug.Log(LevelDictToString(playerData.unlockedLevels));
+
+            // unlockedLevels = playerData.unlockedLevels;
+            // Debug.Log("load maxLevelId:" + maxLevelId.ToString() + ", currentLevelId" + currentLevelId.ToString());
         }
     }
 

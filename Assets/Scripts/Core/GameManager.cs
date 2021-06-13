@@ -33,15 +33,15 @@ public class GameManager : MonoBehaviour
 
     void Update(){
         if(Input.anyKeyDown & isWin){
-            // LevelLoader.instance.LoadNextLevel();
+            LevelLoader.instance.LoadNextLevel();
 
             // unlock new levels and go back to main menu
-            LevelLoader.instance.LoadLastScene(true);
+            // LevelLoader.instance.LoadLastScene(true);
         }
     }
 
     public void Win(){
-        LevelLoader.instance.UnlockNextLevels();
+        // LevelLoader.instance.UnlockNextLevels();
         GameEvents.instance.WinTrigger();
         isWin = true;
         Debug.Log("YOU WIN");
