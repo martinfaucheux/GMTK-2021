@@ -6,6 +6,7 @@ public class ProgressionController : MonoBehaviour
 {
     
     [SerializeField] LevelLayout levelLayout;
+    [SerializeField] Vector2Int gridSize ;
 
     private GenericGrid<(int, bool)> _levelGrid;
 
@@ -26,6 +27,10 @@ public class ProgressionController : MonoBehaviour
                 _levelGrid[x, y] = (levelLayout.levelGrid.GetCell(x, y), false);
             }
         }
+    }
+
+    public void SetGridAssetSize(){
+        levelLayout.levelGrid.UpdateGridSize(gridSize);
     }
 
     private bool IncludeInGrid(int i){

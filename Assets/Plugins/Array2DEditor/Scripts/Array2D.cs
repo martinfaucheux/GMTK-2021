@@ -40,5 +40,7 @@ namespace Array2DEditor
         {
             return GetCellRow(y)[x];
         }
+
+        public void UpdateGridSize(Vector2Int gridSize) => this.gridSize = gridSize;
     }
 }

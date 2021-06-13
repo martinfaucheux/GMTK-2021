@@ -18,11 +18,13 @@ public class LevelLoader : MonoBehaviour
 
     [SerializeField] bool loadSaveData = false;
 
+    public List<int> unlockedOnWin;
+
     // cache last level that was played (for play button)
     private int _lastLevelPlayedID = 1;
     private bool _isMainMenu = false;
 
-    //Awake is always called before any Start functions
+    //Awake is always called before any wStart functions
     void Awake()
     {
         //Check if instance already exists
@@ -84,7 +86,11 @@ public class LevelLoader : MonoBehaviour
         LoadLevel(0, false);
     }
 
-    private void LoadLevel(int levelID, bool doSaveData = true){
+    public void LoadLastScene(bool saveProgress){
+        LoadLevel(SceneManager.sceneCountInBuildSettings -1 , saveProgress);
+    }
+
+    public void LoadLevel(int levelID, bool doSaveData = true){
 
         GameEvents.instance.FadeOutTrigger();
 
@@ -123,6 +129,12 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
+    public void UnlockNextLevels(){
+        foreach(int newLevelId in unlockedOnWin){
+            UnlockLevel(newLevelId);
+        }
+    }
+
     public void SaveData(Dictionary<int, bool> unlockedLevels, int maxLevelId = -1, int currentLevelID = -1){
         if (maxLevelId < 0 ){
             maxLevelId = this.maxLevelId;
@@ -142,6 +154,7 @@ public class LevelLoader : MonoBehaviour
             maxLevelId = playerData.maxLevelId;
             _lastLevelPlayedID = playerData.currentLevelId;
             unlockedLevels = playerData.unlockedLevels;
+            Debug.Log(LevelDictToString(playerData.unlockedLevels));
         }
     }
 
@@ -161,5 +174,13 @@ public class LevelLoader : MonoBehaviour
 
     public void Quit(){
         Application.Quit();
+    }
+
+    public static string LevelDictToString(Dictionary<int, bool> dict){
+        string res = "";
+        foreach(KeyValuePair<int, bool> entry in dict){           
+            res += entry.Key.ToString() + ": " + entry.Value.ToString();
+        }
+        return res;
     }
 }
