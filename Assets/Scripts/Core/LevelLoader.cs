@@ -103,7 +103,7 @@ public class LevelLoader : MonoBehaviour
     }
 
     public bool IsLevelUnlocked(int levelId){
-        return levelId < maxLevelId;
+        return levelId <= maxLevelId;
         // return (unlockedLevels.ContainsKey(levelId) && unlockedLevels[levelId]); 
     }
 
