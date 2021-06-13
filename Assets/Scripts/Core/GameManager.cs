@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     
     public bool isWin = false;
 
+    public int burgerToCollect;
+
     public bool playerCanMove{
         get{
             return !isWin;
@@ -40,7 +42,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Win(){
+    public void CheckWinCondition(){
+        if (burgerToCollect <= 0){
+        Win();
+        }
+    }
+
+    private void Win(){
         // LevelLoader.instance.UnlockNextLevels();
         GameEvents.instance.WinTrigger();
         isWin = true;
