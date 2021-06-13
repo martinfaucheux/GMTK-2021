@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bomb : Entity
 {
+    [SerializeField] GameObject explosionPrefab;
+
     protected override void Start(){
         base.Start();
     }
@@ -11,6 +13,11 @@ public class Bomb : Entity
     public override void Interact(Blob collidingBlob)
     {
         base.Interact(collidingBlob);
-        // TODO:
+        Debug.Log("KABOUM");
+
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        Burger.DestroyAll();
+        Destroy(gameObject);
     }
 }
