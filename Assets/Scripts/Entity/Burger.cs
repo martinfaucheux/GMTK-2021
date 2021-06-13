@@ -25,12 +25,14 @@ public class Burger : Entity
     public override void Interact(Blob collidingBlob)
     {
         base.Interact(collidingBlob);
+        burgerList.Remove(this);
         GameManager.instance.CheckWinCondition();
         Destroy(gameObject);
     }
 
     void OnDestroy(){
-        burgerList.Remove(this);
+        if(burgerList.Contains(this))
+            burgerList.Remove(this);
     }
 
     public static void DestroyAll(){
