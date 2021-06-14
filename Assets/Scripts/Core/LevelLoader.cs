@@ -153,11 +153,9 @@ public class LevelLoader : MonoBehaviour
         PlayerData playerData = DataSaver.LoadGameState();
 
         if (playerData != null){
-            maxLevelId = playerData.maxLevelId;
+            maxLevelId = Mathf.Max(playerData.maxLevelId, 1);
             _lastLevelPlayedID = playerData.currentLevelId;
-
-            // unlockedLevels = playerData.unlockedLevels;
-            // Debug.Log("load maxLevelId:" + maxLevelId.ToString() + ", currentLevelId" + currentLevelId.ToString());
+            Debug.Log("load maxLevelId:" + maxLevelId.ToString() + ", currentLevelId" + currentLevelId.ToString());
         }
     }
 
