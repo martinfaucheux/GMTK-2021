@@ -47,6 +47,7 @@ public class Burger : Entity
         LeanTween.color(gameObject, new Color(0f, 0f, 0f, 1f), 0.2f);
         isInteractable = false;
         isBlocking = true;
+        playSound = false;
         animator.SetTrigger("burn");
     }
 }

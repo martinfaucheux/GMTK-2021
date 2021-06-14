@@ -13,6 +13,8 @@ public class Entity : MonoBehaviour
 
     public string collidingSoundName;
 
+    public bool playSound = true;
+
     public Vector2Int matrixPosition{
         get{return matrixCollider.matrixPosition;}
     }
@@ -22,6 +24,7 @@ public class Entity : MonoBehaviour
     }
 
     public virtual void Collide(Blob collidingBlob){
+        PlaySound();
     }
 
     protected virtual void Start()
@@ -30,7 +33,7 @@ public class Entity : MonoBehaviour
     }
 
     private void PlaySound(){
-        if(collidingSoundName != ""){
+        if(playSound && collidingSoundName != ""){
             AudioManager.instance?.Play(collidingSoundName);
         }
     }
