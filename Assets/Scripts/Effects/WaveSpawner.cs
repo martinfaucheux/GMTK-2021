@@ -26,7 +26,6 @@ public class WaveSpawner : MonoBehaviour
 
     void Update(){
         if(nextSpawnTime < Time.time){
-            print("Spawn");
             Spawn();
             nextSpawnTime = GetNextSpawnTime();
         }
