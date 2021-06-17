@@ -90,6 +90,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 26 - More bombs.unity
     guid: 40be68968a8dea24dab81aa8208900de
   - enabled: 1
+    path: Assets/Scenes/Level 27 - Exploding Burgers.unity
+    guid: cfe7d8e7d44dfe14fb77fbba12eee258
+  - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
   m_configObjects: {}

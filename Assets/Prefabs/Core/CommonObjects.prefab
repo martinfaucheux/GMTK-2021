@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df86628750dc7f14084a10c577ce2784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitBeforeShow: 0.5
+  waitBeforeShow: 1
   showDuration: 3
   slideSpeed: 0.5
   textComponent: {fileID: 8288026244997621343}
@@ -1769,7 +1769,7 @@ MonoBehaviour:
   spawnPeriod: 0.5
   preSpawnCount: 0
   spawnRandomFactor: 0.1
-  waveDuration: 1
+  waveDuration: 2
   xMax: 10
   yMax: 5
 --- !u!1 &6975805623769691294
