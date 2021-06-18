@@ -16,12 +16,12 @@ public class LevelTitle : MonoBehaviour
     void Start()
     {
         _rectTransform = (RectTransform) transform;
-        _showPos = _rectTransform.position;
+        _showPos = _rectTransform.anchoredPosition;
         float initSize = _rectTransform.sizeDelta.x;
 
-        _hidePos = new Vector3(-initSize, _showPos.y, _showPos.z);
+        _hidePos = _showPos - new Vector3(1.5f * initSize, 0f, 0f);
 
-        _rectTransform.position = _hidePos;
+        _rectTransform.anchoredPosition = _hidePos;
         SetText();
         StartCoroutine(Slide());
     }
@@ -33,8 +33,8 @@ public class LevelTitle : MonoBehaviour
 
     private IEnumerator Slide(){
         yield return new WaitForSeconds(waitBeforeShow);
-        LeanTween.move(gameObject, _showPos,  slideSpeed);
+        LeanTween.move(_rectTransform, _showPos,  slideSpeed);
         yield return new WaitForSeconds(waitBeforeShow + showDuration);
-        LeanTween.move(gameObject, _hidePos,  slideSpeed);
+        LeanTween.move(_rectTransform, _hidePos,  slideSpeed);
     }
 }

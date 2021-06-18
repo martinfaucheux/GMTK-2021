@@ -7,7 +7,6 @@ public class Blob : MonoBehaviour
 
     [SerializeField] float moveSpeed = 10;
 
-    
     public Transform guyPoolTransform; 
     public Transform skinBridgePoolTransform; 
 
