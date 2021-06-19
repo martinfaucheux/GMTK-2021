@@ -5,8 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public MatrixCollider matrixCollider{get; private set;}
-    [SerializeField] protected bool isInteractable = true; // whether Interact should be run when colliding
-    public bool isBlocking = true; // whether this blocks movement
+    [SerializeField] protected bool isBlocking = true; // whether this blocks movement
     public bool isStopMovement = false; // wheter displacement is allowed on the case but it can't go further
 
     public bool interactWhenOutOfReach = false;
@@ -35,6 +34,10 @@ public class Entity : MonoBehaviour
     }
 
     public virtual bool CanInteract(Entity otherEntity){
-        return isInteractable;
+        return true;
+    }
+
+    public virtual bool IsBlocking(Entity otherEntity){
+        return isBlocking;
     }
 }

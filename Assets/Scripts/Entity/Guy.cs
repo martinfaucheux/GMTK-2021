@@ -14,21 +14,28 @@ public class Guy : Entity
 
         Guy interactingGuy = entity as Guy;
         if (interactingGuy != null && interactingGuy.blob != null){
-            isBlocking = false;
-            isInteractable = false;
             interactingGuy.blob.Absorb(this);
             BuildSkinBridges(blob);
         }
     }
 
+    public override bool IsBlocking(Entity otherEntity){
+        Guy otherGuy = otherEntity as Guy;
+        if(otherGuy != null && otherGuy.blob != null){
+            // if it's a guy, he is blocked if he is in a different blob
+            return (this.blob != otherGuy.blob);
+        }
+        return base.IsBlocking(otherEntity);
+    }
+
     public override bool CanInteract(Entity otherEntity)
     {
         Guy otherGuy = otherEntity as Guy;
-        if(otherGuy != null){
+        if(otherGuy != null && otherGuy.blob != null){
             // can only interact if guy is in another blob
             return (this.blob != otherGuy.blob);
         }
-        return true;
+        return base.CanInteract(otherEntity);
     }
 
     private void BuildSkinBridges(Blob blob){

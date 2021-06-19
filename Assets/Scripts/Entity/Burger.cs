@@ -8,6 +8,8 @@ public class Burger : Entity
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Animator animator;
 
+    private bool _isBurned = false; 
+
     void Awake(){
         if(burgerList == null){
             burgerList = new List<Burger>{this};
@@ -24,10 +26,12 @@ public class Burger : Entity
 
     public override void Interact(Entity entity)
     {
-        base.Interact(entity);
-        burgerList.Remove(this);
-        GameManager.instance.CheckWinCondition();
-        Destroy(gameObject);
+        if (!_isBurned){
+            base.Interact(entity);
+            burgerList.Remove(this);
+            GameManager.instance.CheckWinCondition();
+            Destroy(gameObject);
+        }
     }
 
     void OnDestroy(){
@@ -45,7 +49,7 @@ public class Burger : Entity
     private void Burn(){
          // paint it black black
         LeanTween.color(gameObject, new Color(0f, 0f, 0f, 1f), 0.2f);
-        isInteractable = false;
+        _isBurned = true;
         isBlocking = true;
         playSound = false;
         animator.SetTrigger("burn");

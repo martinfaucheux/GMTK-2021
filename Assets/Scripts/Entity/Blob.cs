@@ -49,7 +49,7 @@ public class Blob : MonoBehaviour
 
                 Entity entityComponent = GetEntityAtPosition(positionToCheck);
                 if (entityComponent != null){
-                    isEntityBlocking = entityComponent.isBlocking;
+                    isEntityBlocking = entityComponent.IsBlocking(guy);
 
                     if (entityComponent.CanInteract(guy)){
                         iterationEntityList.Add((guy, entityComponent));
@@ -128,7 +128,6 @@ public class Blob : MonoBehaviour
         // use a copy of the list because it will be modified
         foreach(Guy guy in new List<Guy>(otherBlob.guys)){
             Absorb(guy);
-            guy.isBlocking = false;
         }
         Destroy(otherBlob.gameObject);
     }
