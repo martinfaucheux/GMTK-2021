@@ -81,7 +81,6 @@ public class Blob : MonoBehaviour
             // only add if displacement is possible
             distance += isDisplacementPossible ? 1 : 0;
         }
-        Debug.Log(distance);
         Vector2Int maxDisplacement = distance * dirVect;
         return (maxDisplacement, collidedEntities);
     }
