@@ -112,6 +112,9 @@ EditorBuildSettings:
     guid: 2f6eeaea8f56b25468152df99d992b97
   - enabled: 1
     path: Assets/Scenes/Level 34 - Already close.unity
+    guid: 340478da659487a409cd9095126c1334
+  - enabled: 1
+    path: Assets/Scenes/Level 35 - Blob and bombs.unity
     guid: 9be06c5b4fac9d549a102a073251c37d
   - enabled: 1
     path: Assets/Scenes/End Screen.unity
