@@ -116,20 +116,35 @@ public class Blob : MonoBehaviour
         guy.transform.SetParent(guyPoolTransform);
     }
 
-    public void Absorb(Blob blob){
+    public void Absorb(Blob otherBlob){
         // transfert skin bridges to new blob
-        foreach(Transform skingBridgeTransform in blob.skinBridgePoolTransform){
-            skingBridgeTransform.SetParent(this.skinBridgePoolTransform);
-        }
+        TransferSkinBridges(otherBlob);
+
         // absorb remaining guys
         // use a copy of the list because it will be modified
-        foreach(Guy guy in new List<Guy>(blob.guys)){
+        foreach(Guy guy in new List<Guy>(otherBlob.guys)){
             Absorb(guy);
             guy.isBlocking = false;
             guy.isInteractable = false;
         }
-        Destroy(blob.gameObject);
+        Destroy(otherBlob.gameObject);
     }
+
+    private void TransferSkinBridges(Blob otherBlob){
+        // copy list of child transforms first
+        List<Transform> childTransforms = new List<Transform>();
+        foreach (Transform childTransform in otherBlob.skinBridgePoolTransform)
+        { 
+            childTransforms.Add(childTransform);
+        }
+
+        // iterate over copy because child transforms will change
+        foreach(Transform skinBridgeTransform in childTransforms){
+            Debug.Log("Transfer " + skinBridgeTransform.gameObject.ToString());
+            skinBridgeTransform.SetParent(this.skinBridgePoolTransform);
+        }
+    }
+
     private void ResolveCollision(){
 
         // Set of unique encountered blobs
