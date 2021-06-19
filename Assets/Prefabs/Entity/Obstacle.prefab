@@ -62,7 +62,7 @@ MonoBehaviour:
   isInteractable: 1
   isBlocking: 1
   isStopMovement: 0
-  interactWhenOutOfReach: 0
+  interactWhenOutOfReach: 1
   collidingSoundName: Hit Tree
   playSound: 1
   trembleAmplitude: 0.1

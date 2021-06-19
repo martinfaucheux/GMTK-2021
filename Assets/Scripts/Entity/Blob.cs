@@ -16,7 +16,6 @@ public class Blob : MonoBehaviour
     public List<Guy> guys {get; private set;}
     
     private List<Entity> interactedToResolve;
-    private List<Entity> collidedToResolve;
 
     void Start()
     {
@@ -29,7 +28,6 @@ public class Blob : MonoBehaviour
         }
         
         interactedToResolve = new List<Entity>();
-        collidedToResolve = new List<Entity>();
     }
 
     public (Vector2Int, List<Entity>) GetMovement(Direction direction){
@@ -51,22 +49,16 @@ public class Blob : MonoBehaviour
                 bool isValidPosition = CollisionMatrix.instance.IsValidPosition(positionToCheck);
                 bool isEntityBlocking = false;
 
-                GameObject objectAtPosition = CollisionMatrix.instance.GetObjectAtPosition(positionToCheck);
-                if (objectAtPosition != null){
-                    Entity entityComponent = objectAtPosition.GetComponent<Entity>();
+                Entity entityComponent = GetEntityAtPosition(positionToCheck);
+                if (entityComponent != null){
+                    isEntityBlocking = entityComponent.isBlocking;
 
-                    if (entityComponent != null){
-                        isEntityBlocking = entityComponent.isBlocking;
-                        if(isEntityBlocking){
-                            collidedToResolve.Add(entityComponent);
-                        }
-
-                        if (entityComponent.isInteractable){
-                            iterationEntityList.Add(entityComponent);
-                            isDisplacementStopped = entityComponent.isStopMovement;
-                        }
+                    if (entityComponent.isInteractable){
+                        iterationEntityList.Add(entityComponent);
+                        isDisplacementStopped = entityComponent.isStopMovement;
                     }
                 }
+
                 isDisplacementPossible &= (isValidPosition & !isEntityBlocking);
             }
 
@@ -75,6 +67,7 @@ public class Blob : MonoBehaviour
             foreach(Entity collidedEntity in iterationEntityList){
                 if(isDisplacementPossible | collidedEntity.interactWhenOutOfReach){
                     collidedEntities.Add(collidedEntity);
+                    Debug.Log(collidedEntity.gameObject);
                 }
             }
             
@@ -84,6 +77,19 @@ public class Blob : MonoBehaviour
         Vector2Int maxDisplacement = distance * dirVect;
         return (maxDisplacement, collidedEntities);
     }
+
+    private static Entity GetEntityAtPosition(Vector2Int matrixPosition){
+        // helper for collision resolution
+        GameObject objectAtPosition = CollisionMatrix.instance.GetObjectAtPosition(matrixPosition);
+        if (objectAtPosition != null){
+            Entity entity = objectAtPosition.GetComponent<Entity>();
+            if (entity != null){    
+                return entity;
+            }
+        }
+        return null;
+    }
+
 
     public bool AttemptMove(Direction direction){
         (Vector2Int displacement, List<Entity> collidedEntities) = GetMovement(direction);
@@ -150,6 +156,8 @@ public class Blob : MonoBehaviour
         HashSet<Blob> encounteredBlobs = new HashSet<Blob>();
 
         if (interactedToResolve.Any()){
+            Debug.Log("Resolve collision");
+
             // trigger Interact method
             foreach(Entity interactedEntity in interactedToResolve){
                 // keep trace of blobs to merge
@@ -174,12 +182,6 @@ public class Blob : MonoBehaviour
                 GameEvents.instance.BlobCollisionTrigger(guy.gameObject.GetInstanceID());
             }
         }
-
-        foreach(Entity collidedEntity in collidedToResolve){
-            collidedEntity.Collide(this);
-        }
-
-        collidedToResolve = new List<Entity>();
         interactedToResolve = new List<Entity>();
     }
 }
