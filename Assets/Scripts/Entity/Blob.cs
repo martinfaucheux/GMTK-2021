@@ -151,27 +151,33 @@ public class Blob : MonoBehaviour
         // Set of unique encountered blobs
         HashSet<Blob> encounteredBlobs = new HashSet<Blob>();
 
-        if (interactedToResolve.Any()){
+        bool doBloupAnimation = false;
 
-            // trigger Interact method
-            foreach((Entity interactingEntity, Entity interactedEntity) in interactedToResolve){
-                // keep trace of blobs to merge
-                Guy encounteredGuy = interactedEntity as Guy;
-                if (encounteredGuy != null && encounteredGuy.blob != null){
+        // trigger Interact method
+        foreach((Entity interactingEntity, Entity interactedEntity) in interactedToResolve){
+            // keep trace of blobs to merge
+            Guy encounteredGuy = interactedEntity as Guy;
+            if (encounteredGuy != null){
+                doBloupAnimation = true;
+                if(encounteredGuy.blob != null){
                     encounteredBlobs.Add(encounteredGuy.blob);
                 }
-
-                interactedEntity.Interact(interactingEntity);
-            }
-            
-            foreach(Blob encounteredBlob in encounteredBlobs){
-                Absorb(encounteredBlob);
             }
 
+            interactedEntity.Interact(interactingEntity);
+        }
+        
+        foreach(Blob encounteredBlob in encounteredBlobs){
+            Absorb(encounteredBlob);
+        }
+
+        
+        Vector3 targetScale = bloupScaleRatio * transform.localScale;
+
+        // if any guy collided
+        if(doBloupAnimation){
             // bloup animation
-            Vector3 targetScale = bloupScaleRatio * transform.localScale;
             LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
-
             // wow animation
             foreach(Guy guy in guys){
                 GameEvents.instance.BlobCollisionTrigger(guy.gameObject.GetInstanceID());
