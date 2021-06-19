@@ -51,7 +51,7 @@ public class Blob : MonoBehaviour
                 if (entityComponent != null){
                     isEntityBlocking = entityComponent.isBlocking;
 
-                    if (entityComponent.isInteractable){
+                    if (entityComponent.CanInteract(guy)){
                         iterationEntityList.Add((guy, entityComponent));
                         isDisplacementStopped = entityComponent.isStopMovement;
                     }
@@ -64,9 +64,7 @@ public class Blob : MonoBehaviour
             // in case the movement has been blocked
             foreach((Entity collidingEntity, Entity collidedEntity) in iterationEntityList){
                 if(isDisplacementPossible | collidedEntity.interactWhenOutOfReach){
-                    if(collidedEntity.CanInteract(collidingEntity)){
-                        collidedEntities.Add((collidingEntity, collidedEntity));
-                    }
+                    collidedEntities.Add((collidingEntity, collidedEntity));
                 }
             }
             
@@ -131,7 +129,6 @@ public class Blob : MonoBehaviour
         foreach(Guy guy in new List<Guy>(otherBlob.guys)){
             Absorb(guy);
             guy.isBlocking = false;
-            guy.isInteractable = false;
         }
         Destroy(otherBlob.gameObject);
     }
