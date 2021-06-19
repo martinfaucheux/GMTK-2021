@@ -140,7 +140,6 @@ public class Blob : MonoBehaviour
 
         // iterate over copy because child transforms will change
         foreach(Transform skinBridgeTransform in childTransforms){
-            Debug.Log("Transfer " + skinBridgeTransform.gameObject.ToString());
             skinBridgeTransform.SetParent(this.skinBridgePoolTransform);
         }
     }
