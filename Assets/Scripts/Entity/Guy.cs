@@ -13,7 +13,7 @@ public class Guy : Entity
         base.Interact(collidingBlob);
         isBlocking = false;
         isInteractable = false;
-        collidingBlob.AbsorbGuy(this);
+        collidingBlob.Absorb(this);
         BuildSkinBridges(blob);
     }
 
@@ -25,6 +25,12 @@ public class Guy : Entity
                 Vector3 skinBridgePosition = transform.position +  bridgeOffset;
                 Instantiate(bridgeSkinPrefab, skinBridgePosition, Quaternion.identity, blob.skinBridgePoolTransform);
             }
+        }
+    }
+
+    public void Extract(){
+        if(blob != null){
+            blob.guys.Remove(this);
         }
     }
 }

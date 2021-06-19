@@ -11,10 +11,7 @@ public class Blob : MonoBehaviour
     public Transform skinBridgePoolTransform; 
 
     [SerializeField] float bloupScaleRatio = 1.1f;
-    
-    
-    private CollisionMatrix _collisionMatrix;
-    
+        
     // private bool _isMoving = false;
     public List<Guy> guys {get; private set;}
     
@@ -28,7 +25,7 @@ public class Blob : MonoBehaviour
 
         Guy[] initGuys = guyPoolTransform.GetComponentsInChildren<Guy>();
         foreach(Guy guy in initGuys){
-            AbsorbGuy(guy);
+            Absorb(guy);
         }
         
         interactedToResolve = new List<Entity>();
@@ -84,6 +81,7 @@ public class Blob : MonoBehaviour
             // only add if displacement is possible
             distance += isDisplacementPossible ? 1 : 0;
         }
+        Debug.Log(distance);
         Vector2Int maxDisplacement = distance * dirVect;
         return (maxDisplacement, collidedEntities);
     }
@@ -112,18 +110,46 @@ public class Blob : MonoBehaviour
         LeanTween.move(gameObject, newRealWorldPos, moveDuration).setOnComplete(ResolveCollision);
     }
 
-    public void AbsorbGuy(Guy guy){
+    public void Absorb(Guy guy){
+        guy.Extract(); // remove the guy from his current blob
         guys.Add(guy);
         guy.blob = this;
         guy.transform.SetParent(guyPoolTransform);
     }
 
-    private void ResolveCollision(){      
+    public void Absorb(Blob blob){
+        // transfert skin bridges to new blob
+        foreach(Transform skingBridgeTransform in blob.skinBridgePoolTransform){
+            skingBridgeTransform.SetParent(this.skinBridgePoolTransform);
+        }
+        // absorb remaining guys
+        // use a copy of the list because it will be modified
+        foreach(Guy guy in new List<Guy>(blob.guys)){
+            Absorb(guy);
+            guy.isBlocking = false;
+            guy.isInteractable = false;
+        }
+        Destroy(blob.gameObject);
+    }
+    private void ResolveCollision(){
+
+        // Set of unique encountered blobs
+        HashSet<Blob> encounteredBlobs = new HashSet<Blob>();
 
         if (interactedToResolve.Any()){
             // trigger Interact method
             foreach(Entity interactedEntity in interactedToResolve){
+                // keep trace of blobs to merge
+                Guy encounteredGuy = interactedEntity as Guy;
+                if (encounteredGuy != null && encounteredGuy.blob != null){
+                    encounteredBlobs.Add(encounteredGuy.blob);
+                }
+
                 interactedEntity.Interact(this);
+            }
+            
+            foreach(Blob encounteredBlob in encounteredBlobs){
+                Absorb(encounteredBlob);
             }
 
             // bloup animation
