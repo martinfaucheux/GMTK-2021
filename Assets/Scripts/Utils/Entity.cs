@@ -19,11 +19,7 @@ public class Entity : MonoBehaviour
         get{return matrixCollider.matrixPosition;}
     }
 
-    public virtual void Interact(Blob collidingBlob){
-        PlaySound();
-    }
-
-    public virtual void Collide(Blob collidingBlob){
+    public virtual void Interact(Entity collidingEntity){
         PlaySound();
     }
 
@@ -36,5 +32,9 @@ public class Entity : MonoBehaviour
         if(playSound && collidingSoundName != ""){
             AudioManager.instance?.Play(collidingSoundName);
         }
+    }
+
+    public bool CanInteract(Entity otherEntity){
+        return true;
     }
 }

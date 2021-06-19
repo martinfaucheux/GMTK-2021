@@ -10,9 +10,9 @@ public class Bomb : Entity
         base.Start();
     }
 
-    public override void Interact(Blob collidingBlob)
+    public override void Interact(Entity entity)
     {
-        base.Interact(collidingBlob);
+        base.Interact(entity);
         Debug.Log("KABOUM");
 
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);

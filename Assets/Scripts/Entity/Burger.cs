@@ -22,9 +22,9 @@ public class Burger : Entity
         base.Start();
     }
 
-    public override void Interact(Blob collidingBlob)
+    public override void Interact(Entity entity)
     {
-        base.Interact(collidingBlob);
+        base.Interact(entity);
         burgerList.Remove(this);
         GameManager.instance.CheckWinCondition();
         Destroy(gameObject);

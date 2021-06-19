@@ -7,8 +7,8 @@ public class Obstacle : Entity{
     [SerializeField] float trembleAmplitude = 0.1f;
     [SerializeField] float trembleTime = 0.05f;
 
-    public override void Interact(Blob blob){
-        base.Interact(blob);
+    public override void Interact(Entity collidingEntity){
+        base.Interact(collidingEntity);
         TrembleAnimation();
     }
 
