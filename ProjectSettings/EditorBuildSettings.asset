@@ -102,6 +102,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 30 - Other Blob.unity
     guid: cd9c297c982b2ba46b237e27f21a54cb
   - enabled: 1
+    path: Assets/Scenes/Level 31 - Play with other blob.unity
+    guid: bd36cf9cede283744a95f2d9c366d6a4
+  - enabled: 1
+    path: Assets/Scenes/Level 32 - Regain confidence.unity
+    guid: 1ae90df3cf15d5b4ca1f17cc1849374d
+  - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
   m_configObjects: {}
