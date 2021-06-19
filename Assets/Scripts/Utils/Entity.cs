@@ -34,7 +34,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public bool CanInteract(Entity otherEntity){
+    public virtual bool CanInteract(Entity otherEntity){
         return true;
     }
 }

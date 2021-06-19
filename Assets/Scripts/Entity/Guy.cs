@@ -21,6 +21,16 @@ public class Guy : Entity
         }
     }
 
+    public override bool CanInteract(Entity otherEntity)
+    {
+        Guy otherGuy = otherEntity as Guy;
+        if(otherGuy != null){
+            // can only interact if guy is in another blob
+            return (this.blob != otherGuy.blob);
+        }
+        return true;
+    }
+
     private void BuildSkinBridges(Blob blob){
         foreach(Guy otherGuy in blob.guys){
             Vector2Int distToOtherGuy = otherGuy.matrixPosition - matrixPosition;
