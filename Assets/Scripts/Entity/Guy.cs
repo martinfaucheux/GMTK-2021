@@ -15,7 +15,7 @@ public class Guy : Entity
         Guy interactingGuy = entity as Guy;
         if (interactingGuy != null && interactingGuy.blob != null){
             interactingGuy.blob.Absorb(this);
-            BuildSkinBridges(blob);
+            BuildSkinBridges();
         }
     }
 
@@ -38,7 +38,7 @@ public class Guy : Entity
         return base.CanInteract(otherEntity);
     }
 
-    private void BuildSkinBridges(Blob blob){
+    private void BuildSkinBridges(){
         foreach(Guy otherGuy in blob.guys){
             Vector2Int distToOtherGuy = otherGuy.matrixPosition - matrixPosition;
             if (distToOtherGuy.sqrMagnitude < 1.01 ){
