@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] Button leftArrowButton;
     [SerializeField] Button rightArrowButton;
     [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] float actionCoolDown = 0.2f;
 
     private int selectedLevelId {
         get{return _selectedLevelId;}
@@ -19,8 +20,39 @@ public class MainMenuController : MonoBehaviour
     }
     private int _selectedLevelId = 1;
 
+    private float _lastActionTime;
+
+    private bool canTakeAction{
+        get{
+            return Time.time - _lastActionTime > actionCoolDown;
+        }
+    }
+
     void Start(){
         SelectLastLevelPlayed();
+    }
+
+    void Update(){
+        if(canTakeAction){
+            int vertValue = (int)(Input.GetAxisRaw("Horizontal"));
+            bool _actionTaken = true;
+            if(Input.GetKeyDown(KeyCode.Return)){
+                LoadSelectedLevel();
+            }
+            else if (vertValue < 0 && LevelLoader.instance.IsLevelUnlocked(_selectedLevelId - 1)){
+                SelectPreviousLevel();
+            }
+            else if(vertValue > 0 && LevelLoader.instance.IsLevelUnlocked(_selectedLevelId + 1)){
+                SelectNextLevel();
+            }
+            else{
+                _actionTaken = false;
+            }
+
+            if(_actionTaken){
+                _lastActionTime = Time.time;
+            }
+        }
     }
 
     public void LoadSelectedLevel(){
