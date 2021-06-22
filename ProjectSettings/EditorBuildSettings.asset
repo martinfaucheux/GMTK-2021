@@ -117,6 +117,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 35 - Blob and bombs.unity
     guid: 9be06c5b4fac9d549a102a073251c37d
   - enabled: 1
+    path: Assets/Scenes/Level 36 - Mandala.unity
+    guid: 3b0e9b7dacfa29d408dbdd2e93f84e9d
+  - enabled: 1
+    path: Assets/Scenes/Level 37 - A lot of dudes.unity
+    guid: b2da3ba3f2a3c7c4cb631e6e09562516
+  - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
   m_configObjects: {}
