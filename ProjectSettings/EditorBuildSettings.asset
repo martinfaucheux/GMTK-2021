@@ -123,6 +123,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 37 - A lot of dudes.unity
     guid: b2da3ba3f2a3c7c4cb631e6e09562516
   - enabled: 1
+    path: Assets/Scenes/Level 38 - In line.unity
+    guid: 5898d18eb6b71964d85d72ad909e7b38
+  - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
   m_configObjects: {}
