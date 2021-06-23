@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -153,8 +154,14 @@ public class Blob : MonoBehaviour
 
         bool doBloupAnimation = false;
 
+        // order the list with burger resolved at the end
+        List<(Entity, Entity)> interactedToResolveOrdered = Sort(
+            interactedToResolve, // pass the actuall list
+            (elt) => elt.Item2.GetResolveOrder() // function used to order
+        );
+
         // trigger Interact method
-        foreach((Entity interactingEntity, Entity interactedEntity) in interactedToResolve){
+        foreach((Entity interactingEntity, Entity interactedEntity) in interactedToResolveOrdered){
             // keep trace of blobs to merge
             Guy encounteredGuy = interactedEntity as Guy;
             if (encounteredGuy != null){
@@ -184,5 +191,11 @@ public class Blob : MonoBehaviour
             }
         }
         interactedToResolve = new List<(Entity, Entity)>();
+    }
+
+    public static List<T> Sort<T>(
+        List<T> source, Func<T, int> sortFunction, bool asc = true
+    ) where T : new() {
+        return asc ? source.OrderBy(x => sortFunction.Invoke(x)).ToList() : source.OrderByDescending(x => sortFunction.Invoke(x)).ToList();
     }
 }

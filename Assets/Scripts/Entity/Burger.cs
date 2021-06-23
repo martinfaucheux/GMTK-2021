@@ -54,4 +54,6 @@ public class Burger : Entity
         playSound = false;
         animator.SetTrigger("burn");
     }
+
+    public override int GetResolveOrder() => 10;
 }

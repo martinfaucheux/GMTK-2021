@@ -40,4 +40,6 @@ public class Entity : MonoBehaviour
     public virtual bool IsBlocking(Entity otherEntity){
         return isBlocking;
     }
+
+    public virtual int GetResolveOrder() => 0;
 }
