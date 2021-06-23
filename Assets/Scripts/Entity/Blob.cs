@@ -18,8 +18,11 @@ public class Blob : MonoBehaviour
 
     private List<(Entity, Entity)> interactedToResolve;
 
+    private Vector3 _initScale;
+
     void Start()
     {
+        _initScale = transform.localScale;
         // add initial collider to the blob
         guys = new List<Guy>();
 
@@ -151,8 +154,8 @@ public class Blob : MonoBehaviour
 
         // Set of unique encountered blobs
         HashSet<Blob> encounteredBlobs = new HashSet<Blob>();
-
-        bool doBloupAnimation = false;
+        // keep track if need to do wow animation
+        bool doWow = false;
 
         // order the list with burger resolved at the end
         List<(Entity, Entity)> interactedToResolveOrdered = Sort(
@@ -165,11 +168,13 @@ public class Blob : MonoBehaviour
             // keep trace of blobs to merge
             Guy encounteredGuy = interactedEntity as Guy;
             if (encounteredGuy != null){
-                doBloupAnimation = true;
+                doWow = true;
                 if(encounteredGuy.blob != null){
                     encounteredBlobs.Add(encounteredGuy.blob);
                 }
             }
+            // do wow if collided entity is a burger
+            doWow |= (interactedEntity as Burger) != null;
 
             interactedEntity.Interact(interactingEntity);
         }
@@ -178,19 +183,21 @@ public class Blob : MonoBehaviour
             Absorb(encounteredBlob);
         }
 
-        
-        Vector3 targetScale = bloupScaleRatio * transform.localScale;
-
         // if any guy collided
-        if(doBloupAnimation){
-            // bloup animation
-            LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
-            // wow animation
-            foreach(Guy guy in guys){
-                GameEvents.instance.BlobCollisionTrigger(guy.gameObject.GetInstanceID());
-            }
+        if(doWow){
+            DoWow();
         }
         interactedToResolve = new List<(Entity, Entity)>();
+    }
+
+    private void DoWow(){
+        Vector3 targetScale = bloupScaleRatio * _initScale;
+        // bloup animation
+        LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
+        // wow animation
+        foreach(Guy guy in guys){
+            GameEvents.instance.BlobCollisionTrigger(guy.gameObject.GetInstanceID());
+        }
     }
 
     public static List<T> Sort<T>(
