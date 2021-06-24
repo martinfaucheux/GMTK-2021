@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
             return Mathf.Max(0f, GameManager.instance.actionDuration - timeSinceMove);
         }
     }
-    public float moveSpeed = 10;
 
     private MatrixCollider _matrixCollider;
     private Blob _blob;

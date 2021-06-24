@@ -92,7 +92,7 @@ public class Blob : MonoBehaviour
     }
 
 
-    public bool AttemptMove(Direction direction){
+    public void AttemptMove(Direction direction){
         (Vector2Int displacement, List<(Entity, Entity)> collidedEntities) = GetMovement(direction);
 
         interactedToResolve = collidedEntities;
@@ -100,8 +100,6 @@ public class Blob : MonoBehaviour
 
         if(displacement.sqrMagnitude > 0f)
             AudioManager.instance?.Play("Zoom");
-
-        return true;
     }
 
     public void AnimateMove(Vector2Int displacement){
