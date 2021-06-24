@@ -8,13 +8,16 @@ public class BurgerTransition : MonoBehaviour
     private Vector2 _initPosition;
     private bool _isSlideIn = false;
 
+    private RectTransform _rectTransform;
+
     private float moveDuration{
         get{ return LevelLoader.instance.transitionDuration / 2;}
     }
 
     void Start()
     {
-        _initPosition = ((RectTransform) transform).position;
+        _rectTransform = (RectTransform) transform;
+        _initPosition = _rectTransform.anchoredPosition;
 
         GameEvents.instance.onFadeOut += SlideIn;
         GameEvents.instance.onFadeIn += SlideOut;
@@ -27,14 +30,15 @@ public class BurgerTransition : MonoBehaviour
 
     private void SlideIn(){
         if (!_isSlideIn){
-            LeanTween.move(gameObject, targetTransform, moveDuration);
+            Vector3 targetPosition = ((RectTransform ) targetTransform).anchoredPosition;
+            LeanTween.move(_rectTransform, targetPosition, moveDuration);
             _isSlideIn = true;
         }
     }
 
     private void SlideOut(){
         if (_isSlideIn){
-            LeanTween.move(gameObject, _initPosition,  moveDuration);
+            LeanTween.move(_rectTransform, _initPosition,  moveDuration);
             _isSlideIn = false;
         }
     }
