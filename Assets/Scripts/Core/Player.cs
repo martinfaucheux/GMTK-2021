@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // To be DEPRECATED in favor of TurnManager
 
     public float moveCooldown{
         get{

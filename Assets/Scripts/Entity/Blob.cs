@@ -6,6 +6,7 @@ using System.Linq;
 public class Blob : MonoBehaviour
 {
 
+    [SerializeField] bool isControlled = false;
     [SerializeField] float moveSpeed = 10;
 
     public Transform guyPoolTransform; 
@@ -29,6 +30,10 @@ public class Blob : MonoBehaviour
         Guy[] initGuys = guyPoolTransform.GetComponentsInChildren<Guy>();
         foreach(Guy guy in initGuys){
             Absorb(guy);
+        }
+
+        if (isControlled){
+            TurnManager.instance.Register(this);
         }
     }
 

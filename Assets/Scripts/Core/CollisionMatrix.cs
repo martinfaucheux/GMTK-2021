@@ -109,7 +109,7 @@ public class CollisionMatrix: MonoBehaviour {
         }
     }
 
-    public Vector3 GetRealWorldPosition(Vector2 matrixPos){
+    public Vector3 GetRealWorldPosition(Vector2Int matrixPos){
         float x = matrixPos.x;
         float y = matrixPos.y;
         Vector3 realWorldPos;
