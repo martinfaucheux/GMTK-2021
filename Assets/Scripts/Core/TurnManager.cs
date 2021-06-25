@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct CollisionCouple{
+    Entity interacted;
+    Entity interacting;
+}
+
 public class TurnManager : MonoBehaviour
 {
     // Keep track of what should happen within a turn
@@ -86,6 +91,7 @@ public class TurnManager : MonoBehaviour
     }
 
     public void Register(Blob controlledBlob){
+        // TurnManager Start method must run before Blob's
         _controlledBlobs.Add(controlledBlob);
     }
 

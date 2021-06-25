@@ -23,7 +23,7 @@ public class Guy : Entity
 
         Guy interactingGuy = entity as Guy;
         if (interactingGuy != null && interactingGuy.blob != null){
-            BuildSkinBridges();
+            BuildSkinBridges(interactingGuy);
         }
     }
 
@@ -46,15 +46,9 @@ public class Guy : Entity
         return base.CanInteract(otherEntity);
     }
 
-    private void BuildSkinBridges(){
-        foreach(Guy otherGuy in blob.guys){
-            Vector2Int distToOtherGuy = otherGuy.matrixPosition - matrixPosition;
-            if (distToOtherGuy.sqrMagnitude < 1.01 ){
-                Vector3 bridgeOffset = 0.5f * new Vector3(distToOtherGuy.x, distToOtherGuy.y, 0f);
-                Vector3 skinBridgePosition = transform.position +  bridgeOffset;
-                Instantiate(bridgeSkinPrefab, skinBridgePosition, Quaternion.identity, blob.skinBridgePoolTransform);
-            }
-        }
+    private void BuildSkinBridges(Guy interactingGuy){
+        Vector3 skinBridgePosition = (interactingGuy.transform.position +  transform.position) / 2f;
+        Instantiate(bridgeSkinPrefab, skinBridgePosition, Quaternion.identity, transform);
     }
 
     public void Extract(){
