@@ -30,13 +30,13 @@ public class Burger : Entity
             base.PreInteract(entity);
             _isEaten = true;
             burgerList.Remove(this);
-            GameManager.instance.CheckWinCondition();
         }
     }
 
     public override void Interact(Entity entity){
         if (_isEaten){
             base.Interact(entity);
+            GameManager.instance.CheckWinCondition();
             Destroy(gameObject);
         }
     }
