@@ -16,18 +16,16 @@ public class TurnManager : MonoBehaviour
     }
 
     private float _lastMoveTime;
-
     private List<Blob> _controlledBlobs;
-
-    private Dictionary<Entity, Vector2Int> _forecastMatrixPositions;
+    private HashSet<Entity> _entitiesToMove;
 
     void Awake(){
         CheckSingleton();
     }
 
     void Start(){
+        _entitiesToMove = new HashSet<Entity>();
         _controlledBlobs = new List<Blob>();
-        _forecastMatrixPositions = new Dictionary<Entity, Vector2Int>();
         PlayerController.OnGetCommand += TriggerMovement;
     }
 
@@ -37,11 +35,13 @@ public class TurnManager : MonoBehaviour
 
     private void TriggerMovement(Direction direction){
         if (moveCooldown == 0 & GameManager.instance.playerCanMove){
+            _lastMoveTime = Time.time;
             StartCoroutine(PlayTurn(direction));
         }       
     }
 
     private IEnumerator PlayTurn(Direction direction){
+        Debug.Log("Play Turn");
         List<(Entity, Entity)> collisionList = StartTurn(direction);
         MoveTransforms();
         yield return new WaitForSeconds(GameManager.instance.actionDuration);
@@ -51,7 +51,6 @@ public class TurnManager : MonoBehaviour
     private List<(Entity, Entity)> StartTurn(Direction direction){
         // logic of the turn should lay here
 
-        _forecastMatrixPositions = new Dictionary<Entity, Vector2Int>();
         List<(Entity, Entity)> collisionList = new List<(Entity, Entity)>();
 
         foreach(Blob blob in _controlledBlobs){
@@ -59,14 +58,13 @@ public class TurnManager : MonoBehaviour
 
             foreach(Guy guy in blob.guys){
                 guy.matrixCollider.matrixPosition += displacement;
+                _entitiesToMove.Add(guy);
             }
 
             foreach((Entity interactingEntity, Entity interactedEntity) in blobCollisionList){
                 interactedEntity.PreInteract(interactingEntity);
                 collisionList.Add((interactingEntity, interactedEntity));
             }
-
-            AddMovement(blob, displacement);
         }
         return collisionList;
     }
@@ -80,26 +78,11 @@ public class TurnManager : MonoBehaviour
     private void MoveTransforms(){
         float moveDuration = GameManager.instance.actionDuration;
 
-        foreach(KeyValuePair<Entity, Vector2Int> item in _forecastMatrixPositions){
-            GameObject objectToMove= item.Key.gameObject;
-            Vector3 realWorldPos = CollisionMatrix.instance.GetRealWorldPosition(item.Value);
+        foreach(Entity entity in _entitiesToMove){
+            GameObject objectToMove= entity.gameObject;
+            Vector3 realWorldPos = entity.matrixCollider.GetRealPos();
             LeanTween.move(objectToMove, realWorldPos, moveDuration);
         }
-    }
-
-    private void AddMovement(Blob blob, Vector2Int displacement){
-        // add movement to forecast map for all guys of the blob
-        foreach(Guy guy in blob.guys){
-            AddMovement(guy, displacement);
-        }
-    }
-
-    private void AddMovement(Entity entity, Vector2Int displacement){
-        // add movement to forecast map for a specific entity
-        if(!_forecastMatrixPositions.ContainsKey(entity)){
-            _forecastMatrixPositions[entity] = new Vector2Int(0, 0);
-        }
-        _forecastMatrixPositions[entity] += displacement;
     }
 
     public void Register(Blob controlledBlob){
