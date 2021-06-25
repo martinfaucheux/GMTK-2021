@@ -9,6 +9,7 @@ public class Burger : Entity
     [SerializeField] Animator animator;
 
     private bool _isBurned = false; 
+    private bool _isEaten= false; 
 
     void Awake(){
         if(burgerList == null){
@@ -24,12 +25,18 @@ public class Burger : Entity
         base.Start();
     }
 
-    public override void Interact(Entity entity)
-    {
-        if (!_isBurned){
-            base.Interact(entity);
+    public override void PreInteract(Entity entity){
+        if (!_isBurned && !_isEaten){
+            base.PreInteract(entity);
+            _isEaten = true;
             burgerList.Remove(this);
             GameManager.instance.CheckWinCondition();
+        }
+    }
+
+    public override void Interact(Entity entity){
+        if (_isEaten){
+            base.Interact(entity);
             Destroy(gameObject);
         }
     }
@@ -39,20 +46,26 @@ public class Burger : Entity
             burgerList.Remove(this);
     }
 
-    public static void DestroyAll(){
+    public static void DisableAll(){
         foreach(Burger burger in burgerList){
-            // Destroy(burger.gameObject);
-            burger.Burn();
+            if (!burger._isEaten){
+                burger._isBurned = true;
+                burger.isBlocking = true;
+                burger.playSound = false;
+            }
         }
     }
-
-    private void Burn(){
-         // paint it black black
-        LeanTween.color(gameObject, new Color(0f, 0f, 0f, 1f), 0.2f);
-        _isBurned = true;
-        isBlocking = true;
-        playSound = false;
-        animator.SetTrigger("burn");
+    public static void PlayBurnAnimation(){
+        foreach(Burger burger in burgerList){
+            if(burger._isBurned){
+                LeanTween.color(
+                    burger.gameObject,
+                    new Color(0f, 0f, 0f, 1f),
+                    0.2f
+                );
+                burger.animator.SetTrigger("burn");
+            }
+        }
     }
 
     public override int GetResolveOrder() => 10;

@@ -28,33 +28,53 @@ public class TurnManager : MonoBehaviour
     void Start(){
         _controlledBlobs = new List<Blob>();
         _forecastMatrixPositions = new Dictionary<Entity, Vector2Int>();
-        PlayerController.OnGetCommand += StartTurn;
+        PlayerController.OnGetCommand += TriggerMovement;
     }
 
-    private void StartTurn(Direction direction){
-        // TODO: logic of the turn should lay here
+    void OnDestroy(){
+        PlayerController.OnGetCommand -= TriggerMovement;
+    }
+
+    private void TriggerMovement(Direction direction){
+        if (moveCooldown == 0 & GameManager.instance.playerCanMove){
+            StartCoroutine(PlayTurn(direction));
+        }       
+    }
+
+    private IEnumerator PlayTurn(Direction direction){
+        List<(Entity, Entity)> collisionList = StartTurn(direction);
+        MoveTransforms();
+        yield return new WaitForSeconds(GameManager.instance.actionDuration);
+        EndTurn(collisionList);
+    }
+
+    private List<(Entity, Entity)> StartTurn(Direction direction){
+        // logic of the turn should lay here
 
         _forecastMatrixPositions = new Dictionary<Entity, Vector2Int>();
+        List<(Entity, Entity)> collisionList = new List<(Entity, Entity)>();
 
         foreach(Blob blob in _controlledBlobs){
-            (Vector2Int displacement, List<(Entity, Entity)> collidedEntities) = blob.GetMovement(direction);
+            (Vector2Int displacement, List<(Entity, Entity)> blobCollisionList) = blob.GetMovement(direction);
 
-            // resolve interactions here
+            foreach(Guy guy in blob.guys){
+                guy.matrixCollider.matrixPosition += displacement;
+            }
+
+            foreach((Entity interactingEntity, Entity interactedEntity) in blobCollisionList){
+                interactedEntity.PreInteract(interactingEntity);
+                collisionList.Add((interactingEntity, interactedEntity));
+            }
 
             AddMovement(blob, displacement);
         }
-
-        MoveTransforms();
-
-        // TODO: wait end of movement
-
-
+        return collisionList;
     }
 
-    private void EndTurn(){
-        // TODO: play animations and end of Turn 
-
-        // check end of game and stuff
+    private void EndTurn(List<(Entity, Entity)> collisionList){
+        foreach((Entity interactingEntity, Entity interactedEntity) in collisionList){
+            interactedEntity.Interact(interactingEntity);
+        }
     }
 
     private void MoveTransforms(){

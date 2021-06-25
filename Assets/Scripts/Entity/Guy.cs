@@ -8,13 +8,21 @@ public class Guy : Entity
 
     [SerializeField] GameObject bridgeSkinPrefab;
 
+    public override void PreInteract(Entity entity){
+        base.PreInteract(entity);
+        
+        Guy interactingGuy = entity as Guy;
+        if (interactingGuy != null && interactingGuy.blob != null){
+            interactingGuy.blob.Absorb(this);
+        }
+    }
+
     public override void Interact(Entity entity)
     {
         base.Interact(entity);
 
         Guy interactingGuy = entity as Guy;
         if (interactingGuy != null && interactingGuy.blob != null){
-            interactingGuy.blob.Absorb(this);
             BuildSkinBridges();
         }
     }
