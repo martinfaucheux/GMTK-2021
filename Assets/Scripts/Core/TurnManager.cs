@@ -49,8 +49,12 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator PlayTurn(Direction direction){
         List<(Entity, Entity)> collisionList = StartTurn(direction);
+
+        float maxMoveDuration = GetMaxMoveDuration();
         MoveTransforms();
-        yield return new WaitForSeconds(GameManager.instance.actionDuration);
+
+        yield return new WaitForSeconds(maxMoveDuration);
+
         EndTurn(collisionList);
         GameEvents.instance.EndOfTurnTrigger();
     }
@@ -89,11 +93,10 @@ public class TurnManager : MonoBehaviour
     }
 
     private void MoveTransforms(){
-        float moveDuration = GameManager.instance.actionDuration;
-
         foreach(Entity entity in _entitiesToMove){
             GameObject objectToMove= entity.gameObject;
             Vector3 realWorldPos = entity.matrixCollider.GetRealPos();
+            float moveDuration = GetMoveDuration(entity);
             LeanTween.move(objectToMove, realWorldPos, moveDuration);
         }
     }
@@ -122,5 +125,37 @@ public class TurnManager : MonoBehaviour
     ) where T : new() {
         // used to sort the list of objects to resolve
         return asc ? source.OrderBy(x => sortFunction.Invoke(x)).ToList() : source.OrderByDescending(x => sortFunction.Invoke(x)).ToList();
+    }
+
+    private static float GetMoveDuration(Entity entity){
+
+        Vector2Int originalMatrixPos = CollisionMatrix.instance.GetMatrixPos(entity.transform);
+        Vector2Int displacement = entity.matrixPosition - originalMatrixPos;
+        int distance = Mathf.Max(Mathf.Abs(displacement.x), Mathf.Abs(displacement.y));
+
+        if (distance == 0){
+            return 0f;
+        }
+
+        Vector2Int matrixSize = CollisionMatrix.instance.matrixSize;
+        int maxDistance = Mathf.Max(matrixSize.x, matrixSize.y) - 1;
+        float maxDuration = GameManager.instance.actionDuration;
+        float minDuration = 0.33f * maxDuration;
+
+        float duration = minDuration + (maxDuration - minDuration) * ((float) distance / (float) maxDistance);
+
+        // always less than maxDuration
+        return duration;
+    }
+
+    private float GetMaxMoveDuration(){
+        float maxDuration = 0f;
+        foreach(Entity entity in _entitiesToMove){
+            float moveDuration = GetMoveDuration(entity);
+            if (moveDuration > maxDuration){
+                maxDuration = moveDuration;
+            }
+        }
+        return maxDuration;
     }
 }
