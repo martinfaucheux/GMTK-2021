@@ -38,7 +38,6 @@ public class TurnManager : MonoBehaviour
     }
 
     private void TriggerMovement(Direction direction){
-        Debug.Log("Trigger Movement");
         if (moveCooldown == 0 & GameManager.instance.playerCanMove){
             _lastMoveTime = Time.time;
             StartCoroutine(PlayTurn(direction));
@@ -46,15 +45,13 @@ public class TurnManager : MonoBehaviour
     }
 
     private IEnumerator PlayTurn(Direction direction){
-        Debug.Log("Start Turn");
         List<(Entity, Entity)> collisionList = StartTurn(direction);
-        Debug.Log("Get move duration");
+
         float maxMoveDuration = GetMaxMoveDuration();
-        Debug.Log("Move Transforms");
         MoveTransforms();
-        Debug.Log("Wait");
+
         yield return new WaitForSeconds(maxMoveDuration);
-        Debug.Log("Animate");
+
         EndTurn(collisionList);
         GameEvents.instance.EndOfTurnTrigger();
     }

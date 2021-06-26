@@ -75,10 +75,7 @@ public class Guy : Entity
         }
     }
 
-    public void Amaze(){
-        Debug.Log("Amaze " + gameObject.ToString());
-        _doWow = true;
-    }
+    public void Amaze() => _doWow = true;
 
     private void OnEndOfTurn(){
         if(_doWow){
