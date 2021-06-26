@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
 
 public struct CollisionCouple{
     Entity interacted;
@@ -67,7 +69,13 @@ public class TurnManager : MonoBehaviour
                 _entitiesToMove.Add(guy);
             }
 
-            foreach((Entity interactingEntity, Entity interactedEntity) in blobCollisionList){
+            // order the list with burger resolved at the end
+            List<(Entity, Entity)> blobCollisionListOrdered = Sort(
+                blobCollisionList, // pass the actuall list
+                (elt) => elt.Item2.GetResolveOrder() // function used to order
+            );
+
+            foreach((Entity interactingEntity, Entity interactedEntity) in blobCollisionListOrdered){
                 interactedEntity.PreInteract(interactingEntity);
                 collisionList.Add((interactingEntity, interactedEntity));
             }
@@ -108,5 +116,12 @@ public class TurnManager : MonoBehaviour
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a CollisionMatrix.
             Destroy(gameObject);
+    }
+
+    public static List<T> Sort<T>(
+        List<T> source, Func<T, int> sortFunction, bool asc = true
+    ) where T : new() {
+        // used to sort the list of objects to resolve
+        return asc ? source.OrderBy(x => sortFunction.Invoke(x)).ToList() : source.OrderByDescending(x => sortFunction.Invoke(x)).ToList();
     }
 }
