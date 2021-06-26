@@ -33,6 +33,12 @@ public class Blob : MonoBehaviour
 
         bool isDisplacementPossible = true; // main condition to get out of loop
         bool isDisplacementStopped = false; // if a entity pins down the blob
+
+        if(!guys.Any()){
+            // this happens if the blob is emptied withing the turn
+            isDisplacementPossible = false;
+        }
+
         while(isDisplacementPossible & !isDisplacementStopped){
 
             // store entities collided at this distance iteration
@@ -90,10 +96,14 @@ public class Blob : MonoBehaviour
         guy.transform.SetParent(guyPoolTransform);
     }
 
-    public void Absorb(Blob otherBlob){
+    public void Absorb(Blob absorbedBlob){
+        // mark absorbed blob as not controlled
+        TurnManager.instance.Unregister(absorbedBlob);
+        absorbedBlob.isControlled = false;
+
         // absorb remaining guys
         // use a copy of the list because it will be modified
-        foreach(Guy guy in new List<Guy>(otherBlob.guys)){
+        foreach(Guy guy in new List<Guy>(absorbedBlob.guys)){
             Absorb(guy);
         }
     }
