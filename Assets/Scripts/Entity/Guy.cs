@@ -24,13 +24,18 @@ public class Guy : Entity
         
         Guy interactingGuy = entity as Guy;
         if (interactingGuy != null && interactingGuy.blob != null){
-            interactingGuy.blob.Absorb(this);
-            interactingGuy.blob.Amaze();
+            Blob interactingblob = interactingGuy.blob;
+            if(blob != null){
+                interactingblob.Absorb(blob);
+            }
+            else {
+                interactingblob.Absorb(this);
+            }
+            interactingblob.Amaze();
         }
     }
 
-    public override void Interact(Entity entity)
-    {
+    public override void Interact(Entity entity){
         base.Interact(entity);
 
         Guy interactingGuy = entity as Guy;

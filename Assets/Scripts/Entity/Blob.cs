@@ -90,6 +90,14 @@ public class Blob : MonoBehaviour
         guy.transform.SetParent(guyPoolTransform);
     }
 
+    public void Absorb(Blob otherBlob){
+        // absorb remaining guys
+        // use a copy of the list because it will be modified
+        foreach(Guy guy in new List<Guy>(otherBlob.guys)){
+            Absorb(guy);
+        }
+    }
+
     public void Amaze(){
         foreach(Guy guy in guys){
             guy.Amaze();
@@ -98,8 +106,5 @@ public class Blob : MonoBehaviour
 
     public void Remove(Guy guy){
         guys.Remove(guy);
-        // if(!guys.Any()){
-        //     Destroy(gameObject);
-        // }
     }
 }
