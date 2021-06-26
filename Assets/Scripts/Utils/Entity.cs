@@ -18,13 +18,18 @@ public class Entity : MonoBehaviour
         get{return matrixCollider.matrixPosition;}
     }
 
-    public virtual void Interact(Entity collidingEntity){
-        PlaySound();
-    }
-
     protected virtual void Start()
     {
         matrixCollider = GetComponent<MatrixCollider>();
+    }
+
+    public virtual void PreInteract(Entity collidingEntity){
+        // called when forecasting movements, before the entities are visally moved
+    }
+
+    public virtual void Interact(Entity collidingEntity){
+        // called after the entities are visally moved
+        PlaySound();
     }
 
     private void PlaySound(){

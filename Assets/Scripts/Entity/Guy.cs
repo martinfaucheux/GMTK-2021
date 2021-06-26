@@ -5,17 +5,42 @@ using UnityEngine;
 public class Guy : Entity
 {
     public Blob blob;
-
     [SerializeField] GameObject bridgeSkinPrefab;
 
-    public override void Interact(Entity entity)
+    private bool _doWow = false;
+
+    protected override void Start()
     {
+        base.Start();
+        GameEvents.instance.onEndOfTurn += OnEndOfTurn;
+    }
+
+    void OnDestroy(){
+        GameEvents.instance.onEndOfTurn -= OnEndOfTurn;
+    }
+
+    public override void PreInteract(Entity entity){
+        base.PreInteract(entity);
+        
+        Guy interactingGuy = entity as Guy;
+        if (interactingGuy != null && interactingGuy.blob != null){
+            Blob interactingblob = interactingGuy.blob;
+            if(blob != null){
+                interactingblob.Absorb(blob);
+            }
+            else {
+                interactingblob.Absorb(this);
+            }
+            interactingblob.Amaze();
+        }
+    }
+
+    public override void Interact(Entity entity){
         base.Interact(entity);
 
         Guy interactingGuy = entity as Guy;
         if (interactingGuy != null && interactingGuy.blob != null){
-            interactingGuy.blob.Absorb(this);
-            BuildSkinBridges();
+            BuildSkinBridges(interactingGuy);
         }
     }
 
@@ -38,20 +63,32 @@ public class Guy : Entity
         return base.CanInteract(otherEntity);
     }
 
-    private void BuildSkinBridges(){
-        foreach(Guy otherGuy in blob.guys){
-            Vector2Int distToOtherGuy = otherGuy.matrixPosition - matrixPosition;
-            if (distToOtherGuy.sqrMagnitude < 1.01 ){
-                Vector3 bridgeOffset = 0.5f * new Vector3(distToOtherGuy.x, distToOtherGuy.y, 0f);
-                Vector3 skinBridgePosition = transform.position +  bridgeOffset;
-                Instantiate(bridgeSkinPrefab, skinBridgePosition, Quaternion.identity, blob.skinBridgePoolTransform);
-            }
-        }
+    private void BuildSkinBridges(Guy interactingGuy){
+        Vector3 skinBridgePosition = (interactingGuy.transform.position +  transform.position) / 2f;
+        Instantiate(bridgeSkinPrefab, skinBridgePosition, Quaternion.identity, transform);
     }
 
     public void Extract(){
         if(blob != null){
-            blob.guys.Remove(this);
+            blob.Remove(this);
+            blob = null;
         }
+    }
+
+    public void Amaze() => _doWow = true;
+
+    private void OnEndOfTurn(){
+        if(_doWow){
+            DoWow();
+        }
+        _doWow = false;
+    }
+
+    private void DoWow(){
+        Vector3 targetScale = 1.1f * Vector3.one;
+        // bloup animation
+        LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
+        // wow animation
+        GameEvents.instance.BlobCollisionTrigger(gameObject.GetInstanceID());
     }
 }

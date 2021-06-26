@@ -10,14 +10,17 @@ public class Bomb : Entity
         base.Start();
     }
 
+    public override void PreInteract(Entity entity){
+        base.PreInteract(entity);
+        Burger.DisableAll();
+
+    }
+
     public override void Interact(Entity entity)
     {
         base.Interact(entity);
-        Debug.Log("KABOUM");
-
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-
-        Burger.DestroyAll();
+        Burger.PlayBurnAnimation();
         Destroy(gameObject);
     }
 }

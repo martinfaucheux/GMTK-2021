@@ -293,7 +293,7 @@ Transform:
   m_GameObject: {fileID: 3300681083460135628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8940269141822762116}
   m_Father: {fileID: 0}
@@ -324,11 +324,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc2d59256745e246b68708276d7d5c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInteractable: 1
   isBlocking: 1
   isStopMovement: 0
   interactWhenOutOfReach: 1
   collidingSoundName: Bubble
+  playSound: 1
   blob: {fileID: 0}
   bridgeSkinPrefab: {fileID: 1941174533373607620, guid: a66bce8cee206e84a9a1e77ea7ee9d06, type: 3}
 --- !u!114 &8004901410075272785
@@ -382,7 +382,7 @@ Transform:
   m_GameObject: {fileID: 4441029967620498339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
   m_Children:
   - {fileID: 1905203100670968785}
   - {fileID: 6044338363306575505}

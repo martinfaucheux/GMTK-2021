@@ -7,6 +7,7 @@ public class GameEvents : MonoBehaviour
     public event Action onWin;
     public event Action onFadeOut;
     public event Action onFadeIn;
+    public event Action onEndOfTurn;
 
     public event Action<int> onBlobCollision;
 
@@ -56,6 +57,13 @@ public class GameEvents : MonoBehaviour
         if (onBlobCollision != null)
         {
             onBlobCollision(gameObjectId);
+        }
+    }
+    public void EndOfTurnTrigger()
+    {
+        if (onEndOfTurn != null)
+        {
+            onEndOfTurn();
         }
     }
 

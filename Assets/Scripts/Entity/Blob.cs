@@ -1,29 +1,16 @@
-using System.Collections;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+
 public class Blob : MonoBehaviour
 {
 
     [SerializeField] bool isControlled = false;
-    [SerializeField] float moveSpeed = 10;
-
     public Transform guyPoolTransform; 
-    public Transform skinBridgePoolTransform; 
-
-    [SerializeField] float bloupScaleRatio = 1.1f;
-        
-    // private bool _isMoving = false;
     public List<Guy> guys {get; private set;}
-
-    private List<(Entity, Entity)> interactedToResolve;
-
-    private Vector3 _initScale;
 
     void Start()
     {
-        _initScale = transform.localScale;
         // add initial collider to the blob
         guys = new List<Guy>();
 
@@ -46,6 +33,12 @@ public class Blob : MonoBehaviour
 
         bool isDisplacementPossible = true; // main condition to get out of loop
         bool isDisplacementStopped = false; // if a entity pins down the blob
+
+        if(!guys.Any()){
+            // this happens if the blob is emptied withing the turn
+            isDisplacementPossible = false;
+        }
+
         while(isDisplacementPossible & !isDisplacementStopped){
 
             // store entities collided at this distance iteration
@@ -96,30 +89,6 @@ public class Blob : MonoBehaviour
         return null;
     }
 
-
-    public void AttemptMove(Direction direction){
-        (Vector2Int displacement, List<(Entity, Entity)> collidedEntities) = GetMovement(direction);
-
-        interactedToResolve = collidedEntities;
-        AnimateMove(displacement);
-
-        if(displacement.sqrMagnitude > 0f)
-            AudioManager.instance?.Play("Zoom");
-    }
-
-    public void AnimateMove(Vector2Int displacement){
-        // _isMoving = true;
-        foreach(Guy guy in guys){
-            guy.matrixCollider.matrixPosition += displacement;
-        }
-        float moveDuration = Mathf.Min(GameManager.instance.actionDuration, displacement.magnitude * 1f / moveSpeed);
-
-        Vector3Int v3Dsiplacement = (Vector3Int) displacement;
-        Vector3 newRealWorldPos = transform.position + v3Dsiplacement;
-
-        LeanTween.move(gameObject, newRealWorldPos, moveDuration).setOnComplete(ResolveCollision);
-    }
-
     public void Absorb(Guy guy){
         guy.Extract(); // remove the guy from his current blob
         guys.Add(guy);
@@ -127,86 +96,60 @@ public class Blob : MonoBehaviour
         guy.transform.SetParent(guyPoolTransform);
     }
 
-    public void Absorb(Blob otherBlob){
-        // transfert skin bridges to new blob
-        TransferSkinBridges(otherBlob);
+    public void Absorb(Blob absorbedBlob){
+        // mark absorbed blob as not controlled
+        TurnManager.instance.Unregister(absorbedBlob);
+        absorbedBlob.isControlled = false;
 
         // absorb remaining guys
         // use a copy of the list because it will be modified
-        foreach(Guy guy in new List<Guy>(otherBlob.guys)){
+        foreach(Guy guy in new List<Guy>(absorbedBlob.guys)){
             Absorb(guy);
         }
-        Destroy(otherBlob.gameObject);
     }
 
-    private void TransferSkinBridges(Blob otherBlob){
-        // copy list of child transforms first
-        List<Transform> childTransforms = new List<Transform>();
-        foreach (Transform childTransform in otherBlob.skinBridgePoolTransform)
-        { 
-            childTransforms.Add(childTransform);
-        }
-
-        // iterate over copy because child transforms will change
-        foreach(Transform skinBridgeTransform in childTransforms){
-            skinBridgeTransform.SetParent(this.skinBridgePoolTransform);
-        }
-    }
-
-    private void ResolveCollision(){
-
-        // Set of unique encountered blobs
-        HashSet<Blob> encounteredBlobs = new HashSet<Blob>();
-        // keep track if need to do wow animation
-        bool doWow = false;
-
-        // order the list with burger resolved at the end
-        List<(Entity, Entity)> interactedToResolveOrdered = Sort(
-            interactedToResolve, // pass the actuall list
-            (elt) => elt.Item2.GetResolveOrder() // function used to order
-        );
-
-        // trigger Interact method
-        foreach((Entity interactingEntity, Entity interactedEntity) in interactedToResolveOrdered){
-            // keep trace of blobs to merge
-            Guy encounteredGuy = interactedEntity as Guy;
-            if (encounteredGuy != null){
-                doWow = true;
-                if(encounteredGuy.blob != null){
-                    encounteredBlobs.Add(encounteredGuy.blob);
-                }
-            }
-            // do wow if collided entity is a burger
-            doWow |= (interactedEntity as Burger) != null;
-
-            interactedEntity.Interact(interactingEntity);
-        }
-        
-        foreach(Blob encounteredBlob in encounteredBlobs){
-            Absorb(encounteredBlob);
-        }
-
-        // if any guy collided
-        if(doWow){
-            DoWow();
-        }
-        interactedToResolve = new List<(Entity, Entity)>();
-    }
-
-    private void DoWow(){
-        Vector3 targetScale = bloupScaleRatio * _initScale;
-        // bloup animation
-        LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
-        // wow animation
+    public void Amaze(){
         foreach(Guy guy in guys){
-            GameEvents.instance.BlobCollisionTrigger(guy.gameObject.GetInstanceID());
+            guy.Amaze();
         }
     }
 
-    public static List<T> Sort<T>(
-        List<T> source, Func<T, int> sortFunction, bool asc = true
-    ) where T : new() {
-        // used to sort the list of objects to resolve
-        return asc ? source.OrderBy(x => sortFunction.Invoke(x)).ToList() : source.OrderByDescending(x => sortFunction.Invoke(x)).ToList();
+    public void Remove(Guy guy){
+        guys.Remove(guy);
+    }
+
+    public int GetMovementPriority(Direction direction){
+        int minDistance = CollisionMatrix.instance.maxDistance;
+        foreach(Guy guy in guys){
+            int distance = GetDistanceToBorder(guy.matrixPosition, direction);
+            if(distance < minDistance){
+                minDistance = distance;
+            }
+        }
+        return minDistance;
+    }
+
+    private static int GetDistanceToBorder(Vector2Int matrixPosition, Direction direction){
+        int result = 0;
+        Vector2Int maxPos = CollisionMatrix.instance.matrixSize;
+        Vector2Int dirVect = direction.ToPos();
+        switch(direction.ToString()){
+            case "UP":
+                result = maxPos.y - matrixPosition.y;
+                break;
+            case "DOWN":
+                result = matrixPosition.y;
+                break;
+            case "LEFT":
+                result = matrixPosition.x;
+                break;
+            case "RIGHT":
+                result = maxPos.x - matrixPosition.x;
+                break;
+            default:
+                break;       
+        }
+
+        return result;
     }
 }

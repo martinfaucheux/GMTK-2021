@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4956528816214982948}
-  - component: {fileID: 4956528816214982949}
   - component: {fileID: 4956528816214982946}
   m_Layer: 0
-  m_Name: InitBlob
+  m_Name: PlayerBlob
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4956528816214982949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4956528816214982945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15681344ae8d34142bc32b6374ec16f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 20
 --- !u!114 &4956528816214982946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cae28b681eb4e48bfc5ae2907c9802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isControlled: 1
   moveSpeed: 10
   guyPoolTransform: {fileID: 4956528817977087345}
   skinBridgePoolTransform: {fileID: 8932931141412514615}
