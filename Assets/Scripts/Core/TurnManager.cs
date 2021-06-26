@@ -60,11 +60,12 @@ public class TurnManager : MonoBehaviour
     }
 
     private List<(Entity, Entity)> StartTurn(Direction direction){
-        // logic of the turn should lay here
-
+        
+        _entitiesToMove = new HashSet<Entity>();
         List<(Entity, Entity)> collisionList = new List<(Entity, Entity)>();
 
-        foreach(Blob blob in _controlledBlobs){
+        // iterate over a copy of list because it can change within the turn
+        foreach(Blob blob in new List<Blob>(_controlledBlobs)){
             (Vector2Int displacement, List<(Entity, Entity)> blobCollisionList) = blob.GetMovement(direction);
 
             foreach(Guy guy in blob.guys){
@@ -104,6 +105,10 @@ public class TurnManager : MonoBehaviour
     public void Register(Blob controlledBlob){
         // TurnManager Start method must run before Blob's
         _controlledBlobs.Add(controlledBlob);
+    }
+
+    public void Unregister(Blob controlledBlob){
+        _controlledBlobs.Remove(controlledBlob);
     }
 
     private void CheckSingleton(){
