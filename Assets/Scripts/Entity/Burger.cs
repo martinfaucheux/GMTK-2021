@@ -30,6 +30,7 @@ public class Burger : Entity
             base.PreInteract(entity);
             _isEaten = true;
             burgerList.Remove(this);
+            ((Guy) entity).Amaze();
         }
     }
 

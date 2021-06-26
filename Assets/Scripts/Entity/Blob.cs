@@ -21,6 +21,8 @@ public class Blob : MonoBehaviour
 
     private Vector3 _initScale;
 
+    private bool _doWow;
+
     void Start()
     {
         _initScale = transform.localScale;
@@ -96,30 +98,6 @@ public class Blob : MonoBehaviour
         return null;
     }
 
-
-    public void AttemptMove(Direction direction){
-        (Vector2Int displacement, List<(Entity, Entity)> collidedEntities) = GetMovement(direction);
-
-        interactedToResolve = collidedEntities;
-        AnimateMove(displacement);
-
-        if(displacement.sqrMagnitude > 0f)
-            AudioManager.instance?.Play("Zoom");
-    }
-
-    public void AnimateMove(Vector2Int displacement){
-        // _isMoving = true;
-        foreach(Guy guy in guys){
-            guy.matrixCollider.matrixPosition += displacement;
-        }
-        float moveDuration = Mathf.Min(GameManager.instance.actionDuration, displacement.magnitude * 1f / moveSpeed);
-
-        Vector3Int v3Dsiplacement = (Vector3Int) displacement;
-        Vector3 newRealWorldPos = transform.position + v3Dsiplacement;
-
-        LeanTween.move(gameObject, newRealWorldPos, moveDuration).setOnComplete(ResolveCollision);
-    }
-
     public void Absorb(Guy guy){
         guy.Extract(); // remove the guy from his current blob
         guys.Add(guy);
@@ -188,19 +166,9 @@ public class Blob : MonoBehaviour
 
         // if any guy collided
         if(doWow){
-            DoWow();
+            // DoWow();
         }
         interactedToResolve = new List<(Entity, Entity)>();
-    }
-
-    private void DoWow(){
-        Vector3 targetScale = bloupScaleRatio * _initScale;
-        // bloup animation
-        LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
-        // wow animation
-        foreach(Guy guy in guys){
-            GameEvents.instance.BlobCollisionTrigger(guy.gameObject.GetInstanceID());
-        }
     }
 
     public static List<T> Sort<T>(

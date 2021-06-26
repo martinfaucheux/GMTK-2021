@@ -51,6 +51,7 @@ public class TurnManager : MonoBehaviour
         MoveTransforms();
         yield return new WaitForSeconds(GameManager.instance.actionDuration);
         EndTurn(collisionList);
+        GameEvents.instance.EndOfTurnTrigger();
     }
 
     private List<(Entity, Entity)> StartTurn(Direction direction){

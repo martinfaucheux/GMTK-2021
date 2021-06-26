@@ -5,8 +5,19 @@ using UnityEngine;
 public class Guy : Entity
 {
     public Blob blob;
-
     [SerializeField] GameObject bridgeSkinPrefab;
+
+    private bool _doWow = false;
+
+    protected override void Start()
+    {
+        base.Start();
+        GameEvents.instance.onEndOfTurn += OnEndOfTurn;
+    }
+
+    void OnDestroy(){
+        GameEvents.instance.onEndOfTurn -= OnEndOfTurn;
+    }
 
     public override void PreInteract(Entity entity){
         base.PreInteract(entity);
@@ -14,6 +25,8 @@ public class Guy : Entity
         Guy interactingGuy = entity as Guy;
         if (interactingGuy != null && interactingGuy.blob != null){
             interactingGuy.blob.Absorb(this);
+            Amaze();
+            interactingGuy.Amaze();
         }
     }
 
@@ -55,5 +68,22 @@ public class Guy : Entity
         if(blob != null){
             blob.guys.Remove(this);
         }
+    }
+
+    public void Amaze() => _doWow = true;
+
+    private void OnEndOfTurn(){
+        if(_doWow){
+            DoWow();
+        }
+        _doWow = false;
+    }
+
+    private void DoWow(){
+        Vector3 targetScale = 1.1f * Vector3.one;
+        // bloup animation
+        LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
+        // wow animation
+        GameEvents.instance.BlobCollisionTrigger(gameObject.GetInstanceID());
     }
 }
