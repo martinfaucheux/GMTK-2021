@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: dfe6dc643923ebc4f8ed12f2babb201a
   - enabled: 1
+    path: Assets/Scenes/Level 39 - Double Dude.unity
+    guid: ba6e99efb6b444540ae7f4a13183cf54
+  - enabled: 1
     path: Assets/Scenes/Level 1 - No obstacle.unity
     guid: 2345523cfb47d9445a9ff05ebc4eb53d
   - enabled: 1

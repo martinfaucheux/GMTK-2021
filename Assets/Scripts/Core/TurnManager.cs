@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Linq;
 
 public struct CollisionCouple{
     Entity interacted;
@@ -31,7 +29,6 @@ public class TurnManager : MonoBehaviour
     }
 
     void Start(){
-        _entitiesToMove = new HashSet<Entity>();
         _controlledBlobs = new List<Blob>();
         PlayerController.OnGetCommand += TriggerMovement;
     }
@@ -41,6 +38,7 @@ public class TurnManager : MonoBehaviour
     }
 
     private void TriggerMovement(Direction direction){
+        Debug.Log("Trigger Movement");
         if (moveCooldown == 0 & GameManager.instance.playerCanMove){
             _lastMoveTime = Time.time;
             StartCoroutine(PlayTurn(direction));
@@ -48,13 +46,15 @@ public class TurnManager : MonoBehaviour
     }
 
     private IEnumerator PlayTurn(Direction direction){
+        Debug.Log("Start Turn");
         List<(Entity, Entity)> collisionList = StartTurn(direction);
-
+        Debug.Log("Get move duration");
         float maxMoveDuration = GetMaxMoveDuration();
+        Debug.Log("Move Transforms");
         MoveTransforms();
-
+        Debug.Log("Wait");
         yield return new WaitForSeconds(maxMoveDuration);
-
+        Debug.Log("Animate");
         EndTurn(collisionList);
         GameEvents.instance.EndOfTurnTrigger();
     }
@@ -64,8 +64,13 @@ public class TurnManager : MonoBehaviour
         _entitiesToMove = new HashSet<Entity>();
         List<(Entity, Entity)> collisionList = new List<(Entity, Entity)>();
 
-        // iterate over a copy of list because it can change within the turn
-        foreach(Blob blob in new List<Blob>(_controlledBlobs)){
+        // fix inconsistancies in movements when having several controllable blobs
+        List<Blob> controlledBlobsOrdered = Ordering.Sort(
+            _controlledBlobs,
+            blob => blob.GetMovementPriority(direction)
+        );
+
+        foreach(Blob blob in controlledBlobsOrdered){
             (Vector2Int displacement, List<(Entity, Entity)> blobCollisionList) = blob.GetMovement(direction);
 
             foreach(Guy guy in blob.guys){
@@ -74,7 +79,7 @@ public class TurnManager : MonoBehaviour
             }
 
             // order the list with burger resolved at the end
-            List<(Entity, Entity)> blobCollisionListOrdered = Sort(
+            List<(Entity, Entity)> blobCollisionListOrdered = Ordering.Sort(
                 blobCollisionList, // pass the actuall list
                 (elt) => elt.Item2.GetResolveOrder() // function used to order
             );
@@ -125,12 +130,7 @@ public class TurnManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public static List<T> Sort<T>(
-        List<T> source, Func<T, int> sortFunction, bool asc = true
-    ) where T : new() {
-        // used to sort the list of objects to resolve
-        return asc ? source.OrderBy(x => sortFunction.Invoke(x)).ToList() : source.OrderByDescending(x => sortFunction.Invoke(x)).ToList();
-    }
+    
 
     private static float GetMoveDuration(Entity entity){
 
@@ -142,8 +142,7 @@ public class TurnManager : MonoBehaviour
             return 0f;
         }
 
-        Vector2Int matrixSize = CollisionMatrix.instance.matrixSize;
-        int maxDistance = Mathf.Max(matrixSize.x, matrixSize.y) - 1;
+        int maxDistance =  CollisionMatrix.instance.maxDistance;
         float maxDuration = GameManager.instance.actionDuration;
         float minDuration = 0.33f * maxDuration;
 

@@ -117,4 +117,39 @@ public class Blob : MonoBehaviour
     public void Remove(Guy guy){
         guys.Remove(guy);
     }
+
+    public int GetMovementPriority(Direction direction){
+        int minDistance = CollisionMatrix.instance.maxDistance;
+        foreach(Guy guy in guys){
+            int distance = GetDistanceToBorder(guy.matrixPosition, direction);
+            if(distance < minDistance){
+                minDistance = distance;
+            }
+        }
+        return minDistance;
+    }
+
+    private static int GetDistanceToBorder(Vector2Int matrixPosition, Direction direction){
+        int result = 0;
+        Vector2Int maxPos = CollisionMatrix.instance.matrixSize;
+        Vector2Int dirVect = direction.ToPos();
+        switch(direction.ToString()){
+            case "UP":
+                result = maxPos.y - matrixPosition.y;
+                break;
+            case "DOWN":
+                result = matrixPosition.y;
+                break;
+            case "LEFT":
+                result = matrixPosition.x;
+                break;
+            case "RIGHT":
+                result = maxPos.x - matrixPosition.x;
+                break;
+            default:
+                break;       
+        }
+
+        return result;
+    }
 }

@@ -24,6 +24,10 @@ public class CollisionMatrix: MonoBehaviour {
 
     private List<MatrixCollider> colliderList = new List<MatrixCollider>();
 
+    public int maxDistance{
+        get{ return Mathf.Max(matrixSize.x, matrixSize.y); }
+    }
+
     
 
     //Awake is always called before any Start functions
