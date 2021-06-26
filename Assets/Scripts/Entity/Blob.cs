@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Blob : MonoBehaviour
 {
 
     [SerializeField] bool isControlled = false;
     public Transform guyPoolTransform; 
-    public Transform skinBridgePoolTransform;         
     public List<Guy> guys {get; private set;}
 
     void Start()
@@ -88,5 +88,18 @@ public class Blob : MonoBehaviour
         guys.Add(guy);
         guy.blob = this;
         guy.transform.SetParent(guyPoolTransform);
+    }
+
+    public void Amaze(){
+        foreach(Guy guy in guys){
+            guy.Amaze();
+        }
+    }
+
+    public void Remove(Guy guy){
+        guys.Remove(guy);
+        // if(!guys.Any()){
+        //     Destroy(gameObject);
+        // }
     }
 }

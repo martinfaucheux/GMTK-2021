@@ -25,8 +25,7 @@ public class Guy : Entity
         Guy interactingGuy = entity as Guy;
         if (interactingGuy != null && interactingGuy.blob != null){
             interactingGuy.blob.Absorb(this);
-            Amaze();
-            interactingGuy.Amaze();
+            interactingGuy.blob.Amaze();
         }
     }
 
@@ -66,11 +65,15 @@ public class Guy : Entity
 
     public void Extract(){
         if(blob != null){
-            blob.guys.Remove(this);
+            blob.Remove(this);
+            blob = null;
         }
     }
 
-    public void Amaze() => _doWow = true;
+    public void Amaze(){
+        Debug.Log("Amaze " + gameObject.ToString());
+        _doWow = true;
+    }
 
     private void OnEndOfTurn(){
         if(_doWow){

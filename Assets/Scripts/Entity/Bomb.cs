@@ -20,7 +20,7 @@ public class Bomb : Entity
     {
         base.Interact(entity);
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        Burger.DisableAll();
+        Burger.PlayBurnAnimation();
         Destroy(gameObject);
     }
 }

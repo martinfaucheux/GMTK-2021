@@ -48,7 +48,6 @@ public class TurnManager : MonoBehaviour
     }
 
     private IEnumerator PlayTurn(Direction direction){
-        Debug.Log("Play Turn");
         List<(Entity, Entity)> collisionList = StartTurn(direction);
         MoveTransforms();
         yield return new WaitForSeconds(GameManager.instance.actionDuration);
