@@ -129,6 +129,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 39 - Double Dude.unity
     guid: ba6e99efb6b444540ae7f4a13183cf54
   - enabled: 1
+    path: Assets/Scenes/Level 40 - Learn 2 guys.unity
+    guid: d407aa9a584ad414c8fd72c0f678fd9b
+  - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
   m_configObjects: {}
