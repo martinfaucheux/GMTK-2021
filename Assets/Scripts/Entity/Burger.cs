@@ -31,6 +31,8 @@ public class Burger : Entity
             _isEaten = true;
             burgerList.Remove(this);
             ((Guy) entity).blob.Amaze();
+            // remove matrix collider to prevent other collision within the same turn
+            matrixCollider.Unregister();
         }
     }
 

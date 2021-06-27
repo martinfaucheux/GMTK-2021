@@ -16,8 +16,7 @@ public class MatrixCollider : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if(_collisionMatrix != null)
-            _collisionMatrix.RemoveCollider(this);
+        Unregister();
     }
 
     public Vector3 GetRealPos()
@@ -64,6 +63,11 @@ public class MatrixCollider : MonoBehaviour {
     {
         Vector2Int posDiff = otherCollider.matrixPosition - this.matrixPosition;
         return Direction.GetDirection2ValueFromCoord(posDiff.x, posDiff.y);
+    }
+
+    public void Unregister(){
+        if(_collisionMatrix != null)
+            _collisionMatrix.RemoveCollider(this);
     }
 
 
