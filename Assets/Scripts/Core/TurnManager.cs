@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public struct CollisionCouple{
     Entity interacted;
@@ -89,18 +90,23 @@ public class TurnManager : MonoBehaviour
         return collisionList;
     }
 
-    private void EndTurn(List<(Entity, Entity)> collisionList){
-        foreach((Entity interactingEntity, Entity interactedEntity) in collisionList){
-            interactedEntity.Interact(interactingEntity);
-        }
-    }
-
     private void MoveTransforms(){
+
+        if(_entitiesToMove.Any()){
+            AudioManager.instance.Play("Zoom");
+        }
+
         foreach(Entity entity in _entitiesToMove){
             GameObject objectToMove= entity.gameObject;
             Vector3 realWorldPos = entity.matrixCollider.GetRealPos();
             float moveDuration = GetMoveDuration(entity);
             LeanTween.move(objectToMove, realWorldPos, moveDuration);
+        }
+    }
+
+    private void EndTurn(List<(Entity, Entity)> collisionList){
+        foreach((Entity interactingEntity, Entity interactedEntity) in collisionList){
+            interactedEntity.Interact(interactingEntity);
         }
     }
 
