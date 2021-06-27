@@ -141,6 +141,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 43 - Assez malin.unity
     guid: 08b74103301713a40ad291bf4b61c42a
   - enabled: 1
+    path: Assets/Scenes/Level 44 - Boh.unity
+    guid: 3fbf6a6c94cf43f4d92df7a0150eb0e7
+  - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
   m_configObjects: {}
