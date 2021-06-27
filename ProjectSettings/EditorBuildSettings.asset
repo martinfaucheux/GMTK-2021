@@ -147,11 +147,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 45 - Malinois.unity
     guid: c58c45b43ff4a404d94d5c342bf482a7
   - enabled: 1
-    path: Assets/Scenes/Level 46 - x.unity
+    path: Assets/Scenes/Level 46 - Zola.unity
     guid: d778e026f43a8684592b77a1363a42fe
   - enabled: 1
     path: Assets/Scenes/Level 47 - Some mess.unity
     guid: 87cb28b46c2fdb947914d55f756b02c0
+  - enabled: 1
+    path: Assets/Scenes/Level 48 - Mac n Cheese.unity
+    guid: 5a5f2cdb1c90d9d4392a5112fec275fd
+  - enabled: 1
+    path: Assets/Scenes/Level 49 - Spicy Penne.unity
+    guid: 7e076c8b127001243a23c531ba98eb81
   - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
