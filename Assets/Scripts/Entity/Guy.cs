@@ -26,7 +26,9 @@ public class Guy : Entity
         if (interactingGuy != null && interactingGuy.blob != null){
             Blob interactingblob = interactingGuy.blob;
             if(blob != null){
-                interactingblob.Absorb(blob);
+                if(blob != interactingGuy.blob){
+                    interactingblob.Absorb(blob);
+                }
             }
             else {
                 interactingblob.Absorb(this);
@@ -56,7 +58,10 @@ public class Guy : Entity
     public override bool CanInteract(Entity otherEntity)
     {
         Guy otherGuy = otherEntity as Guy;
-        if(otherGuy != null && otherGuy.blob != null){
+        if(
+            otherGuy != null
+            && otherGuy.blob != null
+        ){
             // can only interact if guy is in another blob
             return (this.blob != otherGuy.blob);
         }
