@@ -37,6 +37,16 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("Unknown sound: " + soundName);
         }
     }
+    public Sound Get(string soundName){
+        if(_soundDict.ContainsKey(soundName)){
+            return _soundDict[soundName];
+        }
+        else{
+            Debug.LogError("Unknown sound: " + soundName);
+        }
+        return null;
+    }
+    
 
     public void Stop(string soundName){
         if(_soundDict.ContainsKey(soundName)){

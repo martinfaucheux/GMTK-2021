@@ -16,6 +16,8 @@ public class Sound
     public bool loop;
     public bool playOnStart;
 
+    public bool isEnabled = true;
+
     public AudioSource source{
         get => _source;
         set => SetSource(value);
@@ -42,6 +44,18 @@ public class Sound
         }
 
         source.Play();
+    }
+
+    public void Unmute(){
+        Debug.Log("Unmute");
+        isEnabled = true;
+        _source.volume = volume;
+    }
+
+    public void Mute(){
+        Debug.Log("Mute");
+        isEnabled = false;
+        _source.volume = 0f;
     }
 
     public void Stop() => _source.Stop();
