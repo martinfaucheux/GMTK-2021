@@ -5,7 +5,7 @@ using UnityEngine;
 public class Obstacle : Entity{
     
     [SerializeField] float trembleAmplitude = 0.1f;
-    [SerializeField] float trembleTime = 0.05f;
+    [SerializeField] float trembleTime = 0.04f;
 
     public override void Interact(Entity collidingEntity){
         base.Interact(collidingEntity);

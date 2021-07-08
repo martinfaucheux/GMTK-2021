@@ -59,14 +59,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541ad8512a57af94cbbe8dbb89babdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInteractable: 1
   isBlocking: 1
   isStopMovement: 0
   interactWhenOutOfReach: 1
   collidingSoundName: Hit Tree
   playSound: 1
   trembleAmplitude: 0.1
-  trembleTime: 0.05
+  trembleTime: 0.04
 --- !u!1 &6113319805332216126
 GameObject:
   m_ObjectHideFlags: 0

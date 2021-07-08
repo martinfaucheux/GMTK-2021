@@ -93,7 +93,7 @@ public class TurnManager : MonoBehaviour
     private void MoveTransforms(){
 
         if(_entitiesToMove.Any()){
-            AudioManager.instance.Play("Zoom");
+            AudioManager.instance?.Play("Zoom");
         }
 
         foreach(Entity entity in _entitiesToMove){
