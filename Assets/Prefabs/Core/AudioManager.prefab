@@ -52,6 +52,7 @@ MonoBehaviour:
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
+    isEnabled: 1
   - name: Bubble
     audioClip: {fileID: 8300000, guid: a32bf3c7a852c2847998adbb85f0f445, type: 3}
     volume: 0.5
@@ -59,6 +60,7 @@ MonoBehaviour:
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
+    isEnabled: 1
   - name: Yeah
     audioClip: {fileID: 8300000, guid: 0647c77c6a9d9eb49b7570f348e7eeed, type: 3}
     volume: 0.5
@@ -66,6 +68,7 @@ MonoBehaviour:
     randomizePitch: 0.064
     loop: 0
     playOnStart: 0
+    isEnabled: 1
   - name: Hit Tree
     audioClip: {fileID: 8300000, guid: 4f6538f14cb406c46ad96b9366b55aa0, type: 3}
     volume: 0.5
@@ -73,6 +76,7 @@ MonoBehaviour:
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
+    isEnabled: 1
   - name: Explosion
     audioClip: {fileID: 8300000, guid: 7fcee954c4c0f2f41823e4cb9e9bb656, type: 3}
     volume: 0.697
@@ -80,6 +84,7 @@ MonoBehaviour:
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
+    isEnabled: 1
   - name: Crunch
     audioClip: {fileID: 8300000, guid: 2cd01a918d86290489f4848008738fc9, type: 3}
     volume: 0.5
@@ -87,17 +92,12 @@ MonoBehaviour:
     randomizePitch: 0.1
     loop: 0
     playOnStart: 0
-  - name: Menu Music
-    audioClip: {fileID: 8300000, guid: bd8308f277314cd409a69af6b8728be8, type: 3}
-    volume: 0.5
-    pitch: 1
-    randomizePitch: 0
-    loop: 1
-    playOnStart: 0
+    isEnabled: 1
   - name: Game Music
-    audioClip: {fileID: 8300000, guid: b7237b217b9367f4c94be6912a8914a6, type: 3}
+    audioClip: {fileID: 8300000, guid: 19674b617262839459e58e929c35e504, type: 3}
     volume: 0.5
     pitch: 1
     randomizePitch: 0
     loop: 1
     playOnStart: 1
+    isEnabled: 1
