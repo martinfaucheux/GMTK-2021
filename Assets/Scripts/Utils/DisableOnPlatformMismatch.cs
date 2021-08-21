@@ -13,6 +13,9 @@ public class DisableOnPlatformMismatch : MonoBehaviour
 
     private bool IsPlatformAllowed()
     {
+
+#if UNITY_EDITOR
+
         if (debug)
         {
             return true;
@@ -29,6 +32,7 @@ public class DisableOnPlatformMismatch : MonoBehaviour
                 return true;
             }
         }
+#endif
         return allowedPlatforms.Contains(Application.platform);
     }
 }
