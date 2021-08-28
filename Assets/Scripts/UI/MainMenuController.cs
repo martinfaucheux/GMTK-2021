@@ -10,10 +10,13 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] Button rightArrowButton;
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] float actionCoolDown = 0.2f;
+    [SerializeField] bool isLevelNumberOnNewLine = true;
 
-    private int selectedLevelId {
-        get{return _selectedLevelId;}
-        set{
+    private int selectedLevelId
+    {
+        get { return _selectedLevelId; }
+        set
+        {
             _selectedLevelId = value;
             UpdateUI();
         }
@@ -22,63 +25,80 @@ public class MainMenuController : MonoBehaviour
 
     private float _lastActionTime;
 
-    private bool canTakeAction{
-        get{
+    private bool canTakeAction
+    {
+        get
+        {
             return Time.time - _lastActionTime > actionCoolDown;
         }
     }
 
-    void Start(){
+    void Start()
+    {
         SelectLastLevelPlayed();
     }
 
-    void Update(){
-        if(canTakeAction){
+    void Update()
+    {
+        if (canTakeAction)
+        {
             int vertValue = (int)(Input.GetAxisRaw("Horizontal"));
             bool _actionTaken = true;
-            if(Input.GetKeyDown(KeyCode.Return)){
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
                 LoadSelectedLevel();
             }
-            else if (vertValue < 0 && LevelLoader.instance.IsLevelUnlocked(_selectedLevelId - 1)){
+            else if (vertValue < 0 && LevelLoader.instance.IsLevelUnlocked(_selectedLevelId - 1))
+            {
                 SelectPreviousLevel();
             }
-            else if(vertValue > 0 && LevelLoader.instance.IsLevelUnlocked(_selectedLevelId + 1)){
+            else if (vertValue > 0 && LevelLoader.instance.IsLevelUnlocked(_selectedLevelId + 1))
+            {
                 SelectNextLevel();
             }
-            else{
+            else
+            {
                 _actionTaken = false;
             }
 
-            if(_actionTaken){
+            if (_actionTaken)
+            {
                 _lastActionTime = Time.time;
             }
         }
     }
 
-    public void LoadSelectedLevel(){
+    public void LoadSelectedLevel()
+    {
         LevelLoader.instance.LoadLevel(selectedLevelId);
     }
 
-    public void SelectLastLevelPlayed(){
+    public void SelectLastLevelPlayed()
+    {
         // TODO: last level
         selectedLevelId = LevelLoader.instance.maxLevelId;
     }
 
-    public void SelectNextLevel(){
-        if (LevelLoader.instance.IsLevelUnlocked(selectedLevelId + 1)){
+    public void SelectNextLevel()
+    {
+        if (LevelLoader.instance.IsLevelUnlocked(selectedLevelId + 1))
+        {
             selectedLevelId++;
         }
     }
 
-    public void SelectPreviousLevel(){
-        if(selectedLevelId > 1)
-            selectedLevelId --;
+    public void SelectPreviousLevel()
+    {
+        if (selectedLevelId > 1)
+            selectedLevelId--;
     }
-    
-    private void UpdateUI(){
+
+    private void UpdateUI()
+    {
         leftArrowButton.interactable = selectedLevelId > 1;
         rightArrowButton.interactable = LevelLoader.instance.IsLevelUnlocked(selectedLevelId + 1);
-        levelText.SetText("Level\n" + selectedLevelId.ToString());
+        string lineBreak = isLevelNumberOnNewLine ? "\n" : " ";
+        levelText.SetText("Level" + lineBreak + selectedLevelId.ToString());
     }
 
 
