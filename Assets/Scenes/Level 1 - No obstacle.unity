@@ -575,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementAmplitude: 1
   timeBeforeShow: 3
-  transitionDuration: 3
+  transitionDuration: 1
   pauseDuration: 1
   directions:
   - {x: 0, y: 1}
