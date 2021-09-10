@@ -38,6 +38,11 @@ public class InsructionHand : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        PlayerController.OnGetCommand -= Hide;
+    }
+
     private void Update()
     {
         if (Time.time > nextActionTime)
