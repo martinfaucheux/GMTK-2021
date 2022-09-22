@@ -6,14 +6,15 @@ public class Bomb : Entity
 {
     [SerializeField] GameObject explosionPrefab;
 
-    protected override void Start(){
+    protected override void Start()
+    {
         base.Start();
     }
 
-    public override void PreInteract(Entity entity){
+    public override void PreInteract(Entity entity)
+    {
         base.PreInteract(entity);
         Burger.DisableAll();
-
     }
 
     public override void Interact(Entity entity)
@@ -21,6 +22,7 @@ public class Bomb : Entity
         base.Interact(entity);
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Burger.PlayBurnAnimation();
+        CameraShake.instance?.Shake();
         Destroy(gameObject);
     }
 }
