@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -49,7 +49,8 @@ public class LevelLoader : MonoBehaviour
         // trigger fade in at start
         GameEvents.instance.FadeInTrigger();
 
-        if (loadSaveData){
+        if (loadSaveData)
+        {
             RetrieveGameState();
         }
     }
@@ -78,52 +79,63 @@ public class LevelLoader : MonoBehaviour
         LoadLevel(currentLevelId);
     }
 
-    public void LoadLastLevelPlayed(){
+    public void LoadLastLevelPlayed()
+    {
         LoadLevel(_lastLevelPlayedID, false);
     }
 
-    public void LoadFirstScene(){
+    public void LoadFirstScene()
+    {
         Destroy(AudioManager.instance); // destroy so main menu music will play
         LoadLevel(0, false);
     }
 
-    public void LoadLastScene(bool saveProgress){
-        LoadLevel(SceneManager.sceneCountInBuildSettings -1 , saveProgress);
+    public void LoadLastScene(bool saveProgress)
+    {
+        LoadLevel(SceneManager.sceneCountInBuildSettings - 1, saveProgress);
     }
 
-    public void LoadLevel(int levelID, bool doSaveData = true){
+    public void LoadLevel(int levelID, bool doSaveData = true)
+    {
 
         GameEvents.instance.FadeOutTrigger();
 
-        if (doSaveData){
+        if (doSaveData)
+        {
             SaveData(currentLevelID: levelID);
         }
-        
+
         _lastLevelPlayedID = levelID;
         StartCoroutine(DelayLoadScene(levelID, transitionDuration));
     }
 
-    public bool IsLevelUnlocked(int levelId){
+    public bool IsLevelUnlocked(int levelId)
+    {
         return levelId <= maxLevelId;
         // return (unlockedLevels.ContainsKey(levelId) && unlockedLevels[levelId]); 
     }
 
-    public bool IsPreviousLevelAvailable(){
+    public bool IsPreviousLevelAvailable()
+    {
         return currentLevelId > 1;
     }
 
-    public bool IsNextLevelAvailable(){
+    public bool IsNextLevelAvailable()
+    {
         return (currentLevelId < maxLevelId);
     }
 
-    private void UnlockLevel(int levelID){
-        
+    private void UnlockLevel(int levelID)
+    {
+
         bool hasChanged = !IsLevelUnlocked(levelID);
 
         unlockedLevels[levelID] = true;
 
-        if (hasChanged){
-            if (maxLevelId < levelID){
+        if (hasChanged)
+        {
+            if (maxLevelId < levelID)
+            {
                 maxLevelId = levelID;
             }
             // SaveData(unlockedLevels, maxLevelId: levelID);
@@ -131,34 +143,44 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    public void UnlockNextLevels(){
-        foreach(int newLevelId in unlockedOnWin){
+    public void UnlockNextLevels()
+    {
+        foreach (int newLevelId in unlockedOnWin)
+        {
             UnlockLevel(newLevelId);
         }
     }
 
-    public void SaveData(int maxLevelId = -1, int currentLevelID = -1){
-        if (maxLevelId < 0 ){
+    public void SaveData(int maxLevelId = -1, int currentLevelID = -1)
+    {
+        if (maxLevelId < 0)
+        {
             maxLevelId = this.maxLevelId;
         }
 
-        if (currentLevelID < 0){
+        if (currentLevelID < 0)
+        {
             currentLevelID = this.currentLevelId;
         }
         // DataSaver.SaveGameState(unlockedLevels, maxLevelId, currentLevelID);
+
+        Debug.Log("Save maxLevelId: " + maxLevelId.ToString() + "; currentLevelId: " + currentLevelID.ToString());
         DataSaver.SaveGameState(maxLevelId, currentLevelID);
     }
 
-    public void RetrieveGameState(){
+    public void RetrieveGameState()
+    {
         PlayerData playerData = DataSaver.LoadGameState();
 
-        if (playerData != null){
+        if (playerData != null)
+        {
             maxLevelId = Mathf.Max(playerData.maxLevelId, 1);
             _lastLevelPlayedID = playerData.currentLevelId;
         }
     }
 
-    public void DeleteSavedData(){
+    public void DeleteSavedData()
+    {
         DataSaver.DeleteSavedData();
         maxLevelId = 1;
         _lastLevelPlayedID = 1;
@@ -172,13 +194,16 @@ public class LevelLoader : MonoBehaviour
     }
 
 
-    public void Quit(){
+    public void Quit()
+    {
         Application.Quit();
     }
 
-    public static string LevelDictToString(Dictionary<int, bool> dict){
+    public static string LevelDictToString(Dictionary<int, bool> dict)
+    {
         string res = "";
-        foreach(KeyValuePair<int, bool> entry in dict){           
+        foreach (KeyValuePair<int, bool> entry in dict)
+        {
             res += entry.Key.ToString() + ": " + entry.Value.ToString();
         }
         return res;
