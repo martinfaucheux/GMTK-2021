@@ -9,7 +9,7 @@ public class PlayerData
     public int maxLevelId;
 
     // current active level
-    public int  currentLevelId;
+    public int currentLevelId;
 
     // public Dictionary<int, bool> unlockedLevels;
 
@@ -33,14 +33,15 @@ public class PlayerData
     // }
 
 
-    public PlayerData(int maxLevelId, int currentLevelId) {
+    public PlayerData(int maxLevelId, int currentLevelId)
+    {
         this.maxLevelId = maxLevelId;
         this.currentLevelId = currentLevelId;
     }
 
-    public PlayerData(LevelLoader levelLoader) => new PlayerData(
-            levelLoader.maxLevelId,
-            levelLoader.currentLevelId
+    public PlayerData(ProgressionManager manager) => new PlayerData(
+            manager.maxLevelId,
+            manager.lastPlayedLevelId
     );
 
 }

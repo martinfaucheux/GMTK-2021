@@ -75,8 +75,7 @@ public class MainMenuController : MonoBehaviour
 
     public void SelectLastLevelPlayed()
     {
-        // TODO: last level
-        selectedLevelId = LevelLoader.instance.maxLevelId;
+        selectedLevelId = ProgressionManager.instance.lastPlayedLevelId;
     }
 
     public void SelectNextLevel()

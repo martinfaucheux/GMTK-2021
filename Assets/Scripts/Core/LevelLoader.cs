@@ -6,36 +6,10 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader instance = null;
-
-    // maximum level that was reached
-    public int maxLevelId
-    {
-        get
-        {
-            Debug.Log("GET maxLevelId: " + _maxLevelId.ToString());
-            return _maxLevelId;
-        }
-        set
-        {
-            Debug.Log("SET maxLevelId: " + _maxLevelId.ToString() + " -> " + value.ToString());
-            _maxLevelId = value;
-        }
-    }
-    private int _maxLevelId;
-
-
-
     public Dictionary<int, bool> unlockedLevels = new Dictionary<int, bool>();
     public int currentLevelId;
-
     public float transitionDuration = 0.5f;
-
-    [SerializeField] bool loadSaveData = false;
-
     public List<int> unlockedOnWin;
-
-    // cache last level that was played (for play button)
-    private int _lastLevelPlayedID = 1;
     private bool _isMainMenu = false;
 
     //Awake is always called before any Start functions
@@ -55,11 +29,6 @@ public class LevelLoader : MonoBehaviour
 
         // trigger fade in at start
         GameEvents.instance.FadeInTrigger();
-
-        if (loadSaveData)
-        {
-            RetrieveGameState();
-        }
     }
 
     public void LoadNextLevel()
@@ -88,7 +57,8 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLastLevelPlayed()
     {
-        LoadLevel(_lastLevelPlayedID, false);
+        int lastPlayedLevelId = ProgressionManager.instance.lastPlayedLevelId;
+        LoadLevel(lastPlayedLevelId, false);
     }
 
     public void LoadFirstScene()
@@ -104,22 +74,17 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLevel(int levelID, bool doSaveData = true)
     {
-
         GameEvents.instance.FadeOutTrigger();
 
         if (doSaveData)
-        {
-            SaveData(currentLevelID: levelID);
-        }
+            ProgressionManager.instance.SaveLastPlayedLevel(levelID);
 
-        _lastLevelPlayedID = levelID;
         StartCoroutine(DelayLoadScene(levelID, transitionDuration));
     }
 
     public bool IsLevelUnlocked(int levelId)
     {
-        return levelId <= maxLevelId;
-        // return (unlockedLevels.ContainsKey(levelId) && unlockedLevels[levelId]); 
+        return levelId <= ProgressionManager.instance.maxLevelId;
     }
 
     public bool IsPreviousLevelAvailable()
@@ -129,7 +94,7 @@ public class LevelLoader : MonoBehaviour
 
     public bool IsNextLevelAvailable()
     {
-        return (currentLevelId < maxLevelId);
+        return (currentLevelId < ProgressionManager.instance.maxLevelId);
     }
 
     private void UnlockLevel(int levelID)
@@ -141,12 +106,8 @@ public class LevelLoader : MonoBehaviour
 
         if (hasChanged)
         {
-            if (maxLevelId < levelID)
-            {
-                maxLevelId = levelID;
-            }
-            // SaveData(unlockedLevels, maxLevelId: levelID);
-            SaveData(maxLevelId: levelID);
+            if (ProgressionManager.instance.maxLevelId < levelID)
+                ProgressionManager.instance.SaveMaxLevel(levelID);
         }
     }
 
@@ -158,39 +119,10 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    public void SaveData(int maxLevelId = -1, int currentLevelID = -1)
-    {
-        if (maxLevelId < 0)
-        {
-            maxLevelId = this.maxLevelId;
-        }
-
-        if (currentLevelID < 0)
-        {
-            currentLevelID = this.currentLevelId;
-        }
-        // DataSaver.SaveGameState(unlockedLevels, maxLevelId, currentLevelID);
-
-        Debug.Log("Save maxLevelId: " + maxLevelId.ToString() + "; currentLevelId: " + currentLevelID.ToString());
-        DataSaver.SaveGameState(maxLevelId, currentLevelID);
-    }
-
-    public void RetrieveGameState()
-    {
-        PlayerData playerData = DataSaver.LoadGameState();
-
-        if (playerData != null)
-        {
-            maxLevelId = Mathf.Max(playerData.maxLevelId, 1);
-            _lastLevelPlayedID = playerData.currentLevelId;
-        }
-    }
 
     public void DeleteSavedData()
     {
         DataSaver.DeleteSavedData();
-        maxLevelId = 1;
-        _lastLevelPlayedID = 1;
     }
 
     private IEnumerator DelayLoadScene(int sceneBuildIndex, float seconds)
