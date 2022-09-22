@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,8 +8,22 @@ public class LevelLoader : MonoBehaviour
     public static LevelLoader instance = null;
 
     // maximum level that was reached
-    public int maxLevelId;
-    // current loaded level id
+    public int maxLevelId
+    {
+        get
+        {
+            Debug.Log("GET maxLevelId: " + _maxLevelId.ToString());
+            return _maxLevelId;
+        }
+        set
+        {
+            Debug.Log("SET maxLevelId: " + _maxLevelId.ToString() + " -> " + value.ToString());
+            _maxLevelId = value;
+        }
+    }
+    private int _maxLevelId;
+
+
 
     public Dictionary<int, bool> unlockedLevels = new Dictionary<int, bool>();
     public int currentLevelId;
@@ -24,19 +38,12 @@ public class LevelLoader : MonoBehaviour
     private int _lastLevelPlayedID = 1;
     private bool _isMainMenu = false;
 
-    //Awake is always called before any wStart functions
+    //Awake is always called before any Start functions
     void Awake()
     {
-        //Check if instance already exists
         if (instance == null)
-
-            //if not, set instance to this
             instance = this;
-
-        //If instance already exists and it's not this:
         else if (instance != this)
-
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a CollisionMatrix.
             Destroy(gameObject);
     }
 
