@@ -3,25 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelLoader : MonoBehaviour
+public class LevelLoader : SingletonBase<LevelLoader>
 {
-    public static LevelLoader instance = null;
     public Dictionary<int, bool> unlockedLevels = new Dictionary<int, bool>();
     public int currentLevelId;
     public float transitionDuration = 0.5f;
     public List<int> unlockedOnWin;
     private bool _isMainMenu = false;
 
-    //Awake is always called before any Start functions
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         currentLevelId = SceneManager.GetActiveScene().buildIndex;
@@ -45,15 +34,11 @@ public class LevelLoader : MonoBehaviour
     public void LoadPreviousLevel()
     {
         if (currentLevelId > 0)
-        {
             LoadLevel(currentLevelId - 1);
-        }
     }
 
-    public void ReloadLevel()
-    {
-        LoadLevel(currentLevelId);
-    }
+    public void ReloadLevel() => LoadLevel(currentLevelId);
+
 
     public void LoadLastLevelPlayed()
     {
@@ -82,26 +67,15 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(DelayLoadScene(levelID, transitionDuration));
     }
 
-    public bool IsLevelUnlocked(int levelId)
-    {
-        return levelId <= ProgressionManager.instance.maxLevelId;
-    }
+    public bool IsLevelUnlocked(int levelId) => levelId <= ProgressionManager.instance.maxLevelId;
 
-    public bool IsPreviousLevelAvailable()
-    {
-        return currentLevelId > 1;
-    }
+    public bool IsPreviousLevelAvailable() => currentLevelId > 1;
 
-    public bool IsNextLevelAvailable()
-    {
-        return (currentLevelId < ProgressionManager.instance.maxLevelId);
-    }
+    public bool IsNextLevelAvailable() => (currentLevelId < ProgressionManager.instance.maxLevelId);
 
     private void UnlockLevel(int levelID)
     {
-
         bool hasChanged = !IsLevelUnlocked(levelID);
-
         unlockedLevels[levelID] = true;
 
         if (hasChanged)
@@ -114,16 +88,11 @@ public class LevelLoader : MonoBehaviour
     public void UnlockNextLevels()
     {
         foreach (int newLevelId in unlockedOnWin)
-        {
             UnlockLevel(newLevelId);
-        }
     }
 
 
-    public void DeleteSavedData()
-    {
-        DataSaver.DeleteSavedData();
-    }
+    public void DeleteSavedData() => DataSaver.DeleteSavedData();
 
     private IEnumerator DelayLoadScene(int sceneBuildIndex, float seconds)
     {
@@ -133,18 +102,14 @@ public class LevelLoader : MonoBehaviour
     }
 
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
+    public void Quit() => Application.Quit();
+
 
     public static string LevelDictToString(Dictionary<int, bool> dict)
     {
         string res = "";
         foreach (KeyValuePair<int, bool> entry in dict)
-        {
             res += entry.Key.ToString() + ": " + entry.Value.ToString();
-        }
         return res;
     }
 }
