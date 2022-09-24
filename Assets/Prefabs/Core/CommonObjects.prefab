@@ -1123,8 +1123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point1: {fileID: 7468963456938215021}
   point2: {fileID: 5714546447140699458}
-  spawnPeriod: 0.3
-  foamBubblePrefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
+  spawnPeriod: 0.5
+  initSpawnCount: 5
+  foamPrefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
 --- !u!1 &1605329824195742261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,6 +1158,7 @@ Transform:
   - {fileID: 2638891259339559984}
   - {fileID: 6190965252587733727}
   - {fileID: 5593676108243981617}
+  - {fileID: 7262543729893187097}
   m_Father: {fileID: 2340508121877219085}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1759,6 +1761,54 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &2898172266800572960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7262543729893187097}
+  - component: {fileID: 6473874968572099467}
+  m_Layer: 0
+  m_Name: Sand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7262543729893187097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2898172266800572960}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2819886979370394173}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6473874968572099467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2898172266800572960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3426488fd0d2e1048a3aa4622bedcbb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sandPlacementPrefabs:
+  - {fileID: 2325548710211285280, guid: e11122393f9aab6479c9c60423074e6c, type: 3}
+  - {fileID: 5549172554355951386, guid: 8deff620b3f8aa04a99482253e349184, type: 3}
+  - {fileID: 6812970725586437815, guid: 80d1bc9a8fb2a1b4084255c342f29d69, type: 3}
+  containerName: SandPlacement
 --- !u!1 &2961202623977291073
 GameObject:
   m_ObjectHideFlags: 0
@@ -4443,8 +4493,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point1: {fileID: 4629496291573602360}
   point2: {fileID: 1826760203224683897}
-  spawnPeriod: 0.3
-  foamBubblePrefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
+  spawnPeriod: 0.5
+  initSpawnCount: 5
+  foamPrefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
 --- !u!1 &7774767465109447561
 GameObject:
   m_ObjectHideFlags: 0
@@ -4490,8 +4541,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point1: {fileID: 1826760203224683897}
   point2: {fileID: 7468963456938215021}
-  spawnPeriod: 0.3
-  foamBubblePrefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
+  spawnPeriod: 0.5
+  initSpawnCount: 5
+  foamPrefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
 --- !u!1 &7795410685316424101
 GameObject:
   m_ObjectHideFlags: 0
@@ -4756,6 +4808,7 @@ GameObject:
   - component: {fileID: 5012753064841060820}
   - component: {fileID: 8342745159236049872}
   - component: {fileID: 4774387119485573295}
+  - component: {fileID: 1607949193721587825}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4912,6 +4965,19 @@ MonoBehaviour:
   - poolKey: foamBubble
     prefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
     initCount: 100
+--- !u!114 &1607949193721587825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410190574609165260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd0d0521b497bb4db440038c624887e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSimultaneousTweens: 800
 --- !u!1 &8410190574635116769
 GameObject:
   m_ObjectHideFlags: 0
@@ -5391,8 +5457,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point1: {fileID: 5714546447140699458}
   point2: {fileID: 4629496291573602360}
-  spawnPeriod: 0.3
-  foamBubblePrefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
+  spawnPeriod: 0.5
+  initSpawnCount: 5
+  foamPrefab: {fileID: 49847511859782772, guid: 03f75d769e8253b4c823ed0f7e0bf4be, type: 3}
 --- !u!1 &8693694957569301077
 GameObject:
   m_ObjectHideFlags: 0

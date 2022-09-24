@@ -9,8 +9,6 @@ public class SandRandomizer : MonoBehaviour
 
     public void Place()
     {
-        DestroyIfExist();
-
         GameObject prefab = sandPlacementPrefabs[Random.Range(0, sandPlacementPrefabs.Length)];
         Quaternion rotation = Quaternion.Euler(0, 0, 90 * Random.Range(0, 4));
 
@@ -18,7 +16,7 @@ public class SandRandomizer : MonoBehaviour
 
     }
 
-    private void DestroyIfExist()
+    public void Delete()
     {
         Transform toDestroy = null;
         foreach (Transform childTransform in transform)
