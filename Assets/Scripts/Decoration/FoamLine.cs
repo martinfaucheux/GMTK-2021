@@ -32,6 +32,7 @@ public class FoamLine : MonoBehaviour
 
         // This will trigger the OnEnable of the FoamBubble script
         newObject.SetActive(true);
+        newObject.GetComponent<FoamBubble>().Animate();
 
         _lastSpawnTime = Time.time;
     }

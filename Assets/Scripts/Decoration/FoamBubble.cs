@@ -12,7 +12,7 @@ public class FoamBubble : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
-    void OnEnable()
+    public void Animate()
     {
         Reset();
 
