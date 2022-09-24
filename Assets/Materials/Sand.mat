@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sand
+  m_Shader: {fileID: -6465566751694194690, guid: 00080560c29067a409ba00b4a9531398, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_2a02d597c36849839f82cf9208ad60da:
+        m_Texture: {fileID: 2800000, guid: 1501103d16821ad4abc0cbac28b8e5ce, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 2b989a4462c445d4cb8a82b634b2aedc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_26f81ffa7402439a824282929487e810: 4.48
+    - Vector1_92cb7f139d944ab0bfa09a78cf8e1e44: 0
+    - Vector1_c3dabf96a29f43839aab5aa6b2fd4478: 1.1
+    m_Colors:
+    - Color_7e52b0c065054084915288287fbc4878: {r: 0.8867924, g: 0.67039543, b: 0.25516194, a: 1}
+    - Color_b4b79867507e4ae6bea8adce662d957b: {r: 1, g: 0.99607843, b: 0.57254905, a: 0}
+  m_BuildTextureStacks: []
