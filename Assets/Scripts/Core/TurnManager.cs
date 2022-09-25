@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public struct CollisionCouple{
+public struct CollisionCouple
+{
     Entity interacted;
     Entity interacting;
 }
 
-public class TurnManager : MonoBehaviour
+public class TurnManager : SingletonBase<TurnManager>
 {
     // Keep track of what should happen within a turn
-    
-    public static TurnManager instance;
-    
-    public float moveCooldown{
-        get{
+
+    public float moveCooldown
+    {
+        get
+        {
             float timeSinceMove = Time.time - _lastMoveTime;
             return Mathf.Max(0f, GameManager.instance.actionDuration - timeSinceMove);
         }
@@ -25,27 +26,28 @@ public class TurnManager : MonoBehaviour
     private List<Blob> _controlledBlobs;
     private HashSet<Entity> _entitiesToMove;
 
-    void Awake(){
-        CheckSingleton();
-    }
-
-    void Start(){
+    void Start()
+    {
         _controlledBlobs = new List<Blob>();
         PlayerController.OnGetCommand += TriggerMovement;
     }
 
-    void OnDestroy(){
+    void OnDestroy()
+    {
         PlayerController.OnGetCommand -= TriggerMovement;
     }
 
-    private void TriggerMovement(Direction direction){
-        if (moveCooldown == 0 & GameManager.instance.playerCanMove){
+    private void TriggerMovement(Direction direction)
+    {
+        if (moveCooldown == 0 & GameManager.instance.playerCanMove)
+        {
             _lastMoveTime = Time.time;
             StartCoroutine(PlayTurn(direction));
-        }       
+        }
     }
 
-    private IEnumerator PlayTurn(Direction direction){
+    private IEnumerator PlayTurn(Direction direction)
+    {
         List<(Entity, Entity)> collisionList = StartTurn(direction);
 
         float maxMoveDuration = GetMaxMoveDuration();
@@ -57,8 +59,9 @@ public class TurnManager : MonoBehaviour
         GameEvents.instance.EndOfTurnTrigger();
     }
 
-    private List<(Entity, Entity)> StartTurn(Direction direction){
-        
+    private List<(Entity, Entity)> StartTurn(Direction direction)
+    {
+
         _entitiesToMove = new HashSet<Entity>();
         List<(Entity, Entity)> collisionList = new List<(Entity, Entity)>();
 
@@ -68,10 +71,12 @@ public class TurnManager : MonoBehaviour
             blob => blob.GetMovementPriority(direction)
         );
 
-        foreach(Blob blob in controlledBlobsOrdered){
+        foreach (Blob blob in controlledBlobsOrdered)
+        {
             (Vector2Int displacement, List<(Entity, Entity)> blobCollisionList) = blob.GetMovement(direction);
 
-            foreach(Guy guy in blob.guys){
+            foreach (Guy guy in blob.guys)
+            {
                 guy.matrixCollider.matrixPosition += displacement;
                 _entitiesToMove.Add(guy);
             }
@@ -82,7 +87,8 @@ public class TurnManager : MonoBehaviour
                 (elt) => elt.Item2.GetResolveOrder() // function used to order
             );
 
-            foreach((Entity interactingEntity, Entity interactedEntity) in blobCollisionListOrdered){
+            foreach ((Entity interactingEntity, Entity interactedEntity) in blobCollisionListOrdered)
+            {
                 interactedEntity.PreInteract(interactingEntity);
                 collisionList.Add((interactingEntity, interactedEntity));
             }
@@ -90,78 +96,66 @@ public class TurnManager : MonoBehaviour
         return collisionList;
     }
 
-    private void MoveTransforms(){
+    private void MoveTransforms()
+    {
 
-        if(_entitiesToMove.Any()){
+        if (_entitiesToMove.Any())
             AudioManager.instance?.Play("Zoom");
-        }
 
-        foreach(Entity entity in _entitiesToMove){
-            GameObject objectToMove= entity.gameObject;
+        foreach (Entity entity in _entitiesToMove)
+        {
+            GameObject objectToMove = entity.gameObject;
             Vector3 realWorldPos = entity.matrixCollider.GetRealPos();
             float moveDuration = GetMoveDuration(entity);
             LeanTween.move(objectToMove, realWorldPos, moveDuration);
         }
     }
 
-    private void EndTurn(List<(Entity, Entity)> collisionList){
-        foreach((Entity interactingEntity, Entity interactedEntity) in collisionList){
+    private void EndTurn(List<(Entity, Entity)> collisionList)
+    {
+        foreach ((Entity interactingEntity, Entity interactedEntity) in collisionList)
             interactedEntity.Interact(interactingEntity);
-        }
     }
 
-    public void Register(Blob controlledBlob){
+    public void Register(Blob controlledBlob)
+    {
         // TurnManager Start method must run before Blob's
         _controlledBlobs.Add(controlledBlob);
     }
 
-    public void Unregister(Blob controlledBlob){
+    public void Unregister(Blob controlledBlob)
+    {
         _controlledBlobs.Remove(controlledBlob);
     }
 
-    private void CheckSingleton(){
-        //Check if instance already exists
-        if (instance == null)
-
-            //if not, set instance to this
-            instance = this;
-
-        //If instance already exists and it's not this:
-        else if (instance != this)
-
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a CollisionMatrix.
-            Destroy(gameObject);
-    }
-
-    
-
-    private static float GetMoveDuration(Entity entity){
+    private static float GetMoveDuration(Entity entity)
+    {
 
         Vector2Int originalMatrixPos = CollisionMatrix.instance.GetMatrixPos(entity.transform);
         Vector2Int displacement = entity.matrixPosition - originalMatrixPos;
         int distance = Mathf.Max(Mathf.Abs(displacement.x), Mathf.Abs(displacement.y));
 
-        if (distance == 0){
+        if (distance == 0)
             return 0f;
-        }
 
-        int maxDistance =  CollisionMatrix.instance.maxDistance;
+        int maxDistance = CollisionMatrix.instance.maxDistance;
         float maxDuration = GameManager.instance.actionDuration;
         float minDuration = 0.33f * maxDuration;
 
-        float duration = minDuration + (maxDuration - minDuration) * ((float) distance / (float) maxDistance);
+        float duration = minDuration + (maxDuration - minDuration) * ((float)distance / (float)maxDistance);
 
         // always less than maxDuration
         return duration;
     }
 
-    private float GetMaxMoveDuration(){
+    private float GetMaxMoveDuration()
+    {
         float maxDuration = 0f;
-        foreach(Entity entity in _entitiesToMove){
+        foreach (Entity entity in _entitiesToMove)
+        {
             float moveDuration = GetMoveDuration(entity);
-            if (moveDuration > maxDuration){
+            if (moveDuration > maxDuration)
                 maxDuration = moveDuration;
-            }
         }
         return maxDuration;
     }
