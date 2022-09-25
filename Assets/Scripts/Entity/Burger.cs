@@ -8,59 +8,72 @@ public class Burger : Entity
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Animator animator;
 
-    private bool _isBurned = false; 
-    private bool _isEaten= false; 
+    private bool _isBurned = false;
+    private bool _isEaten = false;
 
-    void Awake(){
-        if(burgerList == null){
-            burgerList = new List<Burger>{this};
-        }
-        else{
+    void Awake()
+    {
+        if (burgerList == null)
+            burgerList = new List<Burger> { this };
+        else
             burgerList.Add(this);
-        }
     }
 
 
-    protected override void Start(){
+    protected override void Start()
+    {
         base.Start();
     }
 
-    public override void PreInteract(Entity entity){
-        if (!_isBurned && !_isEaten){
+    public override void PreInteract(Entity entity)
+    {
+        if (!_isBurned && !_isEaten)
+        {
             base.PreInteract(entity);
             _isEaten = true;
             burgerList.Remove(this);
-            ((Guy) entity).blob.Amaze();
+            ((Guy)entity).blob.Amaze();
             // remove matrix collider to prevent other collision within the same turn
             matrixCollider.Unregister();
         }
     }
 
-    public override void Interact(Entity entity){
-        if (_isEaten){
+    public override void Interact(Entity entity)
+    {
+        if (_isEaten)
+        {
             base.Interact(entity);
             GameManager.instance.CheckWinCondition();
             Destroy(gameObject);
         }
     }
 
-    void OnDestroy(){
-        if(burgerList.Contains(this))
+    void OnDestroy()
+    {
+        if (burgerList.Contains(this))
             burgerList.Remove(this);
     }
 
-    public static void DisableAll(){
-        foreach(Burger burger in burgerList){
-            if (!burger._isEaten){
+    public static void DisableAll()
+    {
+        foreach (Burger burger in burgerList)
+        {
+            if (!burger._isEaten)
+            {
                 burger._isBurned = true;
                 burger.isBlocking = true;
                 burger.playSound = false;
             }
         }
     }
-    public static void PlayBurnAnimation(){
-        foreach(Burger burger in burgerList){
-            if(burger._isBurned){
+
+
+    public static void PlayBurnAnimation()
+    {
+        foreach (Burger burger in burgerList)
+        {
+            if (burger._isBurned)
+            {
                 LeanTween.color(
                     burger.gameObject,
                     new Color(0f, 0f, 0f, 1f),
