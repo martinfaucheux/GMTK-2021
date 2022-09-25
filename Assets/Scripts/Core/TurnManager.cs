@@ -9,9 +9,11 @@ public struct CollisionCouple
     Entity interacting;
 }
 
+// <summary>
+// Keep track of what should happen within a turn
+// </summary>
 public class TurnManager : SingletonBase<TurnManager>
 {
-    // Keep track of what should happen within a turn
 
     public float moveCooldown
     {
@@ -48,6 +50,7 @@ public class TurnManager : SingletonBase<TurnManager>
 
     private IEnumerator PlayTurn(Direction direction)
     {
+        GameEvents.instance.StartOfTurnTrigger();
         List<(Entity, Entity)> collisionList = StartTurn(direction);
 
         float maxMoveDuration = GetMaxMoveDuration();

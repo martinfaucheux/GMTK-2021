@@ -6,6 +6,7 @@ public class GameEvents : SingletonBase<GameEvents>
     public event Action onWin;
     public event Action onFadeOut;
     public event Action onFadeIn;
+    public event Action onStartOfTurn;
     public event Action onEndOfTurn;
     public event Action<int> onBlobCollision;
 
@@ -31,6 +32,11 @@ public class GameEvents : SingletonBase<GameEvents>
     {
         if (onBlobCollision != null)
             onBlobCollision(gameObjectId);
+    }
+    public void StartOfTurnTrigger()
+    {
+        if (onStartOfTurn != null)
+            onStartOfTurn();
     }
     public void EndOfTurnTrigger()
     {
