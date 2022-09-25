@@ -75,10 +75,13 @@ public class TurnManager : SingletonBase<TurnManager>
         {
             (Vector2Int displacement, List<(Entity, Entity)> blobCollisionList) = blob.GetMovement(direction);
 
-            foreach (Guy guy in blob.guys)
+            if (displacement != Vector2Int.zero)
             {
-                guy.matrixCollider.matrixPosition += displacement;
-                _entitiesToMove.Add(guy);
+                foreach (Guy guy in blob.guys)
+                {
+                    guy.matrixCollider.matrixPosition += displacement;
+                    _entitiesToMove.Add(guy);
+                }
             }
 
             // order the list with burger resolved at the end
