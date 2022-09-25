@@ -5,21 +5,15 @@ using UnityEngine;
 public class Burger : Entity
 {
     public static List<Burger> burgerList;
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Animator animator;
 
     [field: SerializeField]
     public bool isFrozen { get; private set; }
+    [SerializeField] BurgerAnimator _burgerAnimator;
     private bool _isBurned = false;
     private bool _isEaten = false;
-    private float frozenTransition
-    {
-        set { spriteRenderer.material.SetFloat(materialTransitionProperty, value); }
-    }
+
     public string frozenSoundName = "Glass";
     private string _normalSoundName;
-    private static string materialTransitionProperty = "_Transition";
-    private static float _transitionTime = 0.2f;
 
     void Awake()
     {
@@ -38,9 +32,8 @@ public class Burger : Entity
         if (isFrozen)
         {
             isBlocking = true;
-            frozenTransition = 1f;
-            animator.SetBool("frozen", true);
             collidingSoundName = frozenSoundName;
+            _burgerAnimator.SetFrozen();
         }
     }
 
@@ -99,6 +92,7 @@ public class Burger : Entity
 
     public static void AnimateExplosion()
     {
+        // TODO: execute this with end of turn event
         Color blackColor = new Color(0f, 0f, 0f, 1f);
         foreach (Burger burger in burgerList)
         {
@@ -107,20 +101,12 @@ public class Burger : Entity
                 if (burger._isBurned)
                 {
                     // The burger juste got burned
-                    LeanTween.color(burger.gameObject, blackColor, _transitionTime);
-                    burger.animator.SetTrigger("burn");
+                    burger._burgerAnimator.SetBurned();
                 }
                 else
                 {
                     // The burger juste got unfrozen
-                    LeanTween.value(
-                        burger.gameObject,
-                        t => burger.frozenTransition = t,
-                        1f,
-                        0f,
-                        _transitionTime
-                    );
-                    burger.animator.SetBool("frozen", false);
+                    burger._burgerAnimator.SetUnFrozen();
                 }
             }
         }
