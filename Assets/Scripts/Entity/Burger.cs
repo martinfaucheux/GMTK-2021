@@ -37,9 +37,22 @@ public class Burger : Entity
         }
     }
 
+    public override bool IsBlocking(Entity otherEntity)
+    {
+        if (_isBurned)
+            // a burned burger is not blocking if the entity
+            // caused an explosion
+            return Bomb.IsExplosionCause(otherEntity);
+        return base.IsBlocking(otherEntity);
+    }
+
     public override void PreInteract(Entity entity)
     {
-        if (!_isBurned && !_isEaten)
+        if (
+            !_isEaten
+            // if a blob caused an explosion, it can still eat burgers
+            && (!_isBurned || Bomb.IsExplosionCause(entity))
+        )
         {
             base.PreInteract(entity);
             _isEaten = true;
@@ -93,10 +106,9 @@ public class Burger : Entity
     public static void AnimateExplosion()
     {
         // TODO: execute this with end of turn event
-        Color blackColor = new Color(0f, 0f, 0f, 1f);
         foreach (Burger burger in burgerList)
         {
-            if (!burger._isEaten)
+            if (!burger._isEaten && burger._burgerAnimator != null)
             {
                 if (burger._isBurned)
                 {

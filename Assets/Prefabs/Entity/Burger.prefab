@@ -117,7 +117,7 @@ MonoBehaviour:
   collidingSoundName: Crunch
   playSound: 1
   <isFrozen>k__BackingField: 0
-  _burgerAnimator: {fileID: 0}
+  _burgerAnimator: {fileID: 599240318667857944}
   frozenSoundName: Glass
 --- !u!114 &599240318667857944
 MonoBehaviour:
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d06d0e52282f1418e30070966e73de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _burger: {fileID: 3467680248784761837}
   _spriteRenderer: {fileID: 3467680248784761838}
   _animator: {fileID: 5046463077321178096}
 --- !u!95 &5046463077321178096
