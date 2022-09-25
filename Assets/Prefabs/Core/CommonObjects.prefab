@@ -1048,9 +1048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22407b7842f9da4493fd938a3f46a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initCameraSize: 13
+  initCameraSize: 12
   targetCameraSize: 10.5
-  transitionDuration: 0.2
 --- !u!1 &1529623985699879557
 GameObject:
   m_ObjectHideFlags: 0

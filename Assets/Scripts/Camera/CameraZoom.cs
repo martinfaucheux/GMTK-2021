@@ -22,7 +22,7 @@ public class CameraZoom : MonoBehaviour
             Camera.main.orthographicSize,
             targetCameraSize,
             LevelLoader.instance.transitionDuration
-        ).setEaseInQuad();
+        ).setEaseInOutQuad();
     }
 
     private static void SetSize(float camSize) => Camera.main.orthographicSize = camSize;
