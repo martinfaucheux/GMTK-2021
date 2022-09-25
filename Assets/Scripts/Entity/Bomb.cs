@@ -14,14 +14,14 @@ public class Bomb : Entity
     public override void PreInteract(Entity entity)
     {
         base.PreInteract(entity);
-        Burger.DisableAll();
+        Burger.ResolveExplosion();
     }
 
     public override void Interact(Entity entity)
     {
         base.Interact(entity);
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        Burger.PlayBurnAnimation();
+        Burger.AnimateExplosion();
         CameraShake.instance?.Shake();
         Destroy(gameObject);
     }

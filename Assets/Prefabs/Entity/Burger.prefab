@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 695a88dd01d5e3943945a23856a80ad5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,13 +110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de2298dfc9b2ea4b9a3e737db3c1eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInteractable: 1
   isBlocking: 0
   isStopMovement: 1
   interactWhenOutOfReach: 0
   collidingSoundName: Crunch
+  playSound: 1
   spriteRenderer: {fileID: 3467680248784761838}
   animator: {fileID: 5046463077321178096}
+  <isFrozen>k__BackingField: 0
+  frozenSoundName: Glass
 --- !u!95 &5046463077321178096
 Animator:
   serializedVersion: 3

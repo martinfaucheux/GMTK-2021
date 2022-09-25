@@ -93,6 +93,14 @@ MonoBehaviour:
     loop: 0
     playOnStart: 0
     isEnabled: 1
+  - name: Glass
+    audioClip: {fileID: 8300000, guid: ec361ebe8bb4aa14792b63a844a71a38, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomizePitch: 0.034
+    loop: 0
+    playOnStart: 0
+    isEnabled: 1
   - name: Game Music
     audioClip: {fileID: 8300000, guid: 19674b617262839459e58e929c35e504, type: 3}
     volume: 0.5

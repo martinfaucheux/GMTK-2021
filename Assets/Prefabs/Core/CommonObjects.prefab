@@ -1184,7 +1184,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605329824195742261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6cb2cfd2754b544d9bdbbb9d8ad5b9f, type: 3}
   m_Name: 
@@ -4859,7 +4859,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matrixSize: {x: 8, y: 8}
   origin: {x: -3.5, y: -3.5, z: 0}
-  mode: 0
   showSceneBounds: 0
   sceneBoundsColor: {r: 1, g: 0, b: 0, a: 0.13333334}
   borderWallPrefab: {fileID: 0}
