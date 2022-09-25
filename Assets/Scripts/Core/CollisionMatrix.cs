@@ -2,21 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionMatrix: MonoBehaviour {
-
-    public enum Mode 
-    {
-        TOPDOWN,
-        ISOMETRIC
-    }
-
-    //Static instance of GameManager which allows it to be accessed by any other script.
-    public static CollisionMatrix instance = null;
-
+public class CollisionMatrix : SingletonBase<CollisionMatrix>
+{
     public Vector2Int matrixSize;
     public Vector3 origin;
 
-    public Mode mode = Mode.TOPDOWN;
     public bool showSceneBounds = true;
     public Color sceneBoundsColor;
     public GameObject borderWallPrefab;
@@ -24,27 +14,9 @@ public class CollisionMatrix: MonoBehaviour {
 
     private List<MatrixCollider> colliderList = new List<MatrixCollider>();
 
-    public int maxDistance{
-        get{ return Mathf.Max(matrixSize.x, matrixSize.y); }
-    }
-
-    
-
-    //Awake is always called before any Start functions
-    void Awake()
+    public int maxDistance
     {
-        //Check if instance already exists
-        if (instance == null)
-
-            //if not, set instance to this
-            instance = this;
-
-        //If instance already exists and it's not this:
-        else if (instance != this)
-
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a CollisionMatrix.
-            Destroy(gameObject);
-
+        get { return Mathf.Max(matrixSize.x, matrixSize.y); }
     }
 
     public void AddCollider(MatrixCollider collider)
@@ -59,26 +31,24 @@ public class CollisionMatrix: MonoBehaviour {
 
 
     // get the first object found at the given position
-    public GameObject GetObjectAtPosition (Vector2Int matrixPosition)
+    public GameObject GetObjectAtPosition(Vector2Int matrixPosition)
     {
-        foreach (MatrixCollider collider in colliderList){
+        foreach (MatrixCollider collider in colliderList)
+        {
             if (collider.matrixPosition == matrixPosition)
-            {
                 return collider.gameObject;
-            }
         }
 
         return null;
     }
 
-    public List<GameObject> GetObjectsAtPosition (Vector2Int matrixPosition)
+    public List<GameObject> GetObjectsAtPosition(Vector2Int matrixPosition)
     {
-        List<GameObject> result  = new List<GameObject>();
-        foreach (MatrixCollider collider in colliderList){
+        List<GameObject> result = new List<GameObject>();
+        foreach (MatrixCollider collider in colliderList)
+        {
             if (collider.matrixPosition == matrixPosition)
-            {
                 result.Add(collider.gameObject);
-            }
         }
         return result;
     }
@@ -98,42 +68,29 @@ public class CollisionMatrix: MonoBehaviour {
     {
         Vector3 realPos = transform.position - origin;
         float x = realPos.x;
-        float y = (mode == Mode.TOPDOWN) ? realPos.y : realPos.z;
-        return new Vector2Int((int) x, (int) y);
+        float y = realPos.y;
+        return new Vector2Int((int)x, (int)y);
     }
 
     public void CenterOrigin()
     {
-        Vector3 newOrigin = - (Vector2) matrixSize / 2f;
-        if (mode == Mode.TOPDOWN){
-            origin = newOrigin + new Vector3(0.5f, 0.5f, 0f);
-        }
-        else {
-            origin = new Vector3(newOrigin.x, 0, newOrigin.y);
-        }
+        Vector3 newOrigin = -(Vector2)matrixSize / 2f;
+        origin = newOrigin + new Vector3(0.5f, 0.5f, 0f);
+
     }
 
-    public Vector3 GetRealWorldPosition(Vector2Int matrixPos){
+    public Vector3 GetRealWorldPosition(Vector2Int matrixPos)
+    {
         float x = matrixPos.x;
         float y = matrixPos.y;
         Vector3 realWorldPos;
-        if (mode == Mode.TOPDOWN)
-            realWorldPos = new Vector3(x, y, 0);
-        else
-            realWorldPos = new Vector3(x, 0, y);
-        
+        realWorldPos = new Vector3(x, y, 0);
         return origin + realWorldPos;
     }
 
-    public Vector3 GetRealWorldVector(Direction direction){
-        
-        Vector2 pos = direction.ToPos();
-
-        if (mode == Mode.ISOMETRIC){
-            return new Vector3(pos.x, 0, pos.y);
-        }
-
-        return pos;
+    public Vector3 GetRealWorldVector(Direction direction)
+    {
+        return (Vector2)direction.ToPos();
     }
-    
+
 }
