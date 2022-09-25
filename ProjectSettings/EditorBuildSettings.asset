@@ -159,6 +159,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 49 - Spicy Penne.unity
     guid: 7e076c8b127001243a23c531ba98eb81
   - enabled: 1
+    path: Assets/Scenes/Level 50 - Frozen Burger.unity
+    guid: 2e840f05d0160014aa9e614d5cf5f45e
+  - enabled: 1
+    path: Assets/Scenes/Level 51 - Make it melt.unity
+    guid: e5f573ca1d08d034493a9058728172c6
+  - enabled: 1
+    path: Assets/Scenes/Level 52 - Don't rush for ice cream.unity
+    guid: 0f542e1bf30a17d4e9dd59cac362485a
+  - enabled: 1
+    path: Assets/Scenes/Level 53 - Desilusion.unity
+    guid: 79b11ac2b4549154a9f69056737348fb
+  - enabled: 1
+    path: Assets/Scenes/Level 54 - Which bomb to boom.unity
+    guid: b4fe92ec0e8e64c489f855390cd72675
+  - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
   m_configObjects: {}
