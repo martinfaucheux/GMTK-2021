@@ -5,19 +5,16 @@ using UnityEngine;
 public class Guy : Entity
 {
     public Blob blob;
+    [field: SerializeField] public bool isSick { get; private set; }
     [SerializeField] GameObject bridgeSkinPrefab;
+    [SerializeField] SpriteRenderer _faceSpriteRender;
+    public Color skinColor { get { return _faceSpriteRender.color; } }
 
     private bool _doWow = false;
 
     protected override void Start()
     {
         base.Start();
-        GameEvents.instance.onEndOfTurn += OnEndOfTurn;
-    }
-
-    void OnDestroy()
-    {
-        GameEvents.instance.onEndOfTurn -= OnEndOfTurn;
     }
 
     public override void PreInteract(Entity entity)
@@ -65,8 +62,7 @@ public class Guy : Entity
     {
         Guy otherGuy = otherEntity as Guy;
         if (
-            otherGuy != null
-            && otherGuy.blob != null
+            otherGuy != null && otherGuy.blob != null
         )
         {
             // can only interact if guy is in another blob
@@ -77,8 +73,14 @@ public class Guy : Entity
 
     private void BuildSkinBridges(Guy interactingGuy)
     {
+        Direction direction = matrixCollider.GetDirectionToOtherCollider(interactingGuy.GetComponent<MatrixCollider>());
+        Quaternion rotation = Quaternion.Euler(0f, 0f, -(direction.Id - 1) * 90f);
         Vector3 skinBridgePosition = (interactingGuy.transform.position + transform.position) / 2f;
-        Instantiate(bridgeSkinPrefab, skinBridgePosition, Quaternion.identity, transform);
+        GameObject skinObject = Instantiate(bridgeSkinPrefab, skinBridgePosition, rotation, transform);
+
+        Material bridgeMaterial = skinObject.GetComponent<SpriteRenderer>().material;
+        bridgeMaterial.SetColor("_ColorA", this.skinColor);
+        bridgeMaterial.SetColor("_ColorB", interactingGuy.skinColor);
     }
 
     public void Extract()
@@ -92,7 +94,7 @@ public class Guy : Entity
 
     public void Amaze() => _doWow = true;
 
-    private void OnEndOfTurn()
+    protected override void OnEndOfTurn()
     {
         if (_doWow)
             DoWow();

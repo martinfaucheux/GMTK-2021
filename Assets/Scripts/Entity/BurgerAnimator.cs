@@ -6,16 +6,50 @@ public class BurgerAnimator : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _spriteRenderer;
     [SerializeField] Animator _animator;
-    private float _frozenTransition
+    [SerializeField] Color _frozenColor;
+    [SerializeField] Color _rottenColor;
+    private float _colorChangeTransition
     {
-        set { _spriteRenderer.material.SetFloat(materialTransitionProperty, value); }
+        set { _spriteRenderer.material.SetFloat(materialColorTransitionProperty, value); }
     }
-    private static string materialTransitionProperty = "_Transition";
+    private float _meltTransition
+    {
+        set { _spriteRenderer.material.SetFloat(materialRotTransitionProperty, value); }
+    }
+    private Color _shiftColor
+    {
+        set { _spriteRenderer.material.SetColor(materialShiftColorProperty, value); }
+    }
+    private static string materialColorTransitionProperty = "_Transition";
+    private static string materialShiftColorProperty = "_ShiftColor";
+    private static string materialRotTransitionProperty = "_Melt";
     private static float _transitionTime = 0.2f;
-
+    private static float _meltMaxValue = 0.2f;
     public void SetFrozen()
     {
-        _frozenTransition = 1f;
+        _shiftColor = _frozenColor;
+        _colorChangeTransition = 1f;
+        _animator.SetBool("frozen", true);
+    }
+
+    public void SetRotten()
+    {
+        _shiftColor = _rottenColor;
+        LeanTween.value(
+            gameObject,
+            t => _colorChangeTransition = t,
+            0f,
+            1f,
+            _transitionTime
+        );
+        LeanTween.value(
+            gameObject,
+            t => _meltTransition = t,
+            0f,
+            _meltMaxValue,
+            _transitionTime
+        );
+
         _animator.SetBool("frozen", true);
     }
 
@@ -24,7 +58,7 @@ public class BurgerAnimator : MonoBehaviour
         // The burger juste got unfrozen
         LeanTween.value(
             gameObject,
-            t => _frozenTransition = t,
+            t => _colorChangeTransition = t,
             1f,
             0f,
             _transitionTime

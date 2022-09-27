@@ -10,6 +10,7 @@ public class Burger : Entity
     public bool isFrozen { get; private set; }
     [SerializeField] BurgerAnimator _burgerAnimator;
     private bool _isBurned = false;
+    private bool _isRotten = false;
     private bool _isEaten = false;
 
     public string frozenSoundName = "Glass";
@@ -43,6 +44,14 @@ public class Burger : Entity
             // a burned burger is not blocking if the entity
             // caused an explosion
             return Bomb.IsExplosionCause(otherEntity);
+
+        if (_isRotten)
+            return true;
+
+        Guy guy = otherEntity as Guy;
+        if (guy != null && guy.isSick)
+            return true;
+
         return base.IsBlocking(otherEntity);
     }
 
@@ -74,8 +83,9 @@ public class Burger : Entity
         }
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (burgerList.Contains(this))
             burgerList.Remove(this);
     }
@@ -119,6 +129,22 @@ public class Burger : Entity
                 {
                     // The burger juste got unfrozen
                     burger._burgerAnimator.SetUnFrozen();
+                }
+            }
+        }
+    }
+
+    protected override void OnEndOfTurn()
+    {
+        if (!_isRotten)
+        {
+            foreach (GameObject neighborEntity in matrixCollider.GetNeighborObjects())
+            {
+                Guy guy = neighborEntity.GetComponent<Guy>();
+                if (guy != null && guy.isSick)
+                {
+                    _isRotten = true;
+                    _burgerAnimator.SetRotten();
                 }
             }
         }

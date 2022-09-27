@@ -12,8 +12,9 @@ public class Bomb : Entity
         GameEvents.instance.onStartOfTurn += CleanCauses;
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         GameEvents.instance.onStartOfTurn -= CleanCauses;
     }
 

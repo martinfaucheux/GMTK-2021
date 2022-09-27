@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 695a88dd01d5e3943945a23856a80ad5, type: 2}
+  - {fileID: 2100000, guid: f52ed0fecc26828499ed3369ac3c4a88, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,6 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 3467680248784761838}
   _animator: {fileID: 5046463077321178096}
+  _frozenColor: {r: 0.42745098, g: 0.92156863, b: 0.90588236, a: 1}
+  _rottenColor: {r: 0.85882354, g: 0.99607843, b: 0.56078434, a: 1}
 --- !u!95 &5046463077321178096
 Animator:
   serializedVersion: 3

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MatrixCollider : MonoBehaviour {
+public class MatrixCollider : MonoBehaviour
+{
 
     public Vector2Int matrixPosition;
     private CollisionMatrix _collisionMatrix;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         _collisionMatrix = CollisionMatrix.instance;
         matrixPosition = _collisionMatrix.GetMatrixPos(this.transform);
         _collisionMatrix.AddCollider(this);
@@ -35,29 +37,29 @@ public class MatrixCollider : MonoBehaviour {
         Vector2Int positionToCheck = matrixPosition + direction.ToPos();
 
         if (!_collisionMatrix.IsValidPosition(positionToCheck))
-        {
             return null;
-        }
 
         return _collisionMatrix.GetObjectAtPosition(positionToCheck);
     }
 
-    public Vector2Int GetMaxInLinePosition(Direction direction){
+    public Vector2Int GetMaxInLinePosition(Direction direction)
+    {
 
         Vector2Int maxInlinePosition = matrixPosition;
         Vector2Int positionToCheck = matrixPosition + direction.ToPos();
 
-        while(_collisionMatrix.IsValidPosition(positionToCheck)){
+        while (_collisionMatrix.IsValidPosition(positionToCheck))
+        {
             GameObject objectAtPosition = _collisionMatrix.GetObjectAtPosition(positionToCheck);
-            if (objectAtPosition != null){
+            if (objectAtPosition != null)
                 break;
-            }
+
             maxInlinePosition = positionToCheck;
             positionToCheck += direction.ToPos();
         }
         return maxInlinePosition;
     }
-    
+
 
     public Direction GetDirectionToOtherCollider(MatrixCollider otherCollider)
     {
@@ -65,8 +67,23 @@ public class MatrixCollider : MonoBehaviour {
         return Direction.GetDirection2ValueFromCoord(posDiff.x, posDiff.y);
     }
 
-    public void Unregister(){
-        if(_collisionMatrix != null)
+    public List<GameObject> GetNeighborObjects()
+    {
+        List<GameObject> result = new List<GameObject>();
+        foreach (Direction direction in Direction.GetAll<Direction>())
+        {
+            if (direction == Direction.IDLE)
+                continue;
+            GameObject neighborObject = GetObjectInDirection(direction);
+            if (neighborObject != null)
+                result.Add(neighborObject);
+        }
+        return result;
+    }
+
+    public void Unregister()
+    {
+        if (_collisionMatrix != null)
             _collisionMatrix.RemoveCollider(this);
     }
 

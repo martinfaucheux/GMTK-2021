@@ -11,6 +11,7 @@ public class FaceAnimation : MonoBehaviour
 
     [SerializeField] bool doBreath;
     [SerializeField] bool doBlink;
+    [SerializeField] bool doMouthTremble;
     [SerializeField] float blinkPeriod;
     [SerializeField] float blinkDuration;
     [SerializeField] float wowDuration;
@@ -27,14 +28,16 @@ public class FaceAnimation : MonoBehaviour
     private float _lastBlink;
     private bool _isBlinking = false;
 
-    void Start(){
+    void Start()
+    {
 
         _initMouthSprite = mouthSpriteRenderer.sprite;
         _initEyesSprite = eyesSpriteRenderer.sprite;
         _lastBlink = Time.time + Random.Range(0f, blinkPeriod);
 
-        if (doBreath){
-            Vector3 targetPos = new Vector3(0f,breathAmplitude, 0f);
+        if (doBreath)
+        {
+            Vector3 targetPos = new Vector3(0f, breathAmplitude, 0f);
             LeanTween.moveLocal(
                 faceTransform.gameObject,
                 targetPos,
@@ -42,23 +45,41 @@ public class FaceAnimation : MonoBehaviour
             ).setLoopPingPong().setDelay(Random.Range(0f, 2 * breathPeriod));
         }
 
+        if (doMouthTremble)
+        {
+            Vector3 displacement = 0.03f * Vector3.right;
+            mouthSpriteRenderer.transform.position -= 0.3f * displacement;
+            LeanTween.moveLocal(
+                mouthSpriteRenderer.gameObject,
+                displacement,
+                0.1f
+            ).setLoopPingPong();
+        }
+
         GameEvents.instance.onBlobCollision += Wow;
     }
 
-    void OnDestroy(){
+    void OnDestroy()
+    {
         GameEvents.instance.onBlobCollision -= Wow;
     }
 
-    void Update(){
-        if (doBlink){
-            if(_isBlinking){
-                if (Time.time - _lastBlink > blinkDuration){
+    void Update()
+    {
+        if (doBlink)
+        {
+            if (_isBlinking)
+            {
+                if (Time.time - _lastBlink > blinkDuration)
+                {
                     eyesSpriteRenderer.sprite = _initEyesSprite;
                     _isBlinking = false;
                 }
             }
-            else {
-                if (Time.time - _lastBlink > blinkPeriod){
+            else
+            {
+                if (Time.time - _lastBlink > blinkPeriod)
+                {
                     eyesSpriteRenderer.sprite = blinkEyeSprite;
                     _isBlinking = true;
                     _lastBlink = Time.time;
@@ -67,19 +88,23 @@ public class FaceAnimation : MonoBehaviour
         }
     }
 
-    private void Wow(int gameObjectId){
-        if(gameObjectId == gameObject.GetInstanceID()){
+    private void Wow(int gameObjectId)
+    {
+        if (gameObjectId == gameObject.GetInstanceID())
+        {
             Wow();
         }
     }
 
-    private void Wow(){
+    private void Wow()
+    {
         mouthSpriteRenderer.sprite = wowMouthsprite;
         Vector3 targetPos = new Vector3(0f, wowAmplitude, 0f);
         LeanTween.moveLocal(eyeBrowsTransform.gameObject, targetPos, wowDuration).setLoopPingPong(1).setOnComplete(SetMouthNormal);
     }
 
-    private void SetMouthNormal(){
+    private void SetMouthNormal()
+    {
         mouthSpriteRenderer.sprite = _initMouthSprite;
     }
 }
