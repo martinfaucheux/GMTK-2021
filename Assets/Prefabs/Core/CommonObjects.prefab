@@ -723,7 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e963072c4c4299c4cacc9889f224d94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectSwipeOnlyAfterRelease: 0
+  detectSwipeOnlyAfterRelease: 1
   minDistanceForSwipe: 20
   angleOfGrid: 0
 --- !u!1 &814032898555710895
