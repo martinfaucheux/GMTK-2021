@@ -15,7 +15,9 @@ public class FoamLine : MonoBehaviour
     void Start()
     {
         for (int i = 0; i < initSpawnCount; i++)
-            Spawn();
+            // Set the tween state between 0 and 1
+            // to "warm up" at start time
+            Spawn(setRandomState: true);
     }
 
     void Update()
@@ -24,7 +26,7 @@ public class FoamLine : MonoBehaviour
             Spawn();
     }
 
-    private void Spawn()
+    private void Spawn(bool setRandomState = false)
     {
         GameObject newObject = GameObjectPool.instance.GetOrCreate(poolKey);
         newObject.transform.position = GetRandomPos();
@@ -32,7 +34,7 @@ public class FoamLine : MonoBehaviour
 
         // This will trigger the OnEnable of the FoamBubble script
         newObject.SetActive(true);
-        newObject.GetComponent<FoamBubble>().Animate();
+        newObject.GetComponent<FoamBubble>().Animate(setRandomState: setRandomState);
 
         _lastSpawnTime = Time.time;
     }

@@ -12,19 +12,20 @@ public class FoamBubble : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
-    public void Animate()
+    public void Animate(bool setRandomState = false)
     {
         Reset();
 
         float duration = lifeDuration + lifeDurationVariation * Random.Range(-1f, 1f);
+        float offset = setRandomState ? Random.Range(0f, duration) : 0f;
 
         LeanTween.scale(
             gameObject,
             Random.Range(minScale, maxScale) * Vector3.one,
             duration
-        ).setLoopPingPong(1).setOnComplete(TweenCallback);
+        ).setLoopPingPong(1).setOnComplete(TweenCallback).setPassed(offset);
 
-        LeanTween.alpha(spriteRenderer.gameObject, 0f, duration * 2f).setEaseInQuint();
+        LeanTween.alpha(spriteRenderer.gameObject, 0f, duration * 2f).setEaseInQuint().setPassed(offset);
     }
 
     private void Reset()
