@@ -74,7 +74,7 @@ public class Guy : Entity
     private void BuildSkinBridges(Guy interactingGuy)
     {
         Direction direction = matrixCollider.GetDirectionToOtherCollider(interactingGuy.GetComponent<MatrixCollider>());
-        Quaternion rotation = Quaternion.Euler(0f, 0f, -(direction.Id - 1) * 90f);
+        Quaternion rotation = Quaternion.Euler(0f, 0f, direction.GetAngle());
         Vector3 skinBridgePosition = (interactingGuy.transform.position + transform.position) / 2f;
         GameObject skinObject = Instantiate(bridgeSkinPrefab, skinBridgePosition, rotation, transform);
 

@@ -27,6 +27,7 @@ public class TurnManager : SingletonBase<TurnManager>
     private float _lastMoveTime;
     private List<Blob> _controlledBlobs;
     private HashSet<Entity> _entitiesToMove;
+    private Direction _turnDirection;
 
     void Start()
     {
@@ -50,8 +51,9 @@ public class TurnManager : SingletonBase<TurnManager>
 
     private IEnumerator PlayTurn(Direction direction)
     {
+        _turnDirection = direction;
         GameEvents.instance.StartOfTurnTrigger();
-        List<(Entity, Entity)> collisionList = StartTurn(direction);
+        List<(Entity, Entity)> collisionList = StartTurn();
 
         float maxMoveDuration = GetMaxMoveDuration();
         MoveTransforms();
@@ -62,7 +64,7 @@ public class TurnManager : SingletonBase<TurnManager>
         GameEvents.instance.EndOfTurnTrigger();
     }
 
-    private List<(Entity, Entity)> StartTurn(Direction direction)
+    private List<(Entity, Entity)> StartTurn()
     {
 
         _entitiesToMove = new HashSet<Entity>();
@@ -71,12 +73,12 @@ public class TurnManager : SingletonBase<TurnManager>
         // fix inconsistancies in movements when having several controllable blobs
         List<Blob> controlledBlobsOrdered = Ordering.Sort(
             _controlledBlobs,
-            blob => blob.GetMovementPriority(direction)
+            blob => blob.GetMovementPriority(_turnDirection)
         );
 
         foreach (Blob blob in controlledBlobsOrdered)
         {
-            (Vector2Int displacement, List<(Entity, Entity)> blobCollisionList) = blob.GetMovement(direction);
+            (Vector2Int displacement, List<(Entity, Entity)> blobCollisionList) = blob.GetMovement(_turnDirection);
 
             if (displacement != Vector2Int.zero)
             {
@@ -119,6 +121,9 @@ public class TurnManager : SingletonBase<TurnManager>
 
     private void EndTurn(List<(Entity, Entity)> collisionList)
     {
+        if (_entitiesToMove.Any())
+            CameraShake.instance.ShakeOnce(_turnDirection);
+
         foreach ((Entity interactingEntity, Entity interactedEntity) in collisionList)
             interactedEntity.Interact(interactingEntity);
     }

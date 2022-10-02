@@ -79,4 +79,6 @@ public class Direction : Enumeration
                 return Direction.IDLE;
         }
     }
+
+    public float GetAngle() => -(Id - 1f) * 90f;
 }

@@ -13,7 +13,6 @@ public class CameraZoom : MonoBehaviour
         Zoom();
     }
 
-
     public void Zoom()
     {
         LeanTween.value(

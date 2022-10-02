@@ -10,7 +10,6 @@ public class CameraShake : SingletonBase<CameraShake>
     [SerializeField] float delay = 0f;
     private float _timeSinceStart = 0f;
     private bool _isShaking = false;
-    private float _randomAngle;
     private Vector3 _initPos;
 
     public void Shake()
@@ -19,17 +18,29 @@ public class CameraShake : SingletonBase<CameraShake>
             StartCoroutine(ShakeCoroutine());
     }
 
+    public void ShakeOnce(Direction direction)
+    {
+        _isShaking = true;
+        Vector3 offset = amplitude * 0.3f * (Vector2)direction.ToPos();
+        LeanTween.move(
+            gameObject,
+            transform.position + offset,
+            duration * 0.1f
+        ).setLoopPingPong(1).setOnComplete(() => _isShaking = false);
+
+    }
+
     private IEnumerator ShakeCoroutine()
     {
         _isShaking = true;
-        _randomAngle = Random.Range(0f, 360f);
+        float randomAngle = Random.Range(0f, 360f);
         _initPos = transform.position;
 
         yield return new WaitForSeconds(delay);
         _timeSinceStart = 0f;
         while (_timeSinceStart < duration)
         {
-            transform.position = _initPos + GetDisplacement(_timeSinceStart / duration);
+            transform.position = _initPos + GetDisplacement(_timeSinceStart / duration, randomAngle);
             _timeSinceStart += Time.deltaTime;
             yield return null;
         }
@@ -37,10 +48,10 @@ public class CameraShake : SingletonBase<CameraShake>
         _isShaking = false;
     }
 
-    private Vector3 GetDisplacement(float t)
+    private Vector3 GetDisplacement(float t, float angle)
     {
         float amp = Mathf.Sin(t * Mathf.PI * 2f / period) * amplitude;
-        return amp * (1 - t) * new Vector3(Mathf.Cos(_randomAngle), Mathf.Sin(_randomAngle));
+        return amp * (1 - t) * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
 }
