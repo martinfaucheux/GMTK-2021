@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundColor: {r: 0.29411766, g: 0.3019608, b: 0.37647063, a: 1}
   seaMaterial: {fileID: 2100000, guid: 5eababdb0bc87e64cb61320da479d3fc, type: 2}
-  obstaclePrefab: {fileID: 0}
+  obstaclePrefab: {fileID: 5533114212604902204, guid: 07d0f5bf48e073f4e8b369469405d67b, type: 3}
   uiElementsColor: {r: 0, g: 0, b: 0, a: 1}
