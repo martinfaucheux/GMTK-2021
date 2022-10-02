@@ -39,6 +39,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Sea
+    uniqueID: 2955340131
+    locked: 0
+  - name: Ground
+    uniqueID: 4177835279
+    locked: 0
+  - name: Ground Decoration
+    uniqueID: 662928707
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Other Objects
+    uniqueID: 4018721357
+    locked: 0
+  - name: Guy
+    uniqueID: 655460675
+    locked: 0
+  - name: Front
+    uniqueID: 812312327
     locked: 0

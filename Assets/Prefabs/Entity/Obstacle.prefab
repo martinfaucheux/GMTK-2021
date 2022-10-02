@@ -62,6 +62,7 @@ MonoBehaviour:
   isBlocking: 1
   isStopMovement: 0
   interactWhenOutOfReach: 1
+  canBeBlocked: 1
   collidingSoundName: Hit Tree
   playSound: 1
   trembleAmplitude: 0.1
@@ -134,8 +135,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -276245939
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e5792da2b230c6c46b236ded52b6176c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -216,8 +217,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -276245939
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 005e24dd80cc19b4696d306d672333af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

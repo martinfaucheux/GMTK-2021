@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 655460675
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: df8e50e58a8681747b347dee7f0ed503, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -151,8 +151,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 655460675
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 666db1bbd8992844a93795b7a4b91f88, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -251,8 +251,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 655460675
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4307e9fbb09997845aab21846da9c2b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -327,10 +327,12 @@ MonoBehaviour:
   isBlocking: 1
   isStopMovement: 0
   interactWhenOutOfReach: 1
+  canBeBlocked: 1
   collidingSoundName: Bubble
   playSound: 1
   blob: {fileID: 0}
   <isSick>k__BackingField: 0
+  <isGhost>k__BackingField: 0
   bridgeSkinPrefab: {fileID: 1941174533373607620, guid: a66bce8cee206e84a9a1e77ea7ee9d06, type: 3}
   _faceSpriteRender: {fileID: 900912649011658315}
 --- !u!114 &8004901410075272785
@@ -494,8 +496,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 655460675
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b75559ab8f8b3754a9789925b47727af, type: 3}
   m_Color: {r: 1, g: 0.7477631, b: 0.5707547, a: 1}
@@ -577,8 +579,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 655460675
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 947a1b67c5185584a936bdd87fcae7bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
