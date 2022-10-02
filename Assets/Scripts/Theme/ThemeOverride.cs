@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThemeOverride : MonoBehaviour
 {
+    public GameObject gameManager;
     public Transform backgroundHolder;
     public Transform grassHolder;
     public SpriteRenderer seaSpriteRenderer;

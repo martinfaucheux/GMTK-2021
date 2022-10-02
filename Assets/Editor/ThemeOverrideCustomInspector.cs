@@ -25,28 +25,41 @@ public class ThemeOverrideCustomInspector : Editor
         // Show default inspector property editor
         DrawDefaultInspector();
 
-        if (GUILayout.Button("Change Theme"))
+        if (GUILayout.Button("Apply Theme"))
         {
-            ChangeTheme();
+            ApplyTheme(t);
         }
     }
 
-    private void ChangeTheme()
+    public static void ApplyTheme(ThemeOverride t)
     {
         List<Object> changedObjects = new List<Object>();
 
-        changedObjects.Concat(ChangeBackgroundColor());
-        changedObjects.Concat(ChangeGrassColor());
-        changedObjects.Concat(ChangeSeaMaterial());
-        changedObjects.Concat(ChangeUIElementColor());
+        changedObjects.Concat(ChangeBackgroundColor(t));
+        changedObjects.Concat(ChangeGrassColor(t));
+        changedObjects.Concat(ChangeSeaMaterial(t));
 
-        List<GameObject> prefabs = ChangeObstacleObjects();
+        List<Object> uiObjects = ChangeUIElementColor(t);
+        changedObjects.Concat(uiObjects);
+
+        List<GameObject> prefabs = ChangeObstacleObjects(t);
         changedObjects.Concat(prefabs);
 
+        foreach (Object uiObject in uiObjects)
+            EditorUtility.SetDirty(uiObject);
+
+        PrefabUtility.RecordPrefabInstancePropertyModifications(GetCommonObject(t));
         EditorSceneManager.MarkSceneDirty(t.gameObject.scene);
     }
 
-    private List<Object> ChangeBackgroundColor()
+    [MenuItem("Tools / Apply Theme")]
+    public static void ApplyTheme()
+    {
+        ThemeOverride themeOverride = GameObject.FindObjectOfType<ThemeOverride>();
+        ApplyTheme(themeOverride);
+    }
+
+    private static List<Object> ChangeBackgroundColor(ThemeOverride t)
     {
         List<Object> changedObjects = new List<Object>();
 
@@ -62,7 +75,7 @@ public class ThemeOverrideCustomInspector : Editor
         return changedObjects;
     }
 
-    private List<Object> ChangeGrassColor()
+    private static List<Object> ChangeGrassColor(ThemeOverride t)
     {
         List<Object> changedObjects = new List<Object>();
 
@@ -77,13 +90,13 @@ public class ThemeOverrideCustomInspector : Editor
         }
         return changedObjects;
     }
-    private List<Object> ChangeSeaMaterial()
+    private static List<Object> ChangeSeaMaterial(ThemeOverride t)
     {
         t.seaSpriteRenderer.material = t.overrideData.seaMaterial;
         return new List<Object>() { t.seaSpriteRenderer };
     }
 
-    private List<Object> ChangeUIElementColor()
+    private static List<Object> ChangeUIElementColor(ThemeOverride t)
     {
         List<Object> changedObjects = new List<Object>();
 
@@ -105,7 +118,7 @@ public class ThemeOverrideCustomInspector : Editor
         return changedObjects;
     }
 
-    private List<GameObject> ChangeObstacleObjects()
+    private static List<GameObject> ChangeObstacleObjects(ThemeOverride t)
     {
         List<GameObject> changedObjects = new List<GameObject>();
 
@@ -127,10 +140,12 @@ public class ThemeOverrideCustomInspector : Editor
         return changedObjects;
     }
 
-    private void DisableSand()
+    private static void DisableSand(ThemeOverride t)
     {
         if (!t.overrideData.allowSand)
             t.sandRandomizer.Delete();
     }
+
+    private static GameObject GetCommonObject(ThemeOverride t) => t.gameManager.transform.parent.gameObject;
 
 }

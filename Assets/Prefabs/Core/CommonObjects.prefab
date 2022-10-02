@@ -7732,6 +7732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dca94939355ee1418e5ba0f45106b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 8410190574609165260}
   backgroundHolder: {fileID: 8410190575727951992}
   grassHolder: {fileID: 2400499498314622242}
   seaSpriteRenderer: {fileID: 2910624488935233845}
