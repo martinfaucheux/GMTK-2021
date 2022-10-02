@@ -10,6 +10,7 @@ public class LevelLoader : SingletonBase<LevelLoader>
     public float transitionDuration = 0.5f;
     public List<int> unlockedOnWin;
     private bool _isMainMenu = false;
+    public int maxLevelId { get { return SceneManager.sceneCountInBuildSettings; } }
 
     void Start()
     {
@@ -91,8 +92,14 @@ public class LevelLoader : SingletonBase<LevelLoader>
             UnlockLevel(newLevelId);
     }
 
+    public void UnlockAllLevels() => UnlockLevel(maxLevelId);
 
-    public void DeleteSavedData() => DataSaver.DeleteSavedData();
+    public void DeleteSavedData()
+    {
+        DataSaver.DeleteSavedData();
+        ProgressionManager.instance.SaveMaxLevel(1);
+        ProgressionManager.instance.SaveLastPlayedLevel(1);
+    }
 
     private IEnumerator DelayLoadScene(int sceneBuildIndex, float seconds)
     {

@@ -3,12 +3,13 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public static class DataSaver {
-
+public static class DataSaver
+{
     public static string dataFileName = "player.data";
 
-    public static void SaveGameState(int maxLevelId, int currentLevelId){
-        
+    public static void SaveGameState(int maxLevelId, int currentLevelId)
+    {
+
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = GetSaveDataPath();
@@ -19,46 +20,56 @@ public static class DataSaver {
 
         formatter.Serialize(stream, data);
         stream.Close();
-    
+
         // Debug.Log("save maxLevelId:" + maxLevelId.ToString() + ", currentLevelId" + currentLevelId.ToString());
 
     }
 
-    public static PlayerData LoadGameState(){
+    public static PlayerData LoadGameState()
+    {
 
         string path = GetSaveDataPath();
 
         PlayerData data = null;
 
-        if (File.Exists(path)){
+        if (File.Exists(path))
+        {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
             data = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
         }
-        else{
+        else
+        {
             Debug.LogWarning("Player data file not found.");
         }
         return data;
     }
 
-    private static string GetSaveDataPath(){
+    private static string GetSaveDataPath()
+    {
         return Application.persistentDataPath + "/" + dataFileName;
     }
 
-    public static bool DeleteSavedData(){
+    public static bool DeleteSavedData()
+    {
 
         bool result = false;
         string path = GetSaveDataPath();
 
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
             File.Delete(path);
             result = true;
+            Debug.LogWarning("Saved state deleted");
+        }
+        else
+        {
+            Debug.LogWarning("No saved state to delete");
         }
         return result;
     }
 
-    
+
 }

@@ -177,6 +177,36 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 55 - Sick guy.unity
     guid: 9f54b7f2349a53c48ae95cea55b0b5da
   - enabled: 1
+    path: Assets/Scenes/Level 56 - Quarantine.unity
+    guid: 23124eb3dc2132c43a428e593eed4370
+  - enabled: 1
+    path: Assets/Scenes/Level 57 - Sick friend.unity
+    guid: 2541f60b3d8c06b4e9a6139d6eb2770d
+  - enabled: 1
+    path: Assets/Scenes/Level 58 - Burger is Wall.unity
+    guid: ad7b61be8bbc88b4597767b87acb0607
+  - enabled: 1
+    path: Assets/Scenes/Level 59 - BattleFront.unity
+    guid: c7c1cff89c3373d4583f7b5e2b4c9872
+  - enabled: 1
+    path: Assets/Scenes/Level 60 - Pestified.unity
+    guid: 21041a5e106b4d2448d7aa05c2f5bfce
+  - enabled: 1
+    path: Assets/Scenes/Level 61 - One for one.unity
+    guid: b5ebc228b57136a409fea44b6276ec2b
+  - enabled: 1
+    path: Assets/Scenes/Level 62 - Punished.unity
+    guid: 3602c7e0ddb5e64479a0d34c1ce82ddd
+  - enabled: 1
+    path: Assets/Scenes/Level 63 - Corners.unity
+    guid: 3d30ef207c792e842836cafded093162
+  - enabled: 1
+    path: Assets/Scenes/Level 64 - Pistacio Icecream.unity
+    guid: 8b47d4e14557aab42949dda4de041394
+  - enabled: 1
+    path: Assets/Scenes/Level 65 - Bebop.unity
+    guid: cabcaeb1187fe784e9c10617379d3280
+  - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 1b2f6b2db772a1248a396c6d1777e4af
   m_configObjects: {}
