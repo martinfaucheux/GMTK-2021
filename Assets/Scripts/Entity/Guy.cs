@@ -6,6 +6,7 @@ public class Guy : Entity
 {
     public Blob blob;
     [field: SerializeField] public bool isSick { get; private set; }
+    [field: SerializeField] public bool isGhost { get; private set; }
     [SerializeField] GameObject bridgeSkinPrefab;
     [SerializeField] SpriteRenderer _faceSpriteRender;
     public Color skinColor { get { return _faceSpriteRender.color; } }
@@ -15,6 +16,11 @@ public class Guy : Entity
     protected override void Start()
     {
         base.Start();
+        if (isSick && isGhost)
+            Debug.LogError("Cannot be sick and ghost", this);
+
+        if (isGhost)
+            canBeBlocked = false;
     }
 
     public override void PreInteract(Entity entity)

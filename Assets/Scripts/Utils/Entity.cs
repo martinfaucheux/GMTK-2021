@@ -7,9 +7,8 @@ public class Entity : MonoBehaviour
     public MatrixCollider matrixCollider { get; private set; }
     [SerializeField] protected bool isBlocking = true; // whether this blocks movement
     public bool isStopMovement = false; // wheter displacement is allowed on the case but it can't go further
-
     public bool interactWhenOutOfReach = false;
-
+    public bool canBeBlocked = true;
     public string collidingSoundName;
 
     public bool playSound = true;
@@ -50,7 +49,7 @@ public class Entity : MonoBehaviour
 
     public virtual bool CanInteract(Entity otherEntity) => true;
 
-    public virtual bool IsBlocking(Entity otherEntity) => isBlocking;
+    public virtual bool IsBlocking(Entity otherEntity) => isBlocking && otherEntity.canBeBlocked;
 
     public virtual int GetResolveOrder() => 0;
 

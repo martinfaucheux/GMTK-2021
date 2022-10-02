@@ -48,7 +48,10 @@ public class Blob : MonoBehaviour
             foreach (Guy guy in guys)
             {
                 Vector2Int positionToCheck = guy.matrixCollider.matrixPosition + (distance + 1) * dirVect;
-                bool isValidPosition = CollisionMatrix.instance.IsValidPosition(positionToCheck);
+                bool isValidPosition = (
+                    CollisionMatrix.instance.IsValidPosition(positionToCheck)
+                    || !guy.canBeBlocked
+                );
                 bool isEntityBlocking = false;
 
                 Entity entityComponent = GetEntityAtPosition(positionToCheck);
