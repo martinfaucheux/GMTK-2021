@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e084e2d06e2c23a448d879c4591fdb6f, type: 3}
+  m_Name: TropicalIsland
+  m_EditorClassIdentifier: 
+  backgroundColor: {r: 0.30588236, g: 0.8196079, b: 0.5686275, a: 1}
+  seaMaterial: {fileID: 2100000, guid: d9e13e268c6825748bd9b312d09b5dd6, type: 2}
+  obstaclePrefab: {fileID: 5059189283627240300, guid: 1d906f1a64fe7ca45901662be76feba1, type: 3}
+  uiElementsColor: {r: 0.3647059, g: 0.3529412, b: 0.38431376, a: 1}
