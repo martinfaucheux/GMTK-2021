@@ -5992,6 +5992,7 @@ Transform:
   - {fileID: 6190965252587733727}
   - {fileID: 5593676108243981617}
   - {fileID: 7262543729893187097}
+  - {fileID: 2400499498314622242}
   m_Father: {fileID: 2340508121877219085}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6934,6 +6935,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3325586419237570659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2400499498314622242}
+  m_Layer: 0
+  m_Name: Grass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2400499498314622242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325586419237570659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2819886979370394173}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3412912131600263631
 GameObject:
   m_ObjectHideFlags: 0
@@ -7702,6 +7733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundHolder: {fileID: 8410190575727951992}
+  grassHolder: {fileID: 2400499498314622242}
   seaSpriteRenderer: {fileID: 2910624488935233845}
   uiElements:
   - {fileID: 2592890761602006491}
@@ -7711,6 +7743,7 @@ MonoBehaviour:
   - {fileID: 5228948390956592227}
   - {fileID: 7119453571787994127}
   overrideData: {fileID: 11400000, guid: 3b28e993bd855d8449359751c348fc03, type: 2}
+  sandRandomizer: {fileID: 6473874968572099467}
 --- !u!1 &4577239925875540744
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,6 +36,7 @@ public class ThemeOverrideCustomInspector : Editor
         List<Object> changedObjects = new List<Object>();
 
         changedObjects.Concat(ChangeBackgroundColor());
+        changedObjects.Concat(ChangeGrassColor());
         changedObjects.Concat(ChangeSeaMaterial());
         changedObjects.Concat(ChangeUIElementColor());
 
@@ -61,6 +62,21 @@ public class ThemeOverrideCustomInspector : Editor
         return changedObjects;
     }
 
+    private List<Object> ChangeGrassColor()
+    {
+        List<Object> changedObjects = new List<Object>();
+
+        SpriteRenderer[] grassSpriteRenderers = t.grassHolder.GetComponentsInChildren<SpriteRenderer>();
+        Color grassColor = t.overrideData.grassColor;
+        grassColor.a = 1f;
+
+        foreach (SpriteRenderer spriteRenderer in grassSpriteRenderers)
+        {
+            spriteRenderer.color = grassColor;
+            changedObjects.Add(spriteRenderer);
+        }
+        return changedObjects;
+    }
     private List<Object> ChangeSeaMaterial()
     {
         t.seaSpriteRenderer.material = t.overrideData.seaMaterial;
@@ -109,6 +125,12 @@ public class ThemeOverrideCustomInspector : Editor
             changedObjects.Add(newObject);
         }
         return changedObjects;
+    }
+
+    private void DisableSand()
+    {
+        if (!t.overrideData.allowSand)
+            t.sandRandomizer.Delete();
     }
 
 }
