@@ -41,9 +41,7 @@ public class Burger : Entity
     public override bool IsBlocking(Entity otherEntity)
     {
         if (_isBurned)
-            // a burned burger is not blocking if the entity
-            // caused an explosion
-            return Bomb.IsExplosionCause(otherEntity);
+            return false;
 
         if (_isRotten)
             return true;
@@ -55,13 +53,14 @@ public class Burger : Entity
         return base.IsBlocking(otherEntity);
     }
 
+    public override bool CanInteract(Entity otherEntity)
+    {
+        return !(_isEaten || _isBurned || _isRotten || isFrozen);
+    }
+
     public override void PreInteract(Entity entity)
     {
-        if (
-            !_isEaten
-            // if a blob caused an explosion, it can still eat burgers
-            && (!_isBurned || Bomb.IsExplosionCause(entity))
-        )
+        if (!_isEaten && !_isBurned)
         {
             base.PreInteract(entity);
             _isEaten = true;
@@ -100,6 +99,7 @@ public class Burger : Entity
                 {
                     burger.isFrozen = false;
                     burger.isBlocking = false;
+                    burger.isStopMovement = false;
                     burger.collidingSoundName = burger._normalSoundName;
                 }
                 else
@@ -149,6 +149,5 @@ public class Burger : Entity
             }
         }
     }
-
     public override int GetResolveOrder() => 10;
 }
