@@ -57,7 +57,7 @@ public class Blob : MonoBehaviour
                 Entity entityComponent = GetEntityAtPosition(positionToCheck);
                 if (entityComponent != null)
                 {
-                    isEntityBlocking = entityComponent.IsBlocking(guy);
+                    isEntityBlocking = entityComponent.IsBlocking(guy) && entityComponent.canBeBlocked;
 
                     if (entityComponent.CanInteract(guy))
                     {

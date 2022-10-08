@@ -32,7 +32,6 @@ public class Burger : Entity
 
         if (isFrozen)
         {
-            isBlocking = true;
             collidingSoundName = frozenSoundName;
             _burgerAnimator.SetFrozen();
         }
@@ -43,7 +42,7 @@ public class Burger : Entity
         if (_isBurned)
             return false;
 
-        if (_isRotten)
+        if (_isRotten || isFrozen)
             return true;
 
         Guy guy = otherEntity as Guy;
@@ -98,14 +97,12 @@ public class Burger : Entity
                 if (burger.isFrozen)
                 {
                     burger.isFrozen = false;
-                    burger.isBlocking = false;
                     burger.isStopMovement = false;
                     burger.collidingSoundName = burger._normalSoundName;
                 }
                 else
                 {
                     burger._isBurned = true;
-                    burger.isBlocking = true;
                     burger.playSound = false;
                 }
             }
