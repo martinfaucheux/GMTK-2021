@@ -26,6 +26,7 @@ public class BurgerAnimator : MonoBehaviour
     private static string materialRotTransitionProperty = "_Melt";
     private static float _colorTransitionDuration = 0.2f;
     private static float _fadeAwayDuration = 3f;
+    private static float _fadeAwayDelay = 2f;
     private static float _meltMaxValue = 0.2f;
     public void SetFrozen()
     {
@@ -80,7 +81,7 @@ public class BurgerAnimator : MonoBehaviour
         sequence.append(
             LeanTween.color(gameObject, Color.black, _colorTransitionDuration)
         );
-        sequence.append(2f);
+        sequence.append(_fadeAwayDelay * Random.Range(0.9f, 1.1f));
         sequence.append(() => _ashParticles?.Play());
         sequence.append(
             LeanTween.alpha(gameObject, 0f, _fadeAwayDuration).setEaseInQuint()
