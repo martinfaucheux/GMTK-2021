@@ -7205,6 +7205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5979188370456091838}
   - component: {fileID: 5719309120295784398}
+  - component: {fileID: 6139852162173570309}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -7238,6 +7239,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36744100b21f73c4db9da6a3fdbf2efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6139852162173570309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3854784893389429187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27827fae245fa1a4cb61fb08a3ce9987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEscapePressedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8244278119025415512}
+        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+        m_MethodName: LoadFirstScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3885832176111795745
 GameObject:
   m_ObjectHideFlags: 0
@@ -9726,7 +9754,6 @@ GameObject:
   - component: {fileID: 7971550538653172210}
   - component: {fileID: 8244278119025415512}
   - component: {fileID: 6628477394855925245}
-  - component: {fileID: 780816305}
   - component: {fileID: 5012753064841060820}
   - component: {fileID: 8342745159236049872}
   - component: {fileID: 4774387119485573295}
@@ -9823,33 +9850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa05b319ddd1904db20364bc8b65d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &780816305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8410190574609165260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27827fae245fa1a4cb61fb08a3ce9987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onEscapePressedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8244278119025415512}
-        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
-        m_MethodName: LoadFirstScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &5012753064841060820
 MonoBehaviour:
   m_ObjectHideFlags: 0

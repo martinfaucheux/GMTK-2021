@@ -24,10 +24,20 @@ public class TurnManager : SingletonBase<TurnManager>
         }
     }
 
+    public bool isReady
+    {
+        get
+        {
+            // return true if no registered descriptor are tweening
+            return !_moveDescriptors.Any(ltd => LeanTween.isTweening(ltd));
+        }
+    }
+
     private float _lastMoveTime;
     private List<Blob> _controlledBlobs;
     private HashSet<Entity> _entitiesToMove;
     private Direction _turnDirection;
+    private List<int> _moveDescriptors = new List<int>();
 
     void Start()
     {
@@ -42,7 +52,11 @@ public class TurnManager : SingletonBase<TurnManager>
 
     private void TriggerMovement(Direction direction)
     {
-        if (moveCooldown == 0 & GameManager.instance.playerCanMove)
+        if (
+            moveCooldown == 0
+            && GameManager.instance.playerCanMove
+            && isReady
+        )
         {
             _lastMoveTime = Time.time;
             StartCoroutine(PlayTurn(direction));
@@ -52,6 +66,8 @@ public class TurnManager : SingletonBase<TurnManager>
     private IEnumerator PlayTurn(Direction direction)
     {
         _turnDirection = direction;
+        _moveDescriptors = new List<int>();
+
         GameEvents.instance.StartOfTurnTrigger();
         List<(Entity, Entity)> collisionList = StartTurn();
 
@@ -115,7 +131,7 @@ public class TurnManager : SingletonBase<TurnManager>
             GameObject objectToMove = entity.gameObject;
             Vector3 realWorldPos = entity.matrixCollider.GetRealPos();
             float moveDuration = GetMoveDuration(entity);
-            LeanTween.move(objectToMove, realWorldPos, moveDuration);
+            _moveDescriptors.Add(LeanTween.move(objectToMove, realWorldPos, moveDuration).id);
         }
     }
 

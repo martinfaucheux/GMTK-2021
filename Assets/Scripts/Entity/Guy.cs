@@ -67,9 +67,7 @@ public class Guy : Entity
     public override bool CanInteract(Entity otherEntity)
     {
         Guy otherGuy = otherEntity as Guy;
-        if (
-            otherGuy != null && otherGuy.blob != null
-        )
+        if (otherGuy != null && otherGuy.blob != null)
         {
             // can only interact if guy is in another blob
             return (this.blob != otherGuy.blob);
@@ -109,6 +107,8 @@ public class Guy : Entity
 
     private void DoWow()
     {
+        // reinitialize scale
+        transform.localScale = Vector3.one;
         Vector3 targetScale = 1.1f * Vector3.one;
         // bloup animation
         LeanTween.scale(gameObject, targetScale, 0.1f).setLoopPingPong(1);
