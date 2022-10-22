@@ -9,202 +9,203 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: dfe6dc643923ebc4f8ed12f2babb201a
   - enabled: 1
-    path: Assets/Scenes/Level 1 - No obstacle.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 1 - No obstacle.unity
     guid: 2345523cfb47d9445a9ff05ebc4eb53d
   - enabled: 1
-    path: Assets/Scenes/Level 2 - First obstacle.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 2 - First obstacle.unity
     guid: e7c501f9bd5c390499e8bc06531ec423
   - enabled: 1
-    path: Assets/Scenes/Level 3 - Several obstacle.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 3 - Several obstacle.unity
     guid: e964482e853fbd249a11fab4c108e530
   - enabled: 1
-    path: Assets/Scenes/Level 4 - Several obstacle, advance.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 4 - Several obstacle, advance.unity
     guid: 30ba4520728e1ec4282feafe7ba3479c
   - enabled: 1
-    path: Assets/Scenes/Level 5 - Spiral.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 5 - Spiral.unity
     guid: 25c7a7eedd695104290426330a6742b7
   - enabled: 1
-    path: Assets/Scenes/Level 6 - Intro to new guy.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 6 - Intro to new guy.unity
     guid: afb22e7bce42ead4ba8b050e0cb517cd
   - enabled: 1
-    path: Assets/Scenes/Level 7 - Play with new guy.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 7 - Play with new guy.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Level 8 - Advance with new guy.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 8 - Advance with new guy.unity
     guid: 405258ab82aae4044a7061cbcbd46adb
   - enabled: 1
-    path: Assets/Scenes/Level 9 - Square.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 9 - Square.unity
     guid: 5d58be1ebb71f4945afb82b007a6ba8a
   - enabled: 1
-    path: Assets/Scenes/Level 9.1 - Path to the jungle.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 9.1 - Path to the jungle.unity
     guid: c6f0da4891ef4124fa8175e7611b6e3d
   - enabled: 1
-    path: Assets/Scenes/Level 10 - inside the square.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 10 - inside the square.unity
     guid: 60a19d259a552c24786e81b0f52082ad
   - enabled: 1
-    path: Assets/Scenes/Level 11 - Too many is too much.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 11 - Too many is too much.unity
     guid: bb971fe52f05fed45be8f529ac56276a
   - enabled: 1
-    path: Assets/Scenes/Level 12 - Guys in grid.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 12 - Guys in grid.unity
     guid: f593a7572e499f04f89d54b4c1bf3a6e
   - enabled: 1
-    path: Assets/Scenes/Level 13 - Oasis.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 13 - Oasis.unity
     guid: 48c9b4ffedaaf8f4aab8e8e5f8fc743e
   - enabled: 1
-    path: Assets/Scenes/Level 14 - Penetrate.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 14 - Penetrate.unity
     guid: 251946ec517ae69489f6d2924b3b6279
   - enabled: 1
-    path: Assets/Scenes/Level 15 - Cornered.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 15 - Cornered.unity
     guid: 595bff877786cee4b9da748e600ac971
   - enabled: 1
-    path: Assets/Scenes/Level 16 - Back and forth.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 16 - Back and forth.unity
     guid: b8caf53eb69e45d40a2eb2bb464934f9
   - enabled: 1
-    path: Assets/Scenes/Level 17 - Quite tricky with the little guys.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 17 - Quite tricky with the little
+      guys.unity
     guid: 31f84d5f357cb15489d817a1b10321b4
   - enabled: 1
-    path: Assets/Scenes/Level 18 - Play Arround with 2 burgers.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 18 - Play Arround with 2 burgers.unity
     guid: 8fd3c6db0ea055349a93c920a1afbf0a
   - enabled: 1
-    path: Assets/Scenes/Level 19 - Dont follow your intuition.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 19 - Dont follow your intuition.unity
     guid: a5ee91373a9abac42899b98bbef25fe0
   - enabled: 1
-    path: Assets/Scenes/Level 20 - Prioritize burgers.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 20 - Prioritize burgers.unity
     guid: cf9596b9f42a04a4ea74b978404f715c
   - enabled: 1
-    path: Assets/Scenes/Level 21 - Burgers at the center.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 21 - Burgers at the center.unity
     guid: 4f57bbe363d05f54f83e5ec389b93722
   - enabled: 1
-    path: Assets/Scenes/Level 22 - Meh.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 22 - Meh.unity
     guid: 55a32b9a9292e1b4eb29fe87b3ad06f7
   - enabled: 1
-    path: Assets/Scenes/Level 23 - Meh advanced.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 23 - Meh advanced.unity
     guid: ecc9e5b6e6b28c04ba8863f6712c227c
   - enabled: 1
-    path: Assets/Scenes/Level 24 - Bomb alert.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 24 - Bomb alert.unity
     guid: 08699eaa0b36cf74285a8292c63fa587
   - enabled: 1
-    path: Assets/Scenes/Level 25 - So you like bombs.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 25 - So you like bombs.unity
     guid: 18254035c9f48d54090095962d84577c
   - enabled: 1
-    path: Assets/Scenes/Level 26 - More bombs.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 26 - More bombs.unity
     guid: 40be68968a8dea24dab81aa8208900de
   - enabled: 1
-    path: Assets/Scenes/Level 27 - Exploding Burgers.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 27 - Exploding Burgers.unity
     guid: cfe7d8e7d44dfe14fb77fbba12eee258
   - enabled: 1
-    path: Assets/Scenes/Level 28 - He got the T.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 28 - He got the T.unity
     guid: d03d78e432593674c972ffd38711f8c8
   - enabled: 1
-    path: Assets/Scenes/Level 29 - Stuffed inside.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 29 - Stuffed inside.unity
     guid: 9579f027f806d2f498f7777a1fe21b05
   - enabled: 1
-    path: Assets/Scenes/Level 30 - Other Blob.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 30 - Other Blob.unity
     guid: cd9c297c982b2ba46b237e27f21a54cb
   - enabled: 1
-    path: Assets/Scenes/Level 31 - Play with other blob.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 31 - Play with other blob.unity
     guid: bd36cf9cede283744a95f2d9c366d6a4
   - enabled: 1
-    path: Assets/Scenes/Level 32 - Regain confidence.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 32 - Regain confidence.unity
     guid: 1ae90df3cf15d5b4ca1f17cc1849374d
   - enabled: 1
-    path: Assets/Scenes/Level 33 - Wallowitz.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 33 - Wallowitz.unity
     guid: 2f6eeaea8f56b25468152df99d992b97
   - enabled: 1
-    path: Assets/Scenes/Level 34 - Already close.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 34 - Already close.unity
     guid: 340478da659487a409cd9095126c1334
   - enabled: 1
-    path: Assets/Scenes/Level 35 - Blob and bombs.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 35 - Blob and bombs.unity
     guid: 9be06c5b4fac9d549a102a073251c37d
   - enabled: 1
-    path: Assets/Scenes/Level 36 - Mandala.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 36 - Mandala.unity
     guid: 3b0e9b7dacfa29d408dbdd2e93f84e9d
   - enabled: 1
-    path: Assets/Scenes/Level 37 - A lot of dudes.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 37 - A lot of dudes.unity
     guid: b2da3ba3f2a3c7c4cb631e6e09562516
   - enabled: 1
-    path: Assets/Scenes/Level 38 - In line.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 38 - In line.unity
     guid: 5898d18eb6b71964d85d72ad909e7b38
   - enabled: 1
-    path: Assets/Scenes/Level 39 - Double Dude.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 39 - Double Dude.unity
     guid: ba6e99efb6b444540ae7f4a13183cf54
   - enabled: 1
-    path: Assets/Scenes/Level 40 - Learn 2 guys.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 40 - Learn 2 guys.unity
     guid: d407aa9a584ad414c8fd72c0f678fd9b
   - enabled: 1
-    path: Assets/Scenes/Level 41 - Guys split.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 41 - Guys split.unity
     guid: 67ffcfcb4bd50e7469549b96f5b1141f
   - enabled: 1
-    path: Assets/Scenes/Level 42 - More fun with 2 guys.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 42 - More fun with 2 guys.unity
     guid: 5bac2f289d11c6a4d8c8c1c700fed120
   - enabled: 1
-    path: Assets/Scenes/Level 43 - Assez malin.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 43 - Assez malin.unity
     guid: 08b74103301713a40ad291bf4b61c42a
   - enabled: 1
-    path: Assets/Scenes/Level 44 - Boh.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 44 - Boh.unity
     guid: 3fbf6a6c94cf43f4d92df7a0150eb0e7
   - enabled: 1
-    path: Assets/Scenes/Level 45 - Malinois.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 45 - Malinois.unity
     guid: c58c45b43ff4a404d94d5c342bf482a7
   - enabled: 1
-    path: Assets/Scenes/Level 46 - Zola.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 46 - Zola.unity
     guid: d778e026f43a8684592b77a1363a42fe
   - enabled: 1
-    path: Assets/Scenes/Level 47 - Some mess.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 47 - Some mess.unity
     guid: 87cb28b46c2fdb947914d55f756b02c0
   - enabled: 1
-    path: Assets/Scenes/Level 48 - Mac n Cheese.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 48 - Mac n Cheese.unity
     guid: 5a5f2cdb1c90d9d4392a5112fec275fd
   - enabled: 1
-    path: Assets/Scenes/Level 49 - Spicy Penne.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 49 - Spicy Penne.unity
     guid: 7e076c8b127001243a23c531ba98eb81
   - enabled: 1
-    path: Assets/Scenes/Level 50 - Frozen Burger.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 50 - Frozen Burger.unity
     guid: 2e840f05d0160014aa9e614d5cf5f45e
   - enabled: 1
-    path: Assets/Scenes/Level 51 - Make it melt.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 51 - Make it melt.unity
     guid: e5f573ca1d08d034493a9058728172c6
   - enabled: 1
-    path: Assets/Scenes/Level 52 - Don't rush for ice cream.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 52 - Don't rush for ice cream.unity
     guid: 0f542e1bf30a17d4e9dd59cac362485a
   - enabled: 1
-    path: Assets/Scenes/Level 53 - Desilusion.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 53 - Desilusion.unity
     guid: 79b11ac2b4549154a9f69056737348fb
   - enabled: 1
-    path: Assets/Scenes/Level 54 - Which bomb to boom.unity
+    path: Assets/Scenes/1 - Tropical Island/Level 54 - Which bomb to boom.unity
     guid: b4fe92ec0e8e64c489f855390cd72675
   - enabled: 1
-    path: Assets/Scenes/Level 55 - Sick guy.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 55 - Sick guy.unity
     guid: 9f54b7f2349a53c48ae95cea55b0b5da
   - enabled: 1
-    path: Assets/Scenes/Level 56 - Quarantine.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 56 - Quarantine.unity
     guid: 23124eb3dc2132c43a428e593eed4370
   - enabled: 1
-    path: Assets/Scenes/Level 57 - Sick friend.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 57 - Sick friend.unity
     guid: 2541f60b3d8c06b4e9a6139d6eb2770d
   - enabled: 1
-    path: Assets/Scenes/Level 58 - Burger is Wall.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 58 - Burger is Wall.unity
     guid: ad7b61be8bbc88b4597767b87acb0607
   - enabled: 1
-    path: Assets/Scenes/Level 59 - BattleFront.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 59 - BattleFront.unity
     guid: c7c1cff89c3373d4583f7b5e2b4c9872
   - enabled: 1
-    path: Assets/Scenes/Level 60 - Pestified.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 60 - Pestified.unity
     guid: 21041a5e106b4d2448d7aa05c2f5bfce
   - enabled: 1
-    path: Assets/Scenes/Level 61 - One for one.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 61 - One for one.unity
     guid: b5ebc228b57136a409fea44b6276ec2b
   - enabled: 1
-    path: Assets/Scenes/Level 62 - Punished.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 62 - Punished.unity
     guid: 3602c7e0ddb5e64479a0d34c1ce82ddd
   - enabled: 1
-    path: Assets/Scenes/Level 63 - Corners.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 63 - Corners.unity
     guid: 3d30ef207c792e842836cafded093162
   - enabled: 1
-    path: Assets/Scenes/Level 64 - Pistacio Icecream.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 64 - Pistacio Icecream.unity
     guid: 8b47d4e14557aab42949dda4de041394
   - enabled: 1
-    path: Assets/Scenes/Level 65 - Bebop.unity
+    path: Assets/Scenes/2 - Dreadful Island/Level 65 - Bebop.unity
     guid: cabcaeb1187fe784e9c10617379d3280
   - enabled: 1
     path: Assets/Scenes/End Screen.unity
