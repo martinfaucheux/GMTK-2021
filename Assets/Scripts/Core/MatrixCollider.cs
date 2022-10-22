@@ -32,14 +32,14 @@ public class MatrixCollider : MonoBehaviour
         return _collisionMatrix.IsValidPosition(futureMatrixPosition);
     }
 
-    public GameObject GetObjectInDirection(Direction direction)
+    public List<GameObject> GetObjectsInDirection(Direction direction)
     {
         Vector2Int positionToCheck = matrixPosition + direction.ToPos();
 
         if (!_collisionMatrix.IsValidPosition(positionToCheck))
-            return null;
+            return new List<GameObject>();
 
-        return _collisionMatrix.GetObjectAtPosition(positionToCheck);
+        return _collisionMatrix.GetObjectsAtPosition(positionToCheck);
     }
 
     public Vector2Int GetMaxInLinePosition(Direction direction)
@@ -50,8 +50,8 @@ public class MatrixCollider : MonoBehaviour
 
         while (_collisionMatrix.IsValidPosition(positionToCheck))
         {
-            GameObject objectAtPosition = _collisionMatrix.GetObjectAtPosition(positionToCheck);
-            if (objectAtPosition != null)
+            List<GameObject> objectsAtPosition = _collisionMatrix.GetObjectsAtPosition(positionToCheck);
+            if (objectsAtPosition.Count > 0)
                 break;
 
             maxInlinePosition = positionToCheck;
@@ -74,8 +74,7 @@ public class MatrixCollider : MonoBehaviour
         {
             if (direction == Direction.IDLE)
                 continue;
-            GameObject neighborObject = GetObjectInDirection(direction);
-            if (neighborObject != null)
+            foreach (GameObject neighborObject in GetObjectsInDirection(direction))
                 result.Add(neighborObject);
         }
         return result;

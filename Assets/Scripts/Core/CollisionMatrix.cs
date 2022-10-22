@@ -30,18 +30,6 @@ public class CollisionMatrix : SingletonBase<CollisionMatrix>
     }
 
 
-    // get the first object found at the given position
-    public GameObject GetObjectAtPosition(Vector2Int matrixPosition)
-    {
-        foreach (MatrixCollider collider in colliderList)
-        {
-            if (collider.matrixPosition == matrixPosition)
-                return collider.gameObject;
-        }
-
-        return null;
-    }
-
     public List<GameObject> GetObjectsAtPosition(Vector2Int matrixPosition)
     {
         List<GameObject> result = new List<GameObject>();

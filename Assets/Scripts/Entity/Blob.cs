@@ -35,7 +35,7 @@ public class Blob : MonoBehaviour
 
         if (!guys.Any())
         {
-            // this happens if the blob is emptied withing the turn
+            // this happens if the blob is emptied within the turn
             isDisplacementPossible = false;
         }
 
@@ -54,19 +54,18 @@ public class Blob : MonoBehaviour
                 );
                 bool isEntityBlocking = false;
 
-                Entity entityComponent = GetEntityAtPosition(positionToCheck);
-                if (entityComponent != null)
+                foreach (Entity entityComponent in GetEntitiesAtPosition(positionToCheck))
                 {
-                    isEntityBlocking = entityComponent.IsBlocking(guy) && guy.CanBeBlocked(entityComponent);
+                    isEntityBlocking |= entityComponent.IsBlocking(guy) && guy.CanBeBlocked(entityComponent);
 
                     if (entityComponent.CanInteract(guy))
                     {
                         iterationEntityList.Add((guy, entityComponent));
-                        isDisplacementStopped = entityComponent.isStopMovement;
+                        isDisplacementStopped |= entityComponent.isStopMovement;
                     }
                 }
 
-                isDisplacementPossible &= (isValidPosition & !isEntityBlocking);
+                isDisplacementPossible &= (isValidPosition && !isEntityBlocking);
             }
 
             // trigger Interact method only for entities that have interactWhenOutOfReach
@@ -84,17 +83,17 @@ public class Blob : MonoBehaviour
         return (maxDisplacement, collidedEntities);
     }
 
-    private static Entity GetEntityAtPosition(Vector2Int matrixPosition)
+    private static List<Entity> GetEntitiesAtPosition(Vector2Int matrixPosition)
     {
-        // helper for collision resolution
-        GameObject objectAtPosition = CollisionMatrix.instance.GetObjectAtPosition(matrixPosition);
-        if (objectAtPosition != null)
+        List<Entity> result = new List<Entity>();
+        List<GameObject> objectsAtPosition = CollisionMatrix.instance.GetObjectsAtPosition(matrixPosition);
+        foreach (GameObject objectAtPosition in objectsAtPosition)
         {
             Entity entity = objectAtPosition.GetComponent<Entity>();
             if (entity != null)
-                return entity;
+                result.Add(entity);
         }
-        return null;
+        return result;
     }
 
     public void Absorb(Guy guy)
