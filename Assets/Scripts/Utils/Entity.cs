@@ -7,7 +7,6 @@ public class Entity : MonoBehaviour
     public MatrixCollider matrixCollider { get; private set; }
     public bool isStopMovement = false; // wheter displacement is allowed on the case but it can't go further
     public bool interactWhenOutOfReach = false;
-    public bool canBeBlocked = true;
     public string collidingSoundName;
 
     public bool playSound = true;
@@ -49,6 +48,10 @@ public class Entity : MonoBehaviour
     public virtual bool CanInteract(Entity otherEntity) => true;
 
     public virtual bool IsBlocking(Entity otherEntity) => false;
+
+    // Whether this entity can be blocked by another entity.
+    // if otherEntity is null, it checks if it can be blocked by the grid
+    public virtual bool CanBeBlocked(Entity otherEntity = null) => true;
 
     public virtual int GetResolveOrder() => 0;
 

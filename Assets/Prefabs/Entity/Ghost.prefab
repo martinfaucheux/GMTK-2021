@@ -289,15 +289,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc2d59256745e246b68708276d7d5c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlocking: 0
   isStopMovement: 0
   interactWhenOutOfReach: 1
-  canBeBlocked: 0
   collidingSoundName: Bubble
   playSound: 1
   blob: {fileID: 0}
   <isSick>k__BackingField: 0
-  <isGhost>k__BackingField: 0
+  <isGhost>k__BackingField: 1
   bridgeSkinPrefab: {fileID: 1941174533373607620, guid: a66bce8cee206e84a9a1e77ea7ee9d06, type: 3}
   _faceSpriteRender: {fileID: 9106109724086933476}
 --- !u!114 &2146201207232729086

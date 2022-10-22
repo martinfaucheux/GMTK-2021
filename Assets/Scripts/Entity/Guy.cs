@@ -18,9 +18,6 @@ public class Guy : Entity
         base.Start();
         if (isSick && isGhost)
             Debug.LogError("Cannot be sick and ghost", this);
-
-        if (isGhost)
-            canBeBlocked = false;
     }
 
     public override void PreInteract(Entity entity)
@@ -62,6 +59,15 @@ public class Guy : Entity
             return (this.blob != otherGuy.blob);
         }
         return base.IsBlocking(otherEntity);
+    }
+
+    public override bool CanBeBlocked(Entity otherEntity = null)
+    {
+        if (isGhost && (otherEntity == null || otherEntity.GetType() != typeof(Guy)))
+            // if ghost, it is blocked only by other guys
+            return false;
+
+        return base.CanBeBlocked(otherEntity);
     }
 
     public override bool CanInteract(Entity otherEntity)

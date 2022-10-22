@@ -39,7 +39,7 @@ public class Blob : MonoBehaviour
             isDisplacementPossible = false;
         }
 
-        while (isDisplacementPossible & !isDisplacementStopped)
+        while (isDisplacementPossible && !isDisplacementStopped)
         {
 
             // store entities collided at this distance iteration
@@ -50,14 +50,14 @@ public class Blob : MonoBehaviour
                 Vector2Int positionToCheck = guy.matrixCollider.matrixPosition + (distance + 1) * dirVect;
                 bool isValidPosition = (
                     CollisionMatrix.instance.IsValidPosition(positionToCheck)
-                    || !guy.canBeBlocked
+                    || !guy.CanBeBlocked()
                 );
                 bool isEntityBlocking = false;
 
                 Entity entityComponent = GetEntityAtPosition(positionToCheck);
                 if (entityComponent != null)
                 {
-                    isEntityBlocking = entityComponent.IsBlocking(guy) && entityComponent.canBeBlocked;
+                    isEntityBlocking = entityComponent.IsBlocking(guy) && guy.CanBeBlocked(entityComponent);
 
                     if (entityComponent.CanInteract(guy))
                     {
