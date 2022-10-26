@@ -7,7 +7,8 @@ public class LevelLoaderCustomInspector : Editor
 {
     private LevelLoader t;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         t = target as LevelLoader;
         SceneView.duringSceneGui -= OnScene;
         SceneView.duringSceneGui += OnScene;
@@ -47,6 +48,10 @@ public class LevelLoaderCustomInspector : Editor
         {
             t.DeleteSavedData();
         }
+        // if (GUILayout.Button("Unlock all levels"))
+        // {
+        //     t.UnlockAllLevels();
+        // }
 
         // if (GUI.changed)
         // {
