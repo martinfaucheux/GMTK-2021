@@ -53,7 +53,7 @@ public class LevelLoader : SingletonBase<LevelLoader>
         LoadLevel(0, false);
     }
 
-    public void LoadLastScene(bool saveProgress)
+    public void LoadLastScene(bool saveProgress = false)
     {
         LoadLevel(SceneManager.sceneCountInBuildSettings - 1, saveProgress);
     }

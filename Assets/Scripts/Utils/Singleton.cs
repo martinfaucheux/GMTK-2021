@@ -20,6 +20,6 @@ public class SingletonBase<T> : MonoBehaviour
         else if (instance.GetInstanceID() != GetInstanceID())
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a CollisionMatrix.
-            Destroy(gameObject);
+            Destroy(this);
     }
 }
