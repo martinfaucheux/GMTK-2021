@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -97,7 +96,7 @@ public class Burger : Entity
                 if (burger.isFrozen)
                 {
                     burger.isFrozen = false;
-                    burger.isStopMovement = false;
+                    burger.isStopMovement = true;
                     burger.collidingSoundName = burger._normalSoundName;
                 }
                 else
