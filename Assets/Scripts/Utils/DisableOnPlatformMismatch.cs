@@ -5,10 +5,9 @@ public class DisableOnPlatformMismatch : MonoBehaviour
 {
     public RuntimePlatform[] allowedPlatforms;
     public bool debug = false;
-    void OnEnable()
+    public void OnEnable()
     {
-        if (!IsPlatformAllowed())
-            gameObject.SetActive(false);
+        gameObject.SetActive(IsPlatformAllowed());
     }
 
     private bool IsPlatformAllowed()
@@ -23,14 +22,9 @@ public class DisableOnPlatformMismatch : MonoBehaviour
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
             BuildTarget activeBuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            if (activeBuildTarget == BuildTarget.Android)
-            {
-                return allowedPlatforms.Contains(RuntimePlatform.Android);
-            }
-            else
-            {
-                return true;
-            }
+            bool isBuildForAndroid = activeBuildTarget == BuildTarget.Android;
+            bool shouldEnableForAndroid =  allowedPlatforms.Contains(RuntimePlatform.Android);
+            return isBuildForAndroid == shouldEnableForAndroid;
         }
 #endif
         return allowedPlatforms.Contains(Application.platform);
